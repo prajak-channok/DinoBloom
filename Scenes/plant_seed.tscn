@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://duioisii7svsp"]
+
+[ext_resource type="Script" uid="uid://b32a7rihj0eec" path="res://ScriptPlant/plant_seed.gd" id="1_jnl03"]
+[ext_resource type="Texture2D" uid="uid://c0httxutpw5s1" path="res://Assets/Seed_noBG.PNG" id="2_mc6me"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfvfm"]
+size = Vector2(44, 64.5)
+
+[node name="Plant_Seed" type="Node2D" unique_id=230459700]
+script = ExtResource("1_jnl03")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1395407012]
+position = Vector2(0, 33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=960533852]
+position = Vector2(-1, -32.75)
+shape = SubResource("RectangleShape2D_xfvfm")
+
+[node name="SeedNoBg" type="Sprite2D" parent="." unique_id=2101316253]
+position = Vector2(4, 2.218752)
+scale = Vector2(0.15082975, 0.15082978)
+texture = ExtResource("2_mc6me")

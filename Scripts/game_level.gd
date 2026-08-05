@@ -71,9 +71,17 @@ func _on_cell_clicked(event: InputEvent, lane: int, col: int) -> void:
 			selected_plant_type = PlantType.NONE
 
 func _place_plant(lane: int, col: int, p_type: PlantType) -> void:
-	var plant_script = load("res://scripts/plant.gd")
-	var plant_node = Node2D.new()
-	plant_node.set_script(plant_script)
+	var plant_node: Node2D
+	
+	if p_type == PlantType.SEED_BLOOM:
+		# กรณีเป็น Seed Bloom: โหลดจากไฟล์ Scene (.tscn)
+		var plant_scene = load("res://scenes/plant_seed.tscn") # <--- ต้องเป็น .tscn
+		plant_node = plant_scene.instantiate()
+	else:
+		# กรณีเป็น Thorn Fern: สร้าง Node2D เปล่า แล้วใส่สคริปต์ plant.gd แบบเดิม
+		var plant_script = load("res://scripts/plant.gd")
+		plant_node = Node2D.new()
+		plant_node.set_script(plant_script)
 	
 	var pos_x = grid_container.position.x + col * CELL_WIDTH + (CELL_WIDTH / 2)
 	var pos_y = grid_container.position.y + lane * CELL_HEIGHT + (CELL_HEIGHT / 2)
