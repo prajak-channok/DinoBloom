@@ -75,13 +75,12 @@ func _place_plant(lane: int, col: int, p_type: PlantType) -> void:
 	
 	if p_type == PlantType.SEED_BLOOM:
 		# กรณีเป็น Seed Bloom: โหลดจากไฟล์ Scene (.tscn)
-		var plant_scene = load("res://scenes/plant_seed.tscn") # <--- ต้องเป็น .tscn
+		var plant_scene = load("res://Scenes/plant_seed.tscn")
 		plant_node = plant_scene.instantiate()
 	else:
-		# กรณีเป็น Thorn Fern: สร้าง Node2D เปล่า แล้วใส่สคริปต์ plant.gd แบบเดิม
-		var plant_script = load("res://scripts/plant.gd")
-		plant_node = Node2D.new()
-		plant_node.set_script(plant_script)
+		# กรณีเป็น Thorn Fern
+		var plant_scene = load("res://Scenes/thorn_fern.tscn")
+		plant_node = plant_scene.instantiate()
 	
 	var pos_x = grid_container.position.x + col * CELL_WIDTH + (CELL_WIDTH / 2)
 	var pos_y = grid_container.position.y + lane * CELL_HEIGHT + (CELL_HEIGHT / 2)
@@ -93,7 +92,7 @@ func _place_plant(lane: int, col: int, p_type: PlantType) -> void:
 
 func _spawn_dinosaur() -> void:
 	var lane = randi() % LANES
-	var dino_script = load("res://scripts/dinosaur.gd")
+	var dino_script = load("res://Scripts/dinosaur.gd")
 	var dino_node = Node2D.new()
 	dino_node.set_script(dino_script)
 	
@@ -126,4 +125,4 @@ func _restart_game() -> void:
 	get_tree().reload_current_scene()
 
 func _go_to_menu() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
