@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource path="res://scripts/stage_board.gd" type="Script" id="1"]
-
-[node name="StageBoard" type="Node2D"]
-script = ExtResource("1")
-board_rect = Rect2(0, 0, 800, 500)
-show_debug_grid = false

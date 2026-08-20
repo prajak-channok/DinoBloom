@@ -11,7 +11,7 @@ class_name WaveManager
 ##
 ## Wave balance below is intentionally kept as one readable const config
 ## block (matching the STAGE_DATA / PLANT_DATA constant pattern already used
-## by M3GameplayScene) rather than a nested custom Resource array, so stage 2
+## by GameplayScene) rather than a nested custom Resource array, so stage 2
 ## and 3 can be added later by appending entries — no script changes needed.
 
 const TOTAL_WAVES := 3
@@ -21,7 +21,7 @@ const TOTAL_WAVES := 3
 const WAVE_CONFIG := {
 	"stage_01": {
 		1: {
-			"dinosaur_count": 20,
+			"dinosaur_count": 15,
 			"allowed_ids": ["dryosaurus"],
 			"wave_hp_multiplier": 1.0,
 			"has_boss": false,

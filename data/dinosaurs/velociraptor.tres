@@ -8,4 +8,5 @@ id = "velociraptor"
 display_name = "Velociraptor"
 base_hp = 150.0
 attack = 10.0
+attack_interval = 1.0
 movement_speed = 80.0

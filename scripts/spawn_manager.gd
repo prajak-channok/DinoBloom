@@ -102,9 +102,9 @@ func _schedule_next_spawn() -> void:
 	# Requirement #6: ~2-3 spawns in the first 15s of the wave (spaced out),
 	# then exactly one at a time on a random 1-5s cadence after that.
 	if _elapsed < 15.0:
-		_next_spawn_time = _elapsed + randf_range(7.0, 10.0)
+		_next_spawn_time = _elapsed + randf_range(7.0, 12.0)
 	else:
-		_next_spawn_time = _elapsed + randf_range(3.0, 7.0)
+		_next_spawn_time = _elapsed + randf_range(1.0, 6.0)
 
 func _pick_available_lane() -> int:
 	var lanes: Array = range(ROWS)

@@ -90,11 +90,10 @@ Responsibility:
 - Reward flow
 
 ### Gameplay Scene
-`res://scripts/gameplay_scene.gd`
-และมี M3-related gameplay implementation ใน:
-`res://scripts/m3_gameplay_scene.gd`
+`res://scenes/gameplay_scene.tscn` ใช้ script จริงคือ:
+`res://scripts/gameplay_scene.gd` (`class_name GameplayScene`)
 
-ต้องตรวจการใช้งานจริงก่อนแก้ เพราะ Project ปัจจุบันมีทั้งไฟล์เก่าและไฟล์ M3/M4 อยู่
+(ยืนยันแล้ว 2026-08-21: `gameplay_scene.gd` เดิม (M2 leftover, ContentClass ไม่มี) และ `gameplay_placeholder.gd` ไม่ถูกอ้างอิงจากที่ใดเลย ถูกลบออกจาก Project แล้ว จากนั้นไฟล์ M3/M4 เดิมชื่อ `m3_gameplay_scene.gd` / `class_name M3GameplayScene` ถูกเปลี่ยนชื่อมาเป็น `gameplay_scene.gd` / `GameplayScene` แทน เพื่อไม่ให้ชื่อไฟล์อ้างถึง Milestone เก่า)
 
 ## Entity Scripts
 ปัจจุบันมี Script สำหรับ:
@@ -117,13 +116,14 @@ Current Match / Current Wave ไม่ต้องบันทึก
 - `select_stage_scene.tscn`
 - `gameplay_scene.tscn`
 - `upgrade_scene.tscn`
-- `stage_board.tscn`
 - Plant scenes
 - Enemy scenes
 
 ## Board
 `stage_board.gd` / `stage_board_visual.gd`
-ใช้สร้าง Board/Grid จากข้อมูล Stage แทนการวาด Grid ฝังอยู่ใน Background
+ใช้สร้าง Board/Grid จากข้อมูล Stage แทนการวาด Grid ฝังอยู่ใน Background ผูกอยู่กับ Node `PlayArea/World/Board` ใน `gameplay_scene.tscn` โดยตรง
+
+(ยืนยันแล้ว 2026-08-21: `scenes/stage_board.tscn` ซึ่งเป็น standalone preview scene แยกไม่ถูกอ้างอิงจากที่ใด — ลบออกแล้ว ส่วน `stage_board.gd`/`stage_board_visual.gd` ยังใช้งานจริงผ่าน `gameplay_scene.tscn`)
 
 Board:
 - 5 rows

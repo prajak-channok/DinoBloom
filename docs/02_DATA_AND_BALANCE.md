@@ -7,7 +7,7 @@ Plant Base HP มาตรฐานที่ตกลง:
 
 Dinosaur Base Reference:
 - Dryosaurus HP = 200
-- Dryosaurus ATK = 10
+- Dryosaurus ATK = 15
 - Dryosaurus Attack Interval = 1 sec
 
 ## Stage

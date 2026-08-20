@@ -1,0 +1,4 @@
+res://scenes/gameplay_scene.tscn
+res://scripts/wave_manager.gd
+res://scripts/spawn_manager.gd
+res://data/stage_board_config.json

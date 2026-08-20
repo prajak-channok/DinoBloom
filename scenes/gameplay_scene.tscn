@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dntsnnnphrp78"]
 
-[ext_resource type="Script" uid="uid://6hbkfq4o01od" path="res://scripts/m3_gameplay_scene.gd" id="1_m3"]
+[ext_resource type="Script" uid="uid://6hbkfq4o01od" path="res://scripts/gameplay_scene.gd" id="1_gameplay"]
 [ext_resource type="Script" uid="uid://ba22i5i1rori" path="res://scripts/stage_board.gd" id="2_board"]
 [ext_resource type="Script" uid="uid://dnoqi86vnmc66" path="res://scripts/stage_board_visual.gd" id="3_board_visual"]
-[ext_resource type="Script" path="res://scripts/wave_manager.gd" id="4_wave_manager"]
-[ext_resource type="Script" path="res://scripts/spawn_manager.gd" id="5_spawn_manager"]
-[ext_resource type="Script" path="res://scripts/match_manager.gd" id="6_match_manager"]
+[ext_resource type="Script" uid="uid://bbmb5y70218l" path="res://scripts/wave_manager.gd" id="4_wave_manager"]
+[ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/spawn_manager.gd" id="5_spawn_manager"]
+[ext_resource type="Script" uid="uid://b2wrs8jll6jr2" path="res://scripts/match_manager.gd" id="6_match_manager"]
 
 [sub_resource type="StyleBoxFlat" id="PlayAreaFrame"]
 bg_color = Color(0.05, 0.06, 0.04, 1)
@@ -44,29 +44,6 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="DebugStyle"]
-bg_color = Color(0.02, 0.02, 0.02, 0.75)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="PopupPanelStyle"]
-bg_color = Color(0.06, 0.09, 0.05, 0.98)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.7, 0.78, 0.4, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-content_margin_left = 40.0
-content_margin_top = 28.0
-content_margin_right = 40.0
-content_margin_bottom = 28.0
-
 [sub_resource type="StyleBoxFlat" id="BossBarBG"]
 bg_color = Color(0.06, 0.02, 0.02, 0.92)
 border_width_bottom = 2
@@ -86,18 +63,41 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="M3GameplayScene" type="Node2D" unique_id=1113645756]
-script = ExtResource("1_m3")
+[sub_resource type="StyleBoxFlat" id="DebugStyle"]
+bg_color = Color(0.02, 0.02, 0.02, 0.75)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
-[node name="Systems" type="Node" parent="."]
+[sub_resource type="StyleBoxFlat" id="PopupPanelStyle"]
+content_margin_left = 40.0
+content_margin_top = 28.0
+content_margin_right = 40.0
+content_margin_bottom = 28.0
+bg_color = Color(0.06, 0.09, 0.05, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.78, 0.4, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
-[node name="WaveManager" type="Node" parent="Systems"]
+[node name="GameplayScene" type="Node2D" unique_id=1113645756]
+script = ExtResource("1_gameplay")
+
+[node name="Systems" type="Node" parent="." unique_id=1856141472]
+
+[node name="WaveManager" type="Node" parent="Systems" unique_id=1929458276]
 script = ExtResource("4_wave_manager")
 
-[node name="SpawnManager" type="Node" parent="Systems"]
+[node name="SpawnManager" type="Node" parent="Systems" unique_id=1715773152]
 script = ExtResource("5_spawn_manager")
 
-[node name="MatchManager" type="Node" parent="Systems"]
+[node name="MatchManager" type="Node" parent="Systems" unique_id=684355703]
 process_mode = 3
 script = ExtResource("6_match_manager")
 
@@ -143,8 +143,8 @@ mouse_filter = 2
 color = Color(0.2, 0.95, 0.35, 0.22)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1026591057]
-layer = 5
 process_mode = 3
+layer = 5
 
 [node name="PlantPanel" type="PanelContainer" parent="UI" unique_id=1735674512]
 offset_top = 124.0
@@ -250,7 +250,7 @@ theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "ABANDON"
 
-[node name="BossHPBar" type="PanelContainer" parent="UI" unique_id=3084729110]
+[node name="BossHPBar" type="PanelContainer" parent="UI" unique_id=-1210238186]
 visible = false
 offset_left = 220.0
 offset_top = 124.0
@@ -258,18 +258,18 @@ offset_right = 1500.0
 offset_bottom = 158.0
 theme_override_styles/panel = SubResource("BossBarBG")
 
-[node name="Margin" type="MarginContainer" parent="UI/BossHPBar" unique_id=3084729111]
+[node name="Margin" type="MarginContainer" parent="UI/BossHPBar" unique_id=-1210238185]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="HBox" type="HBoxContainer" parent="UI/BossHPBar/Margin" unique_id=3084729112]
+[node name="HBox" type="HBoxContainer" parent="UI/BossHPBar/Margin" unique_id=-1210238184]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="BossLabel" type="Label" parent="UI/BossHPBar/Margin/HBox" unique_id=3084729113]
+[node name="BossLabel" type="Label" parent="UI/BossHPBar/Margin/HBox" unique_id=-1210238183]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.6, 0.5, 1)
@@ -277,7 +277,7 @@ theme_override_font_sizes/font_size = 16
 text = "T-REX"
 vertical_alignment = 1
 
-[node name="BossBar" type="ProgressBar" parent="UI/BossHPBar/Margin/HBox" unique_id=3084729114]
+[node name="BossBar" type="ProgressBar" parent="UI/BossHPBar/Margin/HBox" unique_id=-1210238182]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -307,23 +307,25 @@ offset_bottom = 126.0
 theme_override_font_sizes/font_size = 14
 text = "F3 Debug Grid"
 
-[node name="Popups" type="CanvasLayer" parent="."]
-layer = 8
+[node name="Popups" type="CanvasLayer" parent="." unique_id=1836632703]
 process_mode = 3
+layer = 8
 
-[node name="WaveStartPopup" type="Control" parent="Popups"]
+[node name="WaveStartPopup" type="Control" parent="Popups" unique_id=643843586]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 mouse_filter = 1
 
-[node name="Dim" type="ColorRect" parent="Popups/WaveStartPopup"]
+[node name="Dim" type="ColorRect" parent="Popups/WaveStartPopup" unique_id=1697139587]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.72)
 
-[node name="Label" type="Label" parent="Popups/WaveStartPopup"]
+[node name="Label" type="Label" parent="Popups/WaveStartPopup" unique_id=2142121842]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
@@ -333,19 +335,21 @@ text = "WAVE 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WaveClearPopup" type="Control" parent="Popups"]
+[node name="WaveClearPopup" type="Control" parent="Popups" unique_id=2054659491]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 mouse_filter = 1
 
-[node name="Dim" type="ColorRect" parent="Popups/WaveClearPopup"]
+[node name="Dim" type="ColorRect" parent="Popups/WaveClearPopup" unique_id=959965696]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.72)
 
-[node name="Panel" type="PanelContainer" parent="Popups/WaveClearPopup"]
+[node name="Panel" type="PanelContainer" parent="Popups/WaveClearPopup" unique_id=367463114]
 layout_mode = 0
 offset_left = 530.0
 offset_top = 312.0
@@ -353,44 +357,46 @@ offset_right = 970.0
 offset_bottom = 532.0
 theme_override_styles/panel = SubResource("PopupPanelStyle")
 
-[node name="VBox" type="VBoxContainer" parent="Popups/WaveClearPopup/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Popups/WaveClearPopup/Panel" unique_id=660940110]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Popups/WaveClearPopup/Panel/VBox"]
+[node name="Title" type="Label" parent="Popups/WaveClearPopup/Panel/VBox" unique_id=480901761]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.9, 0.5, 1)
 theme_override_font_sizes/font_size = 32
 text = "Wave 1 Complete"
 horizontal_alignment = 1
 
-[node name="DnaLabel" type="Label" parent="Popups/WaveClearPopup/Panel/VBox"]
+[node name="DnaLabel" type="Label" parent="Popups/WaveClearPopup/Panel/VBox" unique_id=2125843533]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.9, 0.65, 1)
 theme_override_font_sizes/font_size = 22
 text = "+2 DNA"
 horizontal_alignment = 1
 
-[node name="CountdownLabel" type="Label" parent="Popups/WaveClearPopup/Panel/VBox"]
+[node name="CountdownLabel" type="Label" parent="Popups/WaveClearPopup/Panel/VBox" unique_id=1407019621]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.8, 0.72, 1)
 theme_override_font_sizes/font_size = 16
 text = "Next wave in 5s..."
 horizontal_alignment = 1
 
-[node name="WinPopup" type="Control" parent="Popups"]
+[node name="WinPopup" type="Control" parent="Popups" unique_id=376414711]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 mouse_filter = 1
 
-[node name="Dim" type="ColorRect" parent="Popups/WinPopup"]
+[node name="Dim" type="ColorRect" parent="Popups/WinPopup" unique_id=1988164458]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.8)
 
-[node name="Panel" type="PanelContainer" parent="Popups/WinPopup"]
+[node name="Panel" type="PanelContainer" parent="Popups/WinPopup" unique_id=1580994151]
 layout_mode = 0
 offset_left = 530.0
 offset_top = 312.0
@@ -398,25 +404,25 @@ offset_right = 970.0
 offset_bottom = 532.0
 theme_override_styles/panel = SubResource("PopupPanelStyle")
 
-[node name="VBox" type="VBoxContainer" parent="Popups/WinPopup/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Popups/WinPopup/Panel" unique_id=1321023544]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="Popups/WinPopup/Panel/VBox"]
+[node name="Title" type="Label" parent="Popups/WinPopup/Panel/VBox" unique_id=1884772195]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.9, 0.5, 1)
 theme_override_font_sizes/font_size = 36
 text = "YOU WIN!"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Popups/WinPopup/Panel/VBox"]
+[node name="Subtitle" type="Label" parent="Popups/WinPopup/Panel/VBox" unique_id=1106774737]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.85, 0.72, 1)
 theme_override_font_sizes/font_size = 16
 text = "Stage Cleared — DNA saved."
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="Popups/WinPopup/Panel/VBox"]
+[node name="BackButton" type="Button" parent="Popups/WinPopup/Panel/VBox" unique_id=968268493]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -424,19 +430,21 @@ theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "BACK TO SELECT STAGE"
 
-[node name="LosePopup" type="Control" parent="Popups"]
+[node name="LosePopup" type="Control" parent="Popups" unique_id=670739323]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 mouse_filter = 1
 
-[node name="Dim" type="ColorRect" parent="Popups/LosePopup"]
+[node name="Dim" type="ColorRect" parent="Popups/LosePopup" unique_id=1423013014]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.8)
 
-[node name="Panel" type="PanelContainer" parent="Popups/LosePopup"]
+[node name="Panel" type="PanelContainer" parent="Popups/LosePopup" unique_id=371352954]
 layout_mode = 0
 offset_left = 530.0
 offset_top = 312.0
@@ -444,25 +452,25 @@ offset_right = 970.0
 offset_bottom = 532.0
 theme_override_styles/panel = SubResource("PopupPanelStyle")
 
-[node name="VBox" type="VBoxContainer" parent="Popups/LosePopup/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Popups/LosePopup/Panel" unique_id=741316007]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="Popups/LosePopup/Panel/VBox"]
+[node name="Title" type="Label" parent="Popups/LosePopup/Panel/VBox" unique_id=639949406]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 36
 text = "DEFEAT"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Popups/LosePopup/Panel/VBox"]
+[node name="Subtitle" type="Label" parent="Popups/LosePopup/Panel/VBox" unique_id=886567862]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.75, 0.72, 1)
 theme_override_font_sizes/font_size = 16
 text = "A Dinosaur reached the left boundary."
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="Popups/LosePopup/Panel/VBox"]
+[node name="BackButton" type="Button" parent="Popups/LosePopup/Panel/VBox" unique_id=418360435]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -470,19 +478,21 @@ theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "BACK TO SELECT STAGE"
 
-[node name="SurrenderPopup" type="Control" parent="Popups"]
+[node name="SurrenderPopup" type="Control" parent="Popups" unique_id=1666263897]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 mouse_filter = 1
 
-[node name="Dim" type="ColorRect" parent="Popups/SurrenderPopup"]
+[node name="Dim" type="ColorRect" parent="Popups/SurrenderPopup" unique_id=1255866962]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.72)
 
-[node name="Panel" type="PanelContainer" parent="Popups/SurrenderPopup"]
+[node name="Panel" type="PanelContainer" parent="Popups/SurrenderPopup" unique_id=992160893]
 layout_mode = 0
 offset_left = 530.0
 offset_top = 322.0
@@ -490,30 +500,30 @@ offset_right = 970.0
 offset_bottom = 522.0
 theme_override_styles/panel = SubResource("PopupPanelStyle")
 
-[node name="VBox" type="VBoxContainer" parent="Popups/SurrenderPopup/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Popups/SurrenderPopup/Panel" unique_id=1655729043]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="Popups/SurrenderPopup/Panel/VBox"]
+[node name="Title" type="Label" parent="Popups/SurrenderPopup/Panel/VBox" unique_id=438411600]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.9, 0.5, 1)
 theme_override_font_sizes/font_size = 26
 text = "Surrender?"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Popups/SurrenderPopup/Panel/VBox"]
+[node name="Subtitle" type="Label" parent="Popups/SurrenderPopup/Panel/VBox" unique_id=1865789717]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.75, 0.72, 1)
 theme_override_font_sizes/font_size = 15
 text = "You will receive no reward."
 horizontal_alignment = 1
 
-[node name="ButtonRow" type="HBoxContainer" parent="Popups/SurrenderPopup/Panel/VBox"]
+[node name="ButtonRow" type="HBoxContainer" parent="Popups/SurrenderPopup/Panel/VBox" unique_id=215570471]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="ConfirmButton" type="Button" parent="Popups/SurrenderPopup/Panel/VBox/ButtonRow"]
+[node name="ConfirmButton" type="Button" parent="Popups/SurrenderPopup/Panel/VBox/ButtonRow" unique_id=900622596]
 custom_minimum_size = Vector2(140, 46)
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
@@ -521,7 +531,7 @@ theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "SURRENDER"
 
-[node name="CancelButton" type="Button" parent="Popups/SurrenderPopup/Panel/VBox/ButtonRow"]
+[node name="CancelButton" type="Button" parent="Popups/SurrenderPopup/Panel/VBox/ButtonRow" unique_id=1564210249]
 custom_minimum_size = Vector2(140, 46)
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
@@ -529,19 +539,21 @@ theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "CANCEL"
 
-[node name="PausedOverlay" type="Control" parent="Popups"]
+[node name="PausedOverlay" type="Control" parent="Popups" unique_id=1606020754]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 mouse_filter = 2
 
-[node name="Dim" type="ColorRect" parent="Popups/PausedOverlay"]
+[node name="Dim" type="ColorRect" parent="Popups/PausedOverlay" unique_id=678775636]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.55)
 
-[node name="Label" type="Label" parent="Popups/PausedOverlay"]
+[node name="Label" type="Label" parent="Popups/PausedOverlay" unique_id=314496221]
 layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 844.0
