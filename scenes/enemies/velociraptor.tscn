@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://u23lt6vlwk4w"]
+
+[ext_resource type="Script" uid="uid://b62h577pivmxo" path="res://scripts/velociraptor.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bvb1kfs78nmpw" path="res://assets/Dinosaurs/SPVelociraptorEatNBG.png" id="3_eat"]
+[ext_resource type="Texture2D" uid="uid://pwx66tqwcf60" path="res://assets/Dinosaurs/SPVelociraptorWalkNBG.png" id="3_soohs"]
+
+[sub_resource type="AtlasTexture" id="Eat1"]
+atlas = ExtResource("3_eat")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="Eat2"]
+atlas = ExtResource("3_eat")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="Eat3"]
+atlas = ExtResource("3_eat")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="Eat4"]
+atlas = ExtResource("3_eat")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="Eat5"]
+atlas = ExtResource("3_eat")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="Eat6"]
+atlas = ExtResource("3_eat")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6fa7"]
+atlas = ExtResource("3_soohs")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r31hd"]
+atlas = ExtResource("3_soohs")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n44u"]
+atlas = ExtResource("3_soohs")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p62ax"]
+atlas = ExtResource("3_soohs")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptkla"]
+atlas = ExtResource("3_soohs")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_165pm"]
+atlas = ExtResource("3_soohs")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="SpriteFrames" id="VeloFrames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Eat1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat6")
+}],
+"loop": 1,
+"name": &"eat",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6fa7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r31hd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n44u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p62ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptkla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_165pm")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="HPBG"]
+bg_color = Color(0.08, 0.08, 0.08, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="HPFill"]
+bg_color = Color(0.25, 0.8, 0.3, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Velociraptor" type="Node2D" unique_id=992370033]
+script = ExtResource("1_script")
+
+[node name="Visual" type="Node2D" parent="." unique_id=822076258]
+position = Vector2(0, -42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=675767353]
+texture_filter = 1
+position = Vector2(0, 26)
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("VeloFrames")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.33027774
+
+[node name="HPBar" type="ProgressBar" parent="." unique_id=1377409152]
+offset_left = -46.0
+offset_top = -76.0
+offset_right = 46.0
+offset_bottom = -70.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("HPBG")
+theme_override_styles/fill = SubResource("HPFill")
+value = 100.0
+show_percentage = false

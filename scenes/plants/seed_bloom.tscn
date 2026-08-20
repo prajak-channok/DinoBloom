@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dvsutu2wmf2pi"]
+
+[ext_resource type="Script" uid="uid://otvcj2876n6a" path="res://scripts/seed_bloom.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://13wh0mqk6gf" path="res://assets/Plants/SeedBloomNBG.PNG" id="2_texture"]
+
+[node name="SeedBloom" type="Node2D" unique_id=1650805094]
+script = ExtResource("1_script")
+
+[node name="Visual" type="Node2D" parent="." unique_id=830859609]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=112711075]
+texture_filter = 1
+position = Vector2(13, -7.977498)
+scale = Vector2(0.22707708, 0.2270771)
+texture = ExtResource("2_texture")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1051083508]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1828058568]

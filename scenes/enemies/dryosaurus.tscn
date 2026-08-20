@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://nbh13v7l1nk5"]
+
+[ext_resource type="Script" uid="uid://ccpt3fcuhubqq" path="res://scripts/dryosaurus.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://e7bc3j3ns7is" path="res://assets/Dinosaurs/SPDryosaurusWalk.png" id="2_walk"]
+[ext_resource type="Texture2D" uid="uid://grq4flawi0ky" path="res://assets/Dinosaurs/SPDryosaurusEat.png" id="3_eat"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_st17s"]
+atlas = ExtResource("3_eat")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krycc"]
+atlas = ExtResource("3_eat")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukc00"]
+atlas = ExtResource("3_eat")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brajh"]
+atlas = ExtResource("3_eat")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efww6"]
+atlas = ExtResource("3_eat")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a7if"]
+atlas = ExtResource("3_eat")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk0"]
+atlas = ExtResource("2_walk")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3iekc"]
+atlas = ExtResource("2_walk")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx7hm"]
+atlas = ExtResource("2_walk")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqgdw"]
+atlas = ExtResource("2_walk")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45jpi"]
+atlas = ExtResource("2_walk")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8usq5"]
+atlas = ExtResource("2_walk")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="SpriteFrames" id="DryFrames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_st17s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krycc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukc00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brajh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efww6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a7if")
+}],
+"loop": 1,
+"name": &"eat",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3iekc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx7hm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqgdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45jpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8usq5")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="HPBG"]
+bg_color = Color(0.08, 0.08, 0.08, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="HPFill"]
+bg_color = Color(0.25, 0.8, 0.3, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Dryosaurus" type="Node2D" unique_id=273739660]
+script = ExtResource("1_script")
+
+[node name="Visual" type="Node2D" parent="." unique_id=709740156]
+position = Vector2(0, -42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=221499616]
+texture_filter = 1
+position = Vector2(-32, 22)
+scale = Vector2(0.26554325, 0.26554325)
+sprite_frames = SubResource("DryFrames")
+animation = &"walk"
+autoplay = "walk"
+frame = 4
+frame_progress = 0.5706156
+
+[node name="HPBar" type="ProgressBar" parent="." unique_id=567442634]
+offset_left = -46.0
+offset_top = -76.0
+offset_right = 46.0
+offset_bottom = -70.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("HPBG")
+theme_override_styles/fill = SubResource("HPFill")
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true

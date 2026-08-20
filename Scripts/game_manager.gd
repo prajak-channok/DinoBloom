@@ -1,24 +1,11 @@
-# GameManager.gd - Singleton (Autoload) สำหรับจัดการสถานะหลักของเกม
 extends Node
+## Application-level state for scene flow.
+## Gameplay state itself remains owned by the Gameplay scene.
 
-signal seeds_changed(new_amount: int)
-signal base_health_changed(new_health: int)
-signal game_over
-signal game_won
+var selected_stage_id: String = "stage_01"
 
-# สถิติและทรัพยากรหลักตามสไลด์ (Ancient Seeds & Tree of Evolution HP)
-var ancient_seeds: int = 100:
-	set(value):
-		ancient_seeds = value
-		seeds_changed.emit(ancient_seeds)
+func start_selected_stage() -> void:
+	get_tree().change_scene_to_file("res://scenes/gameplay_scene.tscn")
 
-var base_health: int = 100:
-	set(value):
-		base_health = clamp(value, 0, 100)
-		base_health_changed.emit(base_health)
-		if base_health <= 0:
-			game_over.emit()
-
-func reset_game() -> void:
-	ancient_seeds = 100
-	base_health = 100
+func go_to_stage_select() -> void:
+	get_tree().change_scene_to_file("res://scenes/select_stage_scene.tscn")

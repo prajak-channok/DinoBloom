@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StageData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/stage_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/BackGround/FieldBG2.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/BackGround/TileField2A.png" id="3_a"]
+[ext_resource type="Texture2D" path="res://assets/BackGround/TileField2B.png" id="4_b"]
+
+[resource]
+script = ExtResource("1_script")
+stage_id = "stage_02"
+display_name = "Volcano"
+background = ExtResource("2_bg")
+tile_a = ExtResource("3_a")
+tile_b = ExtResource("4_b")
+gameplay_area_normalized = Rect2(0.114, 0.151, 0.754, 0.727)
+hp_multiplier = 2.0
+unlock_after_stage_id = "stage_01"

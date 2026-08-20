@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DinosaurData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/dinosaur_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "triceratops"
+display_name = "Triceratops"
+base_hp = 400.0
+attack = 15.0
+attack_interval = 1.5
+movement_speed = 35.0
+armor = 0.0
+faction = "Enemy"
+is_boss = false
+can_be_converted = true

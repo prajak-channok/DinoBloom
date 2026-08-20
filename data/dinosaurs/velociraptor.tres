@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DinosaurData" format=3 uid="uid://wfmapdf75dfo"]
+
+[ext_resource type="Script" uid="uid://bdrxs855ogvqy" path="res://scripts/data/dinosaur_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = "velociraptor"
+display_name = "Velociraptor"
+base_hp = 150.0
+attack = 10.0
+movement_speed = 80.0

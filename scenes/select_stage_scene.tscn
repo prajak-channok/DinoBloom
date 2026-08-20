@@ -1,0 +1,261 @@
+[gd_scene format=3 uid="uid://e3rn8lmq2aum"]
+
+[ext_resource type="Texture2D" uid="uid://bdugybgh7uato" path="res://assets/BackGround/SelectStageBG2.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://djm2wo73llym3" path="res://assets/Component/NormalStateNBG.png" id="2_forest"]
+[ext_resource type="Texture2D" uid="uid://bbe08bsyh5xre" path="res://assets/Component/LavaStateNBG.png" id="3_lava"]
+[ext_resource type="Texture2D" uid="uid://c00lwlu8b0f6u" path="res://assets/Component/TreeEvoStateNBG.png" id="4_tree"]
+[ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="5_dna"]
+[ext_resource type="Script" uid="uid://bvmqsttows6s3" path="res://scripts/select_stage_scene.gd" id="6_script"]
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.039215688, 0.28627452, 0.03529412, 0.78039217)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.65, 0.38, 0.78)
+corner_radius_top_left = 40
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="Button"]
+bg_color = Color(0.1, 0.15, 0.08, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+bg_color = Color(0.2, 0.28, 0.14, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.86, 0.48, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Disabled"]
+bg_color = Color(0.08, 0.08, 0.08, 0.78)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.3, 0.3, 0.85)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="SelectStageScene" type="Control" unique_id=32590936]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_script")
+
+[node name="Background" type="TextureRect" parent="." unique_id=362048384]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ColorRectTop" type="ColorRect" parent="." unique_id=1948566888]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 134.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="ColorRectBG" type="ColorRect" parent="." unique_id=947971155]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 720.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.1764706)
+
+[node name="Title" type="Label" parent="." unique_id=1762662311]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 41.0
+offset_right = 250.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 30
+text = "SELECT STAGE"
+horizontal_alignment = 1
+
+[node name="TopRight" type="PanelContainer" parent="." unique_id=2081667229]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -368.0
+offset_top = 20.0
+offset_right = -26.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Row" type="HBoxContainer" parent="TopRight" unique_id=1157132344]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DNAIcon" type="TextureRect" parent="TopRight/Row" unique_id=389643616]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+texture = ExtResource("5_dna")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DNALabel" type="Label" parent="TopRight/Row" unique_id=1802004153]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.93, 0.7, 1)
+theme_override_font_sizes/font_size = 23
+text = "0"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="TopRight/Row" unique_id=1620716708]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+offset_transform_position = Vector2(1.67, 0)
+theme_override_colors/font_color = Color(0.95, 0.92, 0.75, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("Button")
+theme_override_styles/hover = SubResource("Hover")
+text = "UPGRADE"
+
+[node name="BackButton" type="Button" parent="." unique_id=821842800]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 124.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0.95, 0.92, 0.75, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("Button")
+theme_override_styles/hover = SubResource("Hover")
+text = "Back"
+
+[node name="StateRow" type="HBoxContainer" parent="." unique_id=239967547]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -510.0
+offset_top = -133.0
+offset_right = 510.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Stage01Button" type="Button" parent="StateRow" unique_id=10630555]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 230)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Button")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/hover = SubResource("Hover")
+icon = ExtResource("2_forest")
+flat = true
+expand_icon = true
+
+[node name="Stage02Button" type="Button" parent="StateRow" unique_id=1311603209]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 230)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Disabled")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/hover = SubResource("Hover")
+icon = ExtResource("3_lava")
+flat = true
+expand_icon = true
+
+[node name="Stage03Button" type="Button" parent="StateRow" unique_id=1388283652]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 230)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Disabled")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/hover = SubResource("Hover")
+icon = ExtResource("4_tree")
+flat = true
+expand_icon = true
+
+[node name="StartButton" type="Button" parent="." unique_id=908370821]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.5
+offset_top = -153.0
+offset_right = 122.5
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.98, 0.95, 0.8, 1)
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("Button")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/disabled = SubResource("Disabled")
+text = "START"
+
+[node name="LockedOverlay" type="ColorRect" parent="." unique_id=333209977]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.25)
+
+[node name="LockedPopup" type="AcceptDialog" parent="." unique_id=732610939]
+unique_name_in_owner = true
+oversampling_override = 1.0
+size = Vector2i(333, 106)
+ok_button_text = "OK"
+dialog_text = "This stage is locked.
+Complete the previous stage to unlock it."

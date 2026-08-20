@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://btqnksgj6br5k"]
+
+[ext_resource type="Texture2D" uid="uid://hhrh0cree2eu" path="res://assets/BackGround/StartBG.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://jghm4e1yjn4c" path="res://assets/Component/LogoGameNBG.png" id="2_logo"]
+[ext_resource type="Script" uid="uid://dlu86w5lflk2l" path="res://scripts/start_scene.gd" id="3_script"]
+
+[sub_resource type="StyleBoxFlat" id="ButtonNormal"]
+bg_color = Color(0.12, 0.18, 0.1, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="ButtonHover"]
+bg_color = Color(0.2, 0.28, 0.14, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.86, 0.48, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="StartScene" type="Control" unique_id=845572804]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_script")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1519758692]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Logo" type="TextureRect" parent="." unique_id=1770639252]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 17.0
+offset_top = 113.0
+offset_right = 531.5856
+offset_bottom = 418.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("2_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Menu" type="VBoxContainer" parent="." unique_id=578135646]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = 128.0
+offset_right = 489.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="Menu" unique_id=1210452784]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.72, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "PLAY"
+
+[node name="ExitButton" type="Button" parent="Menu" unique_id=2133344968]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.72, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "EXIT"
+
+[node name="ExitDialog" type="ConfirmationDialog" parent="." unique_id=2004083345]
+unique_name_in_owner = true
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+ok_button_text = "EXIT"
+dialog_text = "Exit DinoBloom?"
+cancel_button_text = "CANCEL"
