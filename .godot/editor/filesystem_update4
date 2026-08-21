@@ -1,4 +1,7 @@
 res://scenes/gameplay_scene.tscn
-res://scripts/wave_manager.gd
-res://scripts/spawn_manager.gd
-res://data/stage_board_config.json
+res://data/plants/thorn_fern.tres
+res://scenes/enemies/triceratops.tscn
+res://scenes/enemies/trex.tscn
+res://scenes/select_stage_scene.tscn
+res://data/stages/stage_02.tres
+res://scripts/start_scene.gd

@@ -1,77 +1,77 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cetxy2vj5mtpe"]
 
-[ext_resource type="Script" path="res://scripts/triceratops.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Dinosaurs/SPTriceratopsWalk.png" id="2_walk"]
-[ext_resource type="Texture2D" path="res://assets/Dinosaurs/SPTriceratopsEat.png" id="3_eat"]
+[ext_resource type="Script" uid="uid://l4vh8spjc78u" path="res://scripts/triceratops.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bylm44t0h1qoi" path="res://assets/Dinosaurs/SPTriceratopsWalk.png" id="2_walk"]
+[ext_resource type="Texture2D" uid="uid://d1tijv0xon3ln" path="res://assets/Dinosaurs/SPTriceratopsEat.png" id="3_eat"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_teat0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_87nfa"]
 atlas = ExtResource("3_eat")
-region = Rect2(0, 0, 512, 512)
+region = Rect2(0, 30, 512, 442)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_teat1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fl7v"]
 atlas = ExtResource("3_eat")
-region = Rect2(512, 0, 512, 512)
+region = Rect2(512, 30, 512, 442)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_teat2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbxch"]
 atlas = ExtResource("3_eat")
-region = Rect2(1024, 0, 512, 512)
+region = Rect2(1024, 30, 512, 442)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_teat3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_71sjn"]
 atlas = ExtResource("3_eat")
-region = Rect2(0, 512, 512, 512)
+region = Rect2(0, 472, 512, 442)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_teat4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bap0w"]
 atlas = ExtResource("3_eat")
-region = Rect2(512, 512, 512, 512)
+region = Rect2(512, 472, 512, 442)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_teat5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_68nqo"]
 atlas = ExtResource("3_eat")
-region = Rect2(1024, 512, 512, 512)
+region = Rect2(1024, 472, 512, 442)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twalk0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxsuc"]
 atlas = ExtResource("2_walk")
-region = Rect2(0, 0, 512, 512)
+region = Rect2(0, 60, 512, 422)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twalk1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u1uf"]
 atlas = ExtResource("2_walk")
-region = Rect2(512, 0, 512, 512)
+region = Rect2(512, 60, 512, 422)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twalk2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_67cvp"]
 atlas = ExtResource("2_walk")
-region = Rect2(1024, 0, 512, 512)
+region = Rect2(1024, 60, 512, 422)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twalk3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_blsfx"]
 atlas = ExtResource("2_walk")
-region = Rect2(0, 512, 512, 512)
+region = Rect2(0, 482, 512, 422)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twalk4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k68fb"]
 atlas = ExtResource("2_walk")
-region = Rect2(512, 512, 512, 512)
+region = Rect2(512, 482, 512, 422)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twalk5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_axw0h"]
 atlas = ExtResource("2_walk")
-region = Rect2(1024, 512, 512, 512)
+region = Rect2(1024, 482, 512, 422)
 
 [sub_resource type="SpriteFrames" id="TriFrames"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_teat0")
+"texture": SubResource("AtlasTexture_87nfa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_teat1")
+"texture": SubResource("AtlasTexture_2fl7v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_teat2")
+"texture": SubResource("AtlasTexture_fbxch")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_teat3")
+"texture": SubResource("AtlasTexture_71sjn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_teat4")
+"texture": SubResource("AtlasTexture_bap0w")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_teat5")
+"texture": SubResource("AtlasTexture_68nqo")
 }],
 "loop": 1,
 "name": &"eat",
@@ -79,22 +79,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twalk0")
+"texture": SubResource("AtlasTexture_gxsuc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twalk1")
+"texture": SubResource("AtlasTexture_0u1uf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twalk2")
+"texture": SubResource("AtlasTexture_67cvp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twalk3")
+"texture": SubResource("AtlasTexture_blsfx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twalk4")
+"texture": SubResource("AtlasTexture_k68fb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twalk5")
+"texture": SubResource("AtlasTexture_axw0h")
 }],
 "loop": 1,
 "name": &"walk",
@@ -115,21 +115,22 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Triceratops" type="Node2D"]
+[node name="Triceratops" type="Node2D" unique_id=156264217]
 script = ExtResource("1_script")
 
-[node name="Visual" type="Node2D" parent="."]
+[node name="Visual" type="Node2D" parent="." unique_id=1187561456]
 position = Vector2(0, -46)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1276682694]
 texture_filter = 1
-position = Vector2(-30, 24)
-scale = Vector2(0.29, 0.29)
+position = Vector2(-10, 2.0000014)
+scale = Vector2(0.39714453, 0.39714453)
 sprite_frames = SubResource("TriFrames")
 animation = &"walk"
 autoplay = "walk"
+frame_progress = 0.5093544
 
-[node name="HPBar" type="ProgressBar" parent="."]
+[node name="HPBar" type="ProgressBar" parent="." unique_id=1407916855]
 offset_left = -52.0
 offset_top = -84.0
 offset_right = 52.0

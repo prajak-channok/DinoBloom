@@ -197,9 +197,13 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="LeftSpacer" type="Control" parent="UI/TopBar/Content/HBox" unique_id=2038598305]
-custom_minimum_size = Vector2(220, 0)
+[node name="RemovePlantButton" type="Button" parent="UI/TopBar/Content/HBox" unique_id=2038598305]
+custom_minimum_size = Vector2(150, 48)
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "ถอนพืช"
 
 [node name="StatusLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1478087897]
 layout_mode = 2
@@ -241,14 +245,6 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "2×"
-
-[node name="SurrenderButton" type="Button" parent="UI/TopBar/Content/HBox" unique_id=5235333]
-custom_minimum_size = Vector2(98, 48)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("ButtonNormal")
-theme_override_styles/hover = SubResource("ButtonHover")
-text = "ABANDON"
 
 [node name="BossHPBar" type="PanelContainer" parent="UI" unique_id=-1210238186]
 visible = false
@@ -545,7 +541,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1500.0
 offset_bottom = 844.0
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="Dim" type="ColorRect" parent="Popups/PausedOverlay" unique_id=678775636]
 layout_mode = 0
@@ -553,12 +549,42 @@ offset_right = 1500.0
 offset_bottom = 844.0
 color = Color(0.01, 0.01, 0.01, 0.55)
 
-[node name="Label" type="Label" parent="Popups/PausedOverlay" unique_id=314496221]
+[node name="Panel" type="PanelContainer" parent="Popups/PausedOverlay" unique_id=314496221]
 layout_mode = 0
-offset_right = 1500.0
-offset_bottom = 844.0
+offset_left = 530.0
+offset_top = 322.0
+offset_right = 970.0
+offset_bottom = 522.0
+theme_override_styles/panel = SubResource("PopupPanelStyle")
+
+[node name="VBox" type="VBoxContainer" parent="Popups/PausedOverlay/Panel" unique_id=314496222]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Popups/PausedOverlay/Panel/VBox" unique_id=314496223]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.92, 0.85, 1)
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 36
 text = "PAUSED"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="ButtonRow" type="HBoxContainer" parent="Popups/PausedOverlay/Panel/VBox" unique_id=314496224]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Popups/PausedOverlay/Panel/VBox/ButtonRow" unique_id=314496225]
+custom_minimum_size = Vector2(140, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "RESUME"
+
+[node name="AbandonButton" type="Button" parent="Popups/PausedOverlay/Panel/VBox/ButtonRow" unique_id=314496226]
+custom_minimum_size = Vector2(140, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "ABANDON"

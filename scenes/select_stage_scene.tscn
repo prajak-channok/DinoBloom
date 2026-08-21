@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://e3rn8lmq2aum"]
 
-[ext_resource type="Texture2D" uid="uid://bdugybgh7uato" path="res://assets/BackGround/SelectStageBG2.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://32r516i3m6l8" path="res://assets/BackGround/SelectStageBG2.png" id="1_bg"]
 [ext_resource type="Texture2D" uid="uid://djm2wo73llym3" path="res://assets/Component/NormalStateNBG.png" id="2_forest"]
 [ext_resource type="Texture2D" uid="uid://bbe08bsyh5xre" path="res://assets/Component/LavaStateNBG.png" id="3_lava"]
 [ext_resource type="Texture2D" uid="uid://c00lwlu8b0f6u" path="res://assets/Component/TreeEvoStateNBG.png" id="4_tree"]
 [ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="5_dna"]
-[ext_resource type="Script" uid="uid://bvmqsttows6s3" path="res://scripts/select_stage_scene.gd" id="6_script"]
+[ext_resource type="Script" uid="uid://xaxljc8wqei3" path="res://scripts/select_stage_scene.gd" id="6_script"]
 
 [sub_resource type="StyleBoxFlat" id="Panel"]
 bg_color = Color(0.039215688, 0.28627452, 0.03529412, 0.78039217)

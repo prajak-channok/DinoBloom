@@ -52,6 +52,7 @@ var ui_boss_bar: ProgressBar
 var ui_pause_button: Button
 var ui_speed_button: Button
 var ui_surrender_button: Button
+var ui_resume_button: Button
 
 var ui_wave_start_popup: Control
 var ui_wave_start_label: Label
@@ -88,6 +89,7 @@ func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: Spawn
 	ui_pause_button = ui.get("pause_button")
 	ui_speed_button = ui.get("speed_button")
 	ui_surrender_button = ui.get("surrender_button")
+	ui_resume_button = ui.get("resume_button")
 
 	ui_wave_start_popup = ui.get("wave_start_popup")
 	ui_wave_start_label = ui.get("wave_start_label")
@@ -115,6 +117,8 @@ func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: Spawn
 		ui_speed_button.pressed.connect(toggle_speed)
 	if ui_surrender_button:
 		ui_surrender_button.pressed.connect(request_surrender)
+	if ui_resume_button:
+		ui_resume_button.pressed.connect(toggle_pause)
 	if ui_surrender_confirm_button:
 		ui_surrender_confirm_button.pressed.connect(confirm_surrender)
 	if ui_surrender_cancel_button:
@@ -153,7 +157,7 @@ func _begin_playing() -> void:
 	set_state(State.PLAYING)
 	var wave_data := wave_manager.get_wave_data(stage_id, current_wave)
 	var hp_multiplier := wave_manager.compute_hp_multiplier(stage, wave_data)
-	spawn_manager.start_wave(wave_data, hp_multiplier)
+	spawn_manager.start_wave(wave_data, hp_multiplier, current_wave == 1)
 
 func _process(delta: float) -> void:
 	match state:
@@ -176,6 +180,7 @@ func _process(delta: float) -> void:
 func _on_wave_finished() -> void:
 	if _match_ended:
 		return
+	_reset_speed()
 	var wave_data := wave_manager.get_wave_data(stage_id, current_wave)
 	var dna_reward := wave_manager.compute_dna_reward(wave_data)
 	SaveManager.add_dna(dna_reward)
@@ -279,6 +284,13 @@ func toggle_speed() -> void:
 		Engine.time_scale = 1.0
 	if ui_speed_button:
 		ui_speed_button.text = "1×" if Engine.time_scale >= 1.5 else "2×"
+
+## Requirement (2026-08-21): when the Wave Clear / Win UI appears, force back
+## to 1x so the player has to explicitly re-press 2x for the next wave.
+func _reset_speed() -> void:
+	Engine.time_scale = 1.0
+	if ui_speed_button:
+		ui_speed_button.text = "2×"
 
 # ---------------------------------------------------------------------------
 # State machine

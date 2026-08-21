@@ -1,36 +1,169 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://be6mrq2nofspo"]
 
-[ext_resource type="Script" path="res://scripts/trex.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bk8vc1nepcefa" path="res://scripts/trex.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cd1xn3oqofyv8" path="res://assets/Dinosaurs/SPT-RexEat.png" id="2_gb0j2"]
+[ext_resource type="Texture2D" uid="uid://by6bjxskas4lo" path="res://assets/Dinosaurs/SPT-RexWalk.png" id="2_qf1l8"]
+[ext_resource type="Texture2D" uid="uid://pdqwhs06v0pb" path="res://assets/Dinosaurs/SPT-RexRumbling.png" id="3_ouigg"]
 
-[sub_resource type="StyleBoxFlat" id="BossLabelBG"]
-bg_color = Color(0.02, 0.02, 0.02, 0.75)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="AtlasTexture" id="AtlasTexture_nph7u"]
+atlas = ExtResource("2_gb0j2")
+region = Rect2(0, 50, 512, 432)
 
-[node name="TRex" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sye47"]
+atlas = ExtResource("2_gb0j2")
+region = Rect2(512, 50, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0oos"]
+atlas = ExtResource("2_gb0j2")
+region = Rect2(1024, 50, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysige"]
+atlas = ExtResource("2_gb0j2")
+region = Rect2(0, 482, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82qjb"]
+atlas = ExtResource("2_gb0j2")
+region = Rect2(512, 482, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwa54"]
+atlas = ExtResource("2_gb0j2")
+region = Rect2(1024, 482, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w3y0"]
+atlas = ExtResource("3_ouigg")
+region = Rect2(0, 100, 505, 412)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv87t"]
+atlas = ExtResource("3_ouigg")
+region = Rect2(505, 100, 505, 412)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4v2n"]
+atlas = ExtResource("3_ouigg")
+region = Rect2(1010, 100, 505, 412)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjnj2"]
+atlas = ExtResource("3_ouigg")
+region = Rect2(0, 512, 505, 412)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwfk0"]
+atlas = ExtResource("3_ouigg")
+region = Rect2(505, 512, 505, 412)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1usgu"]
+atlas = ExtResource("3_ouigg")
+region = Rect2(1010, 512, 505, 412)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf1l8"]
+atlas = ExtResource("2_qf1l8")
+region = Rect2(0, 100, 512, 372)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb0j2"]
+atlas = ExtResource("2_qf1l8")
+region = Rect2(1024, 100, 512, 372)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouigg"]
+atlas = ExtResource("2_qf1l8")
+region = Rect2(512, 100, 512, 372)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtppt"]
+atlas = ExtResource("2_qf1l8")
+region = Rect2(512, 472, 512, 372)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4agy3"]
+atlas = ExtResource("2_qf1l8")
+region = Rect2(1024, 472, 512, 372)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5i6l"]
+atlas = ExtResource("2_qf1l8")
+region = Rect2(0, 472, 512, 372)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s7wsd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nph7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sye47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0oos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysige")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82qjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwa54")
+}],
+"loop": 1,
+"name": &"eat",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w3y0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv87t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4v2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4v2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4v2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjnj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwfk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1usgu")
+}],
+"loop": 0,
+"name": &"rumbling",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf1l8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb0j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouigg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtppt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4agy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5i6l")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="TRex" type="Node2D" unique_id=1550698825]
 script = ExtResource("1_script")
 
-[node name="Visual" type="Node2D" parent="."]
+[node name="Visual" type="Node2D" parent="." unique_id=1311069512]
 position = Vector2(0, -70)
 
-[node name="ColorRect" type="ColorRect" parent="Visual"]
-offset_left = -70.0
-offset_top = -70.0
-offset_right = 70.0
-offset_bottom = 70.0
-color = Color(0.42, 0.08, 0.08, 1)
-
-[node name="Label" type="Label" parent="Visual"]
-offset_left = -70.0
-offset_top = -18.0
-offset_right = 70.0
-offset_bottom = 18.0
-theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
-theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("BossLabelBG")
-text = "T-REX"
-horizontal_alignment = 1
-vertical_alignment = 1
-mouse_filter = 2
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=709393079]
+position = Vector2(4, -6)
+scale = Vector2(0.64467597, 0.64467597)
+sprite_frames = SubResource("SpriteFrames_s7wsd")
+animation = &"rumbling"
+frame_progress = 0.33650684

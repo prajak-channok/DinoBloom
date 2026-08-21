@@ -36,6 +36,9 @@ var _elapsed: float = 0.0
 var _next_spawn_time: float = 0.0
 var _hp_multiplier: float = 1.0
 var _finished_emitted: bool = false
+## Requirement (2026-08-21): only Wave 1 of every stage uses the original
+## slow-start pacing below; Wave 2 onward uses a flat 0.5-3s random cadence.
+var _is_first_wave: bool = true
 
 func setup(p_world: Node2D, p_board: StageBoard) -> void:
 	world = p_world
@@ -43,7 +46,7 @@ func setup(p_world: Node2D, p_board: StageBoard) -> void:
 
 ## Starts spawning dinosaurs for one wave. wave_data comes from
 ## WaveManager.get_wave_data(); hp_multiplier from WaveManager.compute_hp_multiplier().
-func start_wave(wave_data: Dictionary, hp_multiplier: float) -> void:
+func start_wave(wave_data: Dictionary, hp_multiplier: float, is_first_wave: bool = true) -> void:
 	_queue = _build_queue(wave_data)
 	_spawn_index = 0
 	_alive_count = 0
@@ -53,7 +56,8 @@ func start_wave(wave_data: Dictionary, hp_multiplier: float) -> void:
 	_elapsed = 0.0
 	_hp_multiplier = hp_multiplier
 	_finished_emitted = false
-	_next_spawn_time = randf_range(3.0, 5.0)
+	_is_first_wave = is_first_wave
+	_next_spawn_time = randf_range(3.0, 5.0) if _is_first_wave else randf_range(0.5, 3.0)
 	_active = true
 
 ## Immediately halts further spawning (used on Lose / Surrender).
@@ -99,6 +103,9 @@ func _attempt_spawn() -> void:
 	_schedule_next_spawn()
 
 func _schedule_next_spawn() -> void:
+	if not _is_first_wave:
+		_next_spawn_time = _elapsed + randf_range(0.5, 3.0)
+		return
 	# Requirement #6: ~2-3 spawns in the first 15s of the wave (spaced out),
 	# then exactly one at a time on a random 1-5s cadence after that.
 	if _elapsed < 15.0:

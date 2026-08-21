@@ -10,46 +10,65 @@ signal reached_boundary
 signal hp_changed(current: float, max_hp: float)
 
 const DATA: DinosaurData = preload("res://data/dinosaurs/trex.tres")
+const COLUMNS := 8
 
 ## T-Rex is a Boss: bigger gameplay footprint than normal dinosaurs.
 @export var body_half_width: float = 84.0
 @export var contact_padding: float = 2.0
 @export var attack_flash_color: Color = Color(0.85, 0.15, 0.15, 1.0)
-@export var idle_color: Color = Color(0.42, 0.08, 0.08, 1.0)
 
-@onready var visual: ColorRect = $Visual/ColorRect
+@onready var visual: Node2D = $Visual
+@onready var sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
 
 var grid_row: int = 0
 var hp: float = 0.0
 var max_hp: float = 0.0
 var _attack_timer: float = 0.0
 var _board_rect := Rect2()
+var _cell_size := Vector2(120.0, 100.0)
 var _target: Node2D = null
 var _flash_timer: float = 0.0
+## Boss entrance roar: triggers once, when the T-Rex first reaches the
+## second grid column from the right, freezing movement/attack until the
+## one-shot "rumbling" animation finishes.
+var _rumble_triggered: bool = false
+var _is_rumbling: bool = false
 
-func setup(row: int, board_rect: Rect2 = Rect2(), _cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0) -> void:
+func setup(row: int, board_rect: Rect2 = Rect2(), cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0) -> void:
 	grid_row = row
 	hp = DATA.base_hp * hp_multiplier
 	max_hp = hp
 	_board_rect = board_rect
+	_cell_size = cell_size
 	_attack_timer = 0.0
 	_target = null
 	add_to_group("enemies")
 	add_to_group("bosses")
-	if is_instance_valid(visual):
-		visual.color = idle_color
+	_play_walk()
 	hp_changed.emit(hp, max_hp)
 
 func _ready() -> void:
 	if hp <= 0.0:
 		hp = DATA.base_hp
 		max_hp = DATA.base_hp
+	_play_walk()
+	if is_instance_valid(sprite):
+		sprite.animation_finished.connect(_on_animation_finished)
 
 func _process(delta: float) -> void:
 	if _flash_timer > 0.0:
 		_flash_timer -= delta
-		if _flash_timer <= 0.0 and is_instance_valid(visual):
-			visual.color = idle_color
+		if _flash_timer <= 0.0 and is_instance_valid(sprite):
+			sprite.modulate = Color.WHITE
+
+	if _is_rumbling:
+		return
+
+	if not _rumble_triggered and _board_rect.size.x > 0.0 and _cell_size.x > 0.0:
+		var rumble_trigger_x := _board_rect.position.x + (float(COLUMNS) - 1.5) * _cell_size.x
+		if position.x <= rumble_trigger_x:
+			_start_rumble()
+			return
 
 	var plant := _find_next_plant_ahead()
 	if plant != null:
@@ -58,11 +77,13 @@ func _process(delta: float) -> void:
 
 		if position.x > stop_x:
 			_target = null
+			_play_walk()
 			position.x = maxf(position.x - DATA.movement_speed * delta, stop_x)
 		else:
 			if position.x < stop_x:
 				position.x = stop_x
 			_target = plant
+			_play_eat()
 			_attack_timer += delta
 			if _attack_timer >= DATA.attack_interval:
 				_attack_timer -= DATA.attack_interval
@@ -72,15 +93,40 @@ func _process(delta: float) -> void:
 	else:
 		_target = null
 		_attack_timer = 0.0
+		_play_walk()
 		position.x -= DATA.movement_speed * delta
 
 	if _board_rect.size.x > 0.0 and position.x < _board_rect.position.x - body_half_width:
 		reached_boundary.emit()
 		queue_free()
 
+func _start_rumble() -> void:
+	_rumble_triggered = true
+	_is_rumbling = true
+	_target = null
+	_attack_timer = 0.0
+	if is_instance_valid(sprite):
+		sprite.play("rumbling")
+
+func _on_animation_finished() -> void:
+	if is_instance_valid(sprite) and sprite.animation == &"rumbling":
+		_is_rumbling = false
+
+func _play_walk() -> void:
+	if sprite == null:
+		return
+	if sprite.animation != &"walk" or not sprite.is_playing():
+		sprite.play("walk")
+
+func _play_eat() -> void:
+	if sprite == null:
+		return
+	if sprite.animation != &"eat" or not sprite.is_playing():
+		sprite.play("eat")
+
 func _flash_attack() -> void:
-	if is_instance_valid(visual):
-		visual.color = attack_flash_color
+	if is_instance_valid(sprite):
+		sprite.modulate = attack_flash_color
 	_flash_timer = 0.15
 
 func _find_next_plant_ahead() -> Node2D:

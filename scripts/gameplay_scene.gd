@@ -62,7 +62,7 @@ const PLANT_TEXTURES := {
 @onready var wave_label: Label = $UI/TopBar/Content/HBox/WaveLabel
 @onready var pause_button: Button = $UI/TopBar/Content/HBox/PauseButton
 @onready var speed_button: Button = $UI/TopBar/Content/HBox/SpeedButton
-@onready var surrender_button: Button = $UI/TopBar/Content/HBox/SurrenderButton
+@onready var remove_plant_button: Button = $UI/TopBar/Content/HBox/RemovePlantButton
 @onready var boss_hp_bar_container: PanelContainer = $UI/BossHPBar
 @onready var boss_hp_bar: ProgressBar = $UI/BossHPBar/Margin/HBox/BossBar
 
@@ -80,9 +80,12 @@ const PLANT_TEXTURES := {
 @onready var surrender_confirm_button: Button = $Popups/SurrenderPopup/Panel/VBox/ButtonRow/ConfirmButton
 @onready var surrender_cancel_button: Button = $Popups/SurrenderPopup/Panel/VBox/ButtonRow/CancelButton
 @onready var paused_overlay: Control = $Popups/PausedOverlay
+@onready var resume_button: Button = $Popups/PausedOverlay/Panel/VBox/ButtonRow/ResumeButton
+@onready var abandon_button: Button = $Popups/PausedOverlay/Panel/VBox/ButtonRow/AbandonButton
 
 var selected_stage_id := "stage_01"
 var selected_plant := ""
+var remove_mode := false
 var ancient_seed := 100
 var _card_buttons: Dictionary = {}
 var _card_cost_labels: Dictionary = {}
@@ -105,6 +108,8 @@ func _ready() -> void:
 	_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
 	placement_preview.visible = false
 	_layout_gameplay()
+	remove_plant_button.pressed.connect(_on_toggle_remove_mode)
+	_update_remove_button_visual()
 	_start_match()
 
 func _start_match() -> void:
@@ -117,7 +122,8 @@ func _start_match() -> void:
 		"boss_bar": boss_hp_bar,
 		"pause_button": pause_button,
 		"speed_button": speed_button,
-		"surrender_button": surrender_button,
+		"surrender_button": abandon_button,
+		"resume_button": resume_button,
 		"wave_start_popup": wave_start_popup,
 		"wave_start_label": wave_start_label,
 		"wave_clear_popup": wave_clear_popup,
@@ -300,15 +306,39 @@ func _on_plant_card_pressed(plant_name: String) -> void:
 		_update_status("Ancient Seed ไม่พอ")
 		return
 
+	if remove_mode:
+		_set_remove_mode(false)
 	selected_plant = plant_name
 	_update_status("กำลังวาง %s — เลือกช่องบนสนาม" % plant_name)
 	_update_card_states()
+
+func _on_toggle_remove_mode() -> void:
+	_set_remove_mode(not remove_mode)
+
+func _set_remove_mode(enabled: bool) -> void:
+	remove_mode = enabled
+	if remove_mode:
+		selected_plant = ""
+		placement_preview.visible = false
+		_update_card_states()
+		_update_status("โหมดถอนพืช: คลิกพืชที่ต้องการถอน")
+	else:
+		_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
+	_update_remove_button_visual()
+
+func _update_remove_button_visual() -> void:
+	if remove_plant_button == null:
+		return
+	remove_plant_button.text = "ถอนพืช: ON" if remove_mode else "ถอนพืช"
+	remove_plant_button.add_theme_color_override("font_color", Color(0.95, 0.35, 0.3, 1.0) if remove_mode else Color(1, 1, 1, 1))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_update_preview(play_area.get_local_mouse_position())
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if selected_plant != "":
+		if remove_mode:
+			_try_remove_plant(play_area.get_local_mouse_position())
+		elif selected_plant != "":
 			_try_place(play_area.get_local_mouse_position())
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		_try_remove_plant(play_area.get_local_mouse_position())
@@ -320,6 +350,18 @@ func _unhandled_input(event: InputEvent) -> void:
 			debug_panel.visible = debug_grid_enabled
 
 func _update_preview(play_position: Vector2) -> void:
+	if remove_mode:
+		var remove_grid := board.world_to_grid(play_position)
+		if remove_grid.x < 0 or not _occupied.has(remove_grid):
+			placement_preview.visible = false
+			return
+		var remove_cell_size := board.get_cell_size()
+		placement_preview.position = board.grid_to_world(remove_grid.x, remove_grid.y) - remove_cell_size * 0.5
+		placement_preview.size = remove_cell_size
+		placement_preview.color = Color(0.95, 0.25, 0.2, 0.28)
+		placement_preview.visible = true
+		return
+
 	if selected_plant == "":
 		placement_preview.visible = false
 		return
