@@ -8,7 +8,6 @@ func _ready() -> void:
 	play_button.pressed.connect(_on_play_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
 	exit_dialog.confirmed.connect(_on_exit_confirmed)
-	print(OS.get_user_data_dir())
 
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/select_stage_scene.tscn")
