@@ -42,7 +42,6 @@
 - จำนวน Normal Dinosaur ไม่รวม Boss
 - Lane หนึ่งมี Dinosaur พร้อมกันได้ไม่เกิน 10 ตัว
 - Spawn แบบสุ่ม Lane และสุ่มช่วงเวลา
-- 15 วินาทีแรก Spawn ประมาณ 2–3 ตัว แล้วจึงเข้าสู่การ Spawn ทีละตัว โดยสุ่มระยะ 1–5 วินาที
 - Wave จะจบเมื่อ Spawn ครบและไม่มี Enemy เหลือในสนาม
 
 ## 6. Wave / Stage HP Scaling

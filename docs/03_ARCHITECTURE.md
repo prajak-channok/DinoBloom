@@ -89,12 +89,6 @@ Responsibility:
 - ตรวจเงื่อนไขจบ Wave/Match
 - Reward flow
 
-### Gameplay Scene
-`res://scenes/gameplay_scene.tscn` ใช้ script จริงคือ:
-`res://scripts/gameplay_scene.gd` (`class_name GameplayScene`)
-
-(ยืนยันแล้ว 2026-08-21: `gameplay_scene.gd` เดิม (M2 leftover, ContentClass ไม่มี) และ `gameplay_placeholder.gd` ไม่ถูกอ้างอิงจากที่ใดเลย ถูกลบออกจาก Project แล้ว จากนั้นไฟล์ M3/M4 เดิมชื่อ `m3_gameplay_scene.gd` / `class_name M3GameplayScene` ถูกเปลี่ยนชื่อมาเป็น `gameplay_scene.gd` / `GameplayScene` แทน เพื่อไม่ให้ชื่อไฟล์อ้างถึง Milestone เก่า)
-
 ## Entity Scripts
 ปัจจุบันมี Script สำหรับ:
 - Dryosaurus
@@ -122,8 +116,6 @@ Current Match / Current Wave ไม่ต้องบันทึก
 ## Board
 `stage_board.gd` / `stage_board_visual.gd`
 ใช้สร้าง Board/Grid จากข้อมูล Stage แทนการวาด Grid ฝังอยู่ใน Background ผูกอยู่กับ Node `PlayArea/World/Board` ใน `gameplay_scene.tscn` โดยตรง
-
-(ยืนยันแล้ว 2026-08-21: `scenes/stage_board.tscn` ซึ่งเป็น standalone preview scene แยกไม่ถูกอ้างอิงจากที่ใด — ลบออกแล้ว ส่วน `stage_board.gd`/`stage_board_visual.gd` ยังใช้งานจริงผ่าน `gameplay_scene.tscn`)
 
 Board:
 - 5 rows

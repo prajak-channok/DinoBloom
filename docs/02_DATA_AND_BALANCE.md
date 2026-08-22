@@ -65,6 +65,3 @@ Other Plants are defined by the game design but are not all present as complete 
 Base values belong in `.tres` Data Resources.
 Runtime scaling must be calculated by gameplay systems.
 Do not modify Base HP inside `.tres` for Wave scaling.
-
-## Important Current Data Caveat
-The current `data/dinosaurs/velociraptor.tres` does not contain `attack_interval`, while the intended balance is 1.0s. Verify/fix this through the Data Resource rather than compensating inside the dinosaur script.
