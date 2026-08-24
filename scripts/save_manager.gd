@@ -39,6 +39,30 @@ func add_dna(amount: int) -> void:
 	dna += amount
 	save_game()
 
+## M5: deducts DNA spent on plant upgrades and persists it, mirroring add_dna.
+func spend_dna(amount: int) -> bool:
+	if amount <= 0 or amount > dna:
+		return false
+	dna -= amount
+	save_game()
+	return true
+
+func get_plant_level(plant_id: String) -> int:
+	return plant_levels.get(plant_id, 0)
+
+## Atomic upgrade transaction: spend DNA + bump level in a single save. Rolls back
+## the in-memory mutation if the save itself fails, so state and disk never diverge.
+func apply_plant_upgrade(plant_id: String, cost: int) -> bool:
+	if cost <= 0 or cost > dna:
+		return false
+	dna -= cost
+	plant_levels[plant_id] = plant_levels.get(plant_id, 0) + 1
+	if not save_game():
+		dna += cost
+		plant_levels[plant_id] -= 1
+		return false
+	return true
+
 func mark_stage_completed(stage_id: String) -> void:
 	if stage_id == "stage_01" or stage_id == "stage_02" or stage_id == "stage_03":
 		if not stage_id in completed_stages:

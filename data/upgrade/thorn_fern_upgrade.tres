@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="PlantUpgradeData" format=3 uid="uid://dcj6hnhvwm2bp"]
+
+[ext_resource type="Script" uid="uid://o2cftnhh8wb2" path="res://scripts/data/plant_upgrade_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://k1n5yg7qt1p6" path="res://scripts/data/upgrade_level_data.gd" id="2"]
+
+[sub_resource type="Resource" id="SubResource_tf_l1"]
+script = ExtResource("2")
+level = 1
+attack_modifier = 25.0
+
+[sub_resource type="Resource" id="SubResource_tf_l2"]
+script = ExtResource("2")
+level = 2
+attack_modifier = 50.0
+
+[sub_resource type="Resource" id="SubResource_tf_l3"]
+script = ExtResource("2")
+level = 3
+attack_modifier = 50.0
+placement_cooldown_modifier = -1.0
+
+[sub_resource type="Resource" id="SubResource_tf_l4"]
+script = ExtResource("2")
+level = 4
+attack_modifier = 100.0
+
+[sub_resource type="Resource" id="SubResource_tf_l5"]
+script = ExtResource("2")
+level = 5
+placement_cooldown_modifier = -1.0
+placement_cost_modifier = -25
+
+[resource]
+script = ExtResource("1")
+plant_id = "thorn_fern"
+levels = Array[ExtResource("2")]([SubResource("SubResource_tf_l1"), SubResource("SubResource_tf_l2"), SubResource("SubResource_tf_l3"), SubResource("SubResource_tf_l4"), SubResource("SubResource_tf_l5")])

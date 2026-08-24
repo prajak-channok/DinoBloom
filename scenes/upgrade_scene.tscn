@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://dnihi1764mbga"]
 
 [ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="1_3q44q"]
-[ext_resource type="Texture2D" uid="uid://13wh0mqk6gf" path="res://assets/Plants/SeedBloomNBG.PNG" id="2_bml3v"]
-[ext_resource type="Texture2D" uid="uid://bymdvkrc6j6x8" path="res://assets/Plants/ThornFernNBG.png" id="3_8euho"]
+[ext_resource type="Script" uid="uid://cybwdfutuh2w5" path="res://scripts/upgrade_scene.gd" id="1_upgscr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bml3v"]
 bg_color = Color(0.1, 0.15, 0.08, 0.94)
@@ -144,18 +143,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="CardHover"]
-bg_color = Color(0.95, 0.93, 0.84, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.34, 0.45, 0.2, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [node name="UpgradeScene" type="Control" unique_id=781929789]
 layout_mode = 3
 anchors_preset = 15
@@ -163,6 +150,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_upgscr")
 
 [node name="Background" type="ColorRect" parent="." unique_id=601284591]
 layout_mode = 1
@@ -183,6 +171,7 @@ grow_horizontal = 2
 color = Color(0.10616442, 0.27224317, 0, 1)
 
 [node name="BackButton" type="Button" parent="TopBar" unique_id=1572780573]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 24.0
 offset_top = 40.0
@@ -260,6 +249,7 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("Board")
 
 [node name="LeftBackground" type="PanelContainer" parent="UpgradeBoard" unique_id=875801792]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 668)
 layout_mode = 0
 offset_left = 18.0
@@ -278,6 +268,7 @@ text = "Select a plant"
 horizontal_alignment = 1
 
 [node name="LeftPanel" type="PanelContainer" parent="UpgradeBoard" unique_id=831000913]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 668)
 layout_mode = 0
 offset_left = 18.0
@@ -297,17 +288,19 @@ theme_override_constants/margin_bottom = 16
 
 [node name="Info" type="VBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer" unique_id=28732510]
 layout_mode = 2
-theme_override_constants/separation = 21
+theme_override_constants/separation = 10
 
 [node name="TopInfo" type="HBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info" unique_id=1959177518]
 custom_minimum_size = Vector2(0, 275)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PlantPreview" type="ColorRect" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=2119579028]
+[node name="PlantPreview" type="TextureRect" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=2119579028]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
-color = Color(0.68, 0.66096, 0.5848, 1)
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Panel" type="PanelContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=938600247]
 layout_mode = 2
@@ -315,6 +308,7 @@ size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
 
 [node name="PlantName" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo/Panel" unique_id=1568072328]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(225, 100)
 custom_maximum_size = Vector2(225, 100)
 layout_mode = 2
@@ -348,18 +342,21 @@ text = "Stats"
 horizontal_alignment = 1
 
 [node name="ATK" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=390055694]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "ATK: -"
 
 [node name="HP" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=1356559432]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "HP: -"
 
 [node name="DPS" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=2085239342]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
@@ -379,15 +376,23 @@ theme_override_styles/panel = SubResource("Panel")
 
 [node name="Content" type="VBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel" unique_id=1953354312]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 
 [node name="ProgressBar" type="ProgressBar" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content" unique_id=1381569973]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_k735o")
 theme_override_styles/fill = SubResource("StyleBoxFlat_pm4ds")
 value = 20.0
 show_percentage = false
+
+[node name="NextUpgradeLabel" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content" unique_id=101270187]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Next Upgrade: -"
 
 [node name="BottomRow" type="Panel" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content" unique_id=836918814]
 layout_mode = 2
@@ -397,32 +402,34 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_s7rlf")
 [node name="DNACost" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=159008519]
 layout_mode = 0
 offset_left = 4.0
-offset_top = 43.0
+offset_top = 22.0
 offset_right = 117.0
-offset_bottom = 71.0
+offset_bottom = 50.0
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "DNA Cost:   "
 
-[node name="Label" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=1684305560]
+[node name="DNACostValue" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=1684305560]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 115.0
-offset_top = 33.0
+offset_top = 12.0
 offset_right = 215.0
-offset_bottom = 75.0
+offset_bottom = 54.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "10"
 vertical_alignment = 1
 
 [node name="UpgradeButton" type="Button" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=470765114]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(85, 34)
 layout_mode = 0
 offset_left = 305.0
-offset_top = 22.0
+offset_top = -2.0
 offset_right = 455.0
-offset_bottom = 72.0
+offset_bottom = 48.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_2bn62")
@@ -445,46 +452,19 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="PlantGrid" type="GridContainer" parent="UpgradeBoard/PlantListPanel/MarginContainer" unique_id=1202225295]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 15
 columns = 5
 
-[node name="PlantCard1" type="Button" parent="UpgradeBoard/PlantListPanel/MarginContainer/PlantGrid" unique_id=1748294199]
-custom_minimum_size = Vector2(170, 170)
-layout_mode = 2
-theme_override_styles/normal = SubResource("Card")
-theme_override_styles/pressed = SubResource("CardPressed")
-theme_override_styles/hover = SubResource("StyleBoxFlat_d8y6w")
-icon = ExtResource("2_bml3v")
-icon_alignment = 1
-expand_icon = true
-
-[node name="PlantCard2" type="Button" parent="UpgradeBoard/PlantListPanel/MarginContainer/PlantGrid" unique_id=931492197]
-custom_minimum_size = Vector2(170, 170)
-layout_mode = 2
-theme_override_styles/normal = SubResource("Card")
-theme_override_styles/pressed = SubResource("CardPressed")
-theme_override_styles/hover = SubResource("StyleBoxFlat_d8y6w")
-icon = ExtResource("3_8euho")
-icon_alignment = 1
-expand_icon = true
-
 [node name="PlantCardTemplate" type="Button" parent="." unique_id=411825859]
+unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(170, 170)
 layout_mode = 0
 theme_override_styles/normal = SubResource("Card")
 theme_override_styles/pressed = SubResource("CardPressed")
-theme_override_styles/hover = SubResource("CardHover")
-
-[node name="PlantIcon" type="TextureRect" parent="PlantCardTemplate" unique_id=484639741]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
+theme_override_styles/hover = SubResource("StyleBoxFlat_d8y6w")
+icon_alignment = 1
+expand_icon = true

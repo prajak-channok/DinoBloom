@@ -29,17 +29,20 @@ const STAGE_DATA := {
 
 const PLANT_DATA := {
 	"Seed Bloom": preload("res://data/plants/seed_bloom.tres"),
-	"Thorn Fern": preload("res://data/plants/thorn_fern.tres")
+	"Thorn Fern": preload("res://data/plants/thorn_fern.tres"),
+	"Baobab Guardian": preload("res://data/plants/baobab_guardian.tres")
 }
 
 const PLANT_SCENES := {
 	"Seed Bloom": "res://scenes/plants/seed_bloom.tscn",
-	"Thorn Fern": "res://scenes/plants/thorn_fern.tscn"
+	"Thorn Fern": "res://scenes/plants/thorn_fern.tscn",
+	"Baobab Guardian": "res://scenes/plants/baobab_guardian.tscn"
 }
 
 const PLANT_TEXTURES := {
 	"Seed Bloom": "res://assets/Plants/SeedBloomNBG.PNG",
-	"Thorn Fern": "res://assets/Plants/ThornFernNBG.png"
+	"Thorn Fern": "res://assets/Plants/ThornFernNBG.png",
+	"Baobab Guardian": "res://assets/Plants/BaobabGuardianNBG.png"
 }
 
 @onready var play_area: Control = $PlayArea
@@ -207,7 +210,7 @@ func _build_plant_cards() -> void:
 	_card_buttons.clear()
 	_card_cost_labels.clear()
 
-	for plant_name in ["Seed Bloom", "Thorn Fern"]:
+	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian"]:
 		var data: PlantData = PLANT_DATA[plant_name]
 		var card := PanelContainer.new()
 		card.name = plant_name.replace(" ", "") + "Card"
