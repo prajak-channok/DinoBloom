@@ -80,8 +80,6 @@ func _process(delta: float) -> void:
 			_play_walk()
 			position.x = maxf(position.x - DATA.movement_speed * delta, stop_x)
 		else:
-			if position.x < stop_x:
-				position.x = stop_x
 			_target = plant
 			_play_eat()
 			_attack_timer += delta

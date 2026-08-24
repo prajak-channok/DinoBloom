@@ -54,8 +54,6 @@ func _process(delta: float) -> void:
 		else:
 			_state = "eating"
 			_target = plant
-			if position.x < stop_x:
-				position.x = stop_x
 			_play_eat()
 			_attack_timer += delta
 			if _attack_timer >= DATA.attack_interval:
