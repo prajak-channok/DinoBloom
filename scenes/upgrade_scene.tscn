@@ -1,82 +1,470 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://dnihi1764mbga"]
 
-[ext_resource type="Texture2D" path="res://assets/BackGround/SelectStageBG2.png" id="1_bg"]
-[ext_resource type="Script" path="res://scripts/upgrade_scene.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="1_3q44q"]
+[ext_resource type="Script" uid="uid://cybwdfutuh2w5" path="res://scripts/upgrade_scene.gd" id="1_upgscr"]
 
-[node name="UpgradeScene" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bml3v"]
+bg_color = Color(0.1, 0.15, 0.08, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8euho"]
+bg_color = Color(0.2, 0.28, 0.14, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.86, 0.48, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5odw"]
+bg_color = Color(0.0287667, 0.20703113, 0.019072557, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.65, 0.38, 0.78)
+corner_radius_top_left = 40
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="Board"]
+bg_color = Color(0.78, 0.75, 0.65, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3q44q"]
+bg_color = Color(0.700309, 0.6601522, 0.5041797, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.105882354, 0.27058825, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6ira"]
+bg_color = Color(0.91, 0.89, 0.81, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.105882354, 0.27058825, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7wsd"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.91, 0.89, 0.81, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k735o"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm4ds"]
+bg_color = Color(0.105882354, 0.27058825, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7rlf"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bn62"]
+bg_color = Color(0.1, 0.15, 0.08, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="Card"]
+bg_color = Color(0.91, 0.89, 0.83, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.68, 0.67, 0.59, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="CardPressed"]
+bg_color = Color(0.66, 0.64, 0.55, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.22, 0.24, 0.16, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8y6w"]
+bg_color = Color(0.95, 0.93, 0.84, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.34, 0.45, 0.2, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="UpgradeScene" type="Control" unique_id=781929789]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_script")
+script = ExtResource("1_upgscr")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=601284591]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_bg")
-expand_mode = 1
-stretch_mode = 6
 mouse_filter = 2
+color = Color(0.22, 0.27, 0.17, 1)
 
-[node name="Title" type="Label" parent="."]
+[node name="TopBar" type="ColorRect" parent="." unique_id=276942212]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -80.0
-offset_right = 300.0
-offset_bottom = 20.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 140.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.96, 0.92, 0.72, 1)
-theme_override_font_sizes/font_size = 30
-text = "PLANT UPGRADE"
-horizontal_alignment = 1
+color = Color(0.10616442, 0.27224317, 0, 1)
 
-[node name="Info" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = 10.0
-offset_right = 360.0
-offset_bottom = 130.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.90, 0.88, 0.75, 1)
-theme_override_font_sizes/font_size = 20
-text = "Upgrade cards are reserved for the next milestone.\nSave data already contains DNA and plant levels."
-horizontal_alignment = 1
-
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="TopBar" unique_id=1572780573]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 24.0
-offset_top = 20.0
-offset_right = 150.0
-offset_bottom = 70.0
-text = "← BACK"
+offset_top = 40.0
+offset_right = 124.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.7490196, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_bml3v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8euho")
+text = "Back"
 
-[node name="DNALabel" type="Label" parent="."]
+[node name="TopRight" type="PanelContainer" parent="TopBar" unique_id=1469533176]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_top = 35.0
+offset_right = -26.0
+offset_bottom = 103.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5odw")
+
+[node name="Row" type="HBoxContainer" parent="TopBar/TopRight" unique_id=1894599394]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DNAIcon" type="TextureRect" parent="TopBar/TopRight/Row" unique_id=595895345]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+texture = ExtResource("1_3q44q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DNALabel" type="Label" parent="TopBar/TopRight/Row" unique_id=676687343]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.93, 0.7, 1)
+theme_override_font_sizes/font_size = 23
+text = "0"
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="TopBar" unique_id=285331401]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 41.0
+offset_right = 250.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 35
+text = "UPGRADE SYSTEM"
+horizontal_alignment = 1
+
+[node name="UpgradeBoard" type="Panel" parent="." unique_id=2116910300]
+custom_maximum_size = Vector2(-1, 704)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -705.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("Board")
+
+[node name="LeftBackground" type="PanelContainer" parent="UpgradeBoard" unique_id=875801792]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 668)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 518.0
+offset_bottom = 686.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3q44q")
+
+[node name="Label" type="Label" parent="UpgradeBoard/LeftBackground" unique_id=630085164]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.22, 0.22, 0.22, 0.85882354)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.7058824)
+theme_override_font_sizes/font_size = 30
+text = "Select a plant"
+horizontal_alignment = 1
+
+[node name="LeftPanel" type="PanelContainer" parent="UpgradeBoard" unique_id=831000913]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 668)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 518.0
+offset_bottom = 686.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k6ira")
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeBoard/LeftPanel" unique_id=3749394]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Info" type="VBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer" unique_id=28732510]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TopInfo" type="HBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info" unique_id=1959177518]
+custom_minimum_size = Vector2(0, 275)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlantPreview" type="TextureRect" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=2119579028]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Panel" type="PanelContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=938600247]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
+
+[node name="PlantName" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo/Panel" unique_id=1568072328]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 100)
+custom_maximum_size = Vector2(225, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Plant Name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PlantDescription" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo/Panel" unique_id=1125276354]
+custom_minimum_size = Vector2(170, 150)
+custom_maximum_size = Vector2(170, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Plant description."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Stats" type="VBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info" unique_id=33446782]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=515738373]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="ATK" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=390055694]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "ATK: -"
+
+[node name="HP" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=1356559432]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "HP: -"
+
+[node name="DPS" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=2085239342]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "DPS: -"
+
+[node name="Skill" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=745113618]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Skill: -"
+
+[node name="UpgradePanel" type="PanelContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info" unique_id=77095607]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Content" type="VBoxContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel" unique_id=1953354312]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ProgressBar" type="ProgressBar" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content" unique_id=1381569973]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_k735o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pm4ds")
+value = 20.0
+show_percentage = false
+
+[node name="NextUpgradeLabel" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content" unique_id=101270187]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Next Upgrade: -"
+
+[node name="BottomRow" type="Panel" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content" unique_id=836918814]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7rlf")
+
+[node name="DNACost" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=159008519]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 22.0
+offset_right = 117.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "DNA Cost:   "
+
+[node name="DNACostValue" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=1684305560]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 1040.0
-offset_top = 28.0
-offset_right = 1240.0
-offset_bottom = 68.0
-theme_override_colors/font_color = Color(0.96, 0.92, 0.72, 1)
-theme_override_font_sizes/font_size = 24
-text = "DNA: 0"
-horizontal_alignment = 2
+offset_left = 115.0
+offset_top = 12.0
+offset_right = 215.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "10"
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=470765114]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(85, 34)
+layout_mode = 0
+offset_left = 305.0
+offset_top = -2.0
+offset_right = 455.0
+offset_bottom = 48.0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_2bn62")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8euho")
+text = "Upgrade"
+
+[node name="PlantListPanel" type="PanelContainer" parent="UpgradeBoard" unique_id=1161014185]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 18.0
+offset_right = 1481.0
+offset_bottom = 686.0
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeBoard/PlantListPanel" unique_id=1649775113]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="PlantGrid" type="GridContainer" parent="UpgradeBoard/PlantListPanel/MarginContainer" unique_id=1202225295]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 5
+
+[node name="PlantCardTemplate" type="Button" parent="." unique_id=411825859]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 0
+theme_override_styles/normal = SubResource("Card")
+theme_override_styles/pressed = SubResource("CardPressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d8y6w")
+icon_alignment = 1
+expand_icon = true
