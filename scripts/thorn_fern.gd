@@ -24,6 +24,7 @@ var _gameplay: Node = null
 var grid_row: int = -1
 var grid_column: int = -1
 var _hp: float = 0.0
+var _attack: float = 0.0
 var _attack_timer: float = 0.0
 var _cell_size: Vector2 = Vector2.ZERO
 
@@ -100,6 +101,8 @@ func setup_combat(gameplay: Node, row: int) -> void:
 	_gameplay = gameplay
 	grid_row = row
 	_hp = DATA.base_hp
+	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
+	_attack = final_stats.attack if final_stats != null else DATA.base_attack
 	_attack_timer = DATA.attack_interval
 	_combat_enabled = true
 
@@ -117,7 +120,7 @@ func _combat_process(delta: float) -> void:
 		return
 	var projectile: Node2D = projectile_scene.instantiate() as Node2D
 	projectile.position = position + Vector2(_cell_size.x * 0.25, -_cell_size.y * 0.08)
-	projectile.setup(target, DATA.base_attack, grid_row)
+	projectile.setup(target, _attack, grid_row)
 	_gameplay.add_child(projectile)
 
 func _find_nearest_enemy() -> Node2D:

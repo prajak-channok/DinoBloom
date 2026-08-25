@@ -283,14 +283,14 @@ func toggle_speed() -> void:
 	else:
 		Engine.time_scale = 1.0
 	if ui_speed_button:
-		ui_speed_button.text = "1×" if Engine.time_scale >= 1.5 else "2×"
+		ui_speed_button.text = "2×" if Engine.time_scale >= 1.5 else "1×"
 
 ## Requirement (2026-08-21): when the Wave Clear / Win UI appears, force back
 ## to 1x so the player has to explicitly re-press 2x for the next wave.
 func _reset_speed() -> void:
 	Engine.time_scale = 1.0
 	if ui_speed_button:
-		ui_speed_button.text = "2×"
+		ui_speed_button.text = "1×"
 
 # ---------------------------------------------------------------------------
 # State machine

@@ -22,12 +22,16 @@ func _ready() -> void:
 	add_to_group("plants")
 	_base_position = visual.position
 	_base_scale = visual.scale
-	_hp = DATA.base_hp
+	_hp = _get_hp()
 
 func setup(gameplay: Node, row: int) -> void:
 	grid_row = row
-	_hp = DATA.base_hp
+	_hp = _get_hp()
 	add_to_group("plants")
+
+func _get_hp() -> float:
+	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
+	return final_stats.hp if final_stats != null else DATA.base_hp
 
 func set_grid_cell(row: int, column: int, cell_size: Vector2) -> void:
 	grid_row = row
