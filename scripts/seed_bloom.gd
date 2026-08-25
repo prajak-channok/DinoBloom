@@ -30,7 +30,8 @@ func _ready() -> void:
 func setup(gameplay: Node, row: int) -> void:
 	_gameplay = gameplay
 	grid_row = row
-	_hp = DATA.base_hp
+	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
+	_hp = final_stats.hp if final_stats != null else DATA.base_hp
 	add_to_group("plants")
 
 func set_grid_cell(row: int, column: int, cell_size: Vector2) -> void:

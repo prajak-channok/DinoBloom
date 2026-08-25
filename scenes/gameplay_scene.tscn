@@ -244,7 +244,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
-text = "2×"
+text = "1×"
 
 [node name="BossHPBar" type="PanelContainer" parent="UI" unique_id=-1210238186]
 visible = false
