@@ -1,21 +1,67 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b5vffcjmccmb0"]
 
-[ext_resource type="Script" path="res://scripts/baobab_guardian.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Plants/BaobabGuardianNBG.png" id="2_texture"]
+[ext_resource type="Script" uid="uid://diwovsktlyslr" path="res://scripts/baobab_guardian.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cw41e313pecuk" path="res://assets/Plants/BaobabGuardianDamage.png" id="2_damage_texture"]
 
-[node name="BaobabGuardian" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_stage01"]
+atlas = ExtResource("2_damage_texture")
+region = Rect2(0, 0, 360, 460)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stage02"]
+atlas = ExtResource("2_damage_texture")
+region = Rect2(360, 0, 360, 460)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stage03"]
+atlas = ExtResource("2_damage_texture")
+region = Rect2(720, 0, 360, 460)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stage04"]
+atlas = ExtResource("2_damage_texture")
+region = Rect2(1080, 0, 360, 460)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_baobab_damage"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stage01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stage02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stage03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stage04")
+}],
+"loop": 0,
+"name": &"damage",
+"speed": 1.0
+}]
+
+[node name="BaobabGuardian" type="Node2D" unique_id=667054894]
 script = ExtResource("1_script")
 
-[node name="Visual" type="Node2D" parent="."]
+[node name="Visual" type="Node2D" parent="." unique_id=2081240235]
 
-[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=857516001]
 texture_filter = 1
-position = Vector2(9.3562565, -4.3562565)
-scale = Vector2(0.105, 0.105)
-texture = ExtResource("2_texture")
+position = Vector2(5, -20)
+scale = Vector2(0.2810188, 0.24565215)
+sprite_frames = SubResource("SpriteFrames_baobab_damage")
+animation = &"damage"
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="SpriteNext" type="AnimatedSprite2D" parent="Visual" unique_id=604321584]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(6.0000005, -8)
+scale = Vector2(0.28657436, 0.23695654)
+sprite_frames = SubResource("SpriteFrames_baobab_damage")
+animation = &"damage"
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=2135581901]
+position = Vector2(1, 1)
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=516388657]
