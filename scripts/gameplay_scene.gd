@@ -283,11 +283,20 @@ func _make_card_style(selected: bool) -> StyleBoxFlat:
 	style.corner_radius_bottom_right = 12
 	return style
 
+## Placement Cost/Cooldown reflect the plant's current Upgrade level; PlantData
+## stays the fallback only if PlantProgression has no Final Stat for it.
+func _get_placement_stats(plant_name: String) -> Dictionary:
+	var data: PlantData = PLANT_DATA[plant_name]
+	var final_stats: Variant = PlantProgression.get_final_stats(data.id)
+	if final_stats == null:
+		return {"cost": data.placement_cost, "cooldown": data.placement_cooldown}
+	return {"cost": final_stats.placement_cost, "cooldown": final_stats.placement_cooldown}
+
 func _update_card_states() -> void:
 	for plant_name in _card_buttons:
 		var card: PanelContainer = _card_buttons[plant_name]
 		var button := card.get_node("SelectButton") as Button
-		var data: PlantData = PLANT_DATA[plant_name]
+		var stats: Dictionary = _get_placement_stats(plant_name)
 		var cooldown := float(_plant_cooldowns.get(plant_name, 0.0))
 		var ready := cooldown <= 0.0
 		button.disabled = not ready
@@ -296,16 +305,16 @@ func _update_card_states() -> void:
 			_card_cost_labels[plant_name].text = "Cooldown %.1fs" % cooldown
 			_card_cost_labels[plant_name].add_theme_color_override("font_color", Color(0.75, 0.75, 0.75, 1.0))
 		else:
-			_card_cost_labels[plant_name].text = "Cost  %d Seed" % data.placement_cost
+			_card_cost_labels[plant_name].text = "Cost  %d Seed" % stats.cost
 			_card_cost_labels[plant_name].add_theme_color_override("font_color", Color(0.94, 0.84, 0.45, 1.0))
 
 		card.add_theme_stylebox_override("panel", _make_card_style(plant_name == selected_plant))
 
 func _on_plant_card_pressed(plant_name: String) -> void:
-	var data: PlantData = PLANT_DATA[plant_name]
+	var stats: Dictionary = _get_placement_stats(plant_name)
 	if float(_plant_cooldowns.get(plant_name, 0.0)) > 0.0:
 		return
-	if ancient_seed < data.placement_cost:
+	if ancient_seed < stats.cost:
 		_update_status("Ancient Seed ไม่พอ")
 		return
 
@@ -389,8 +398,8 @@ func _try_place(play_position: Vector2) -> void:
 		_update_status("ช่องนี้ถูกใช้งานแล้ว")
 		return
 
-	var data: PlantData = PLANT_DATA[selected_plant]
-	if ancient_seed < data.placement_cost:
+	var stats: Dictionary = _get_placement_stats(selected_plant)
+	if ancient_seed < stats.cost:
 		_update_status("Ancient Seed ไม่พอ")
 		return
 	if float(_plant_cooldowns.get(selected_plant, 0.0)) > 0.0:
@@ -420,9 +429,9 @@ func _try_place(play_position: Vector2) -> void:
 	if plant.has_signal("seed_generated"):
 		plant.seed_generated.connect(_on_seed_generated)
 
-	ancient_seed -= data.placement_cost
-	_occupied[grid] = {"node": plant, "cost": data.placement_cost}
-	_plant_cooldowns[selected_plant] = data.placement_cooldown
+	ancient_seed -= stats.cost
+	_occupied[grid] = {"node": plant, "cost": stats.cost}
+	_plant_cooldowns[selected_plant] = stats.cooldown
 	_update_seed_label()
 	_update_status("%s วางแล้ว" % selected_plant)
 	selected_plant = ""
