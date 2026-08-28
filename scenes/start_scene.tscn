@@ -2,7 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://hhrh0cree2eu" path="res://assets/BackGround/StartBG.png" id="1_bg"]
 [ext_resource type="Texture2D" uid="uid://jghm4e1yjn4c" path="res://assets/Component/LogoGameNBG.png" id="2_logo"]
+[ext_resource type="Texture2D" uid="uid://easpnpht45jr" path="res://audio/sound on.png" id="3_2l3yw"]
 [ext_resource type="Script" uid="uid://dlu86w5lflk2l" path="res://scripts/start_scene.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://cjxj6dh1u2im3" path="res://scenes/texture_button.gd" id="4_0kdh5"]
+[ext_resource type="Texture2D" uid="uid://iftlgocmnq1m" path="res://audio/sound off.png" id="4_2525w"]
+[ext_resource type="AudioStream" uid="uid://bqjc33ht2s8cv" path="res://audio/#14 Wander (Official).mp3" id="4_i331m"]
 
 [sub_resource type="StyleBoxFlat" id="ButtonNormal"]
 bg_color = Color(0.12, 0.18, 0.1, 0.94)
@@ -103,6 +107,19 @@ theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "EXIT"
 
+[node name="Sound button" type="TextureButton" parent="." unique_id=1106753053]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 788.0
+offset_right = 60.0
+offset_bottom = 845.0
+texture_normal = ExtResource("3_2l3yw")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_0kdh5")
+icon_sound_on = ExtResource("3_2l3yw")
+icon_sound_off = ExtResource("4_2525w")
+
 [node name="ExitDialog" type="ConfirmationDialog" parent="." unique_id=2004083345]
 unique_name_in_owner = true
 oversampling_override = 1.0
@@ -110,3 +127,9 @@ position = Vector2i(0, 36)
 ok_button_text = "EXIT"
 dialog_text = "Exit DinoBloom?"
 cancel_button_text = "CANCEL"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=593131669]
+stream = ExtResource("4_i331m")
+autoplay = true
+
+[connection signal="pressed" from="Sound button" to="Sound button" method="_on_pressed"]
