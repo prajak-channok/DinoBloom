@@ -131,5 +131,6 @@ cancel_button_text = "CANCEL"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=593131669]
 stream = ExtResource("4_i331m")
 autoplay = true
+bus = &"GameSound"
 
 [connection signal="pressed" from="Sound button" to="Sound button" method="_on_pressed"]
