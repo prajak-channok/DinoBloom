@@ -4,7 +4,7 @@ class_name ThornFern
 const DATA: PlantData = preload("res://data/plants/thorn_fern.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 const ATTACK_ANIMATION := "attack"
-const FIRE_FRAME := 2
+const ATTACK_FRAME := 2
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025
@@ -29,7 +29,7 @@ var _attack: float = 0.0
 var _attack_timer: float = 0.0
 var _cell_size: Vector2 = Vector2.ZERO
 var _current_target: Node2D = null
-var _fire_frame_triggered: bool = false
+var _attack_frame_triggered: bool = false
 
 func _ready() -> void:
 	add_to_group("plants")
@@ -76,7 +76,7 @@ func play_attack() -> void:
 		return
 
 	_attacking = true
-	_fire_frame_triggered = false
+	_attack_frame_triggered = false
 
 	visual.position = _base_position
 	visual.scale = _base_scale
@@ -94,11 +94,11 @@ func _on_animation_frame_changed() -> void:
 	if animated_sprite.animation != ATTACK_ANIMATION:
 		return
 
-	if _fire_frame_triggered:
+	if _attack_frame_triggered:
 		return
 
-	if animated_sprite.frame == FIRE_FRAME:
-		_fire_frame_triggered = true
+	if animated_sprite.frame == ATTACK_FRAME:
+		_attack_frame_triggered = true
 		_spawn_projectile()
 
 func _spawn_projectile() -> void:
@@ -140,7 +140,7 @@ func _show_idle() -> void:
 	animated_sprite.stop()
 	animated_sprite.animation = ATTACK_ANIMATION
 	animated_sprite.frame = 0
-	_fire_frame_triggered = false
+	_attack_frame_triggered = false
 
 	bounce_time = 0.0
 	visual.position = _base_position

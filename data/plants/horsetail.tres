@@ -1,19 +1,20 @@
-[gd_resource type="Resource" script_class="PlantData" format=3]
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://co0adr0xrwwke"]
 
-[ext_resource type="Script" path="res://scripts/data/plant_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/Plants/HorsetailNBG.png" id="2"]
+[ext_resource type="Script" uid="uid://cxn8ef2oiq000" path="res://scripts/data/plant_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://buy0dvaevq2dd" path="res://assets/Plants/HorsetailNBG.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 id = "horsetail"
 display_name = "Horsetail"
 base_hp = 60.0
-base_attack = 20.0
+base_attack = 50.0
 attack_interval = 1.5
-placement_cost = 150
-placement_cooldown = 15.0
 plant_type = "Attack"
-ability_type = "Projectile"
-production_amount = 0
-production_interval = 0.0
+ability_data = {
+"attack_range": 400.0,
+"chain_count": 3,
+"chain_damage_multiplier": 0.7,
+"chain_range": 350.0
+}
 visual_reference = ExtResource("2")

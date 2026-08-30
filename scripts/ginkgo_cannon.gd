@@ -4,7 +4,7 @@ class_name GinkgoCannon
 const DATA: PlantData = preload("res://data/plants/ginkgo_cannon.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 const ATTACK_ANIMATION := "attack"
-const FIRE_FRAME := 5
+const ATTACK_FRAME := 5
 const CONVERSION_COOLDOWN: float = 20.0
 
 @export var bounce_speed: float = 0.7
@@ -104,7 +104,7 @@ func _on_attack_sprite_frame_changed() -> void:
 		return
 
 	if animated_sprite.animation == ATTACK_ANIMATION \
-			and animated_sprite.frame == FIRE_FRAME:
+			and animated_sprite.frame == ATTACK_FRAME:
 		_spawn_projectile()
 
 

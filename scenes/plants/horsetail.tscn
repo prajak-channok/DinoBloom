@@ -1,25 +1,127 @@
 [gd_scene format=3 uid="uid://bbnv6j6msse05"]
 
 [ext_resource type="Script" uid="uid://ctha2oprjixsv" path="res://scripts/horsetail.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://buy0dvaevq2dd" path="res://assets/Plants/HorsetailNBG.png" id="2_texture"]
+[ext_resource type="Texture2D" uid="uid://ctku1551v1g8e" path="res://assets/Plants/SPHorsetail.png" id="2_sbvg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3lam"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(0, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chrl6"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(256, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fccum"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(512, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he4fx"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(768, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5veas"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(1024, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5a8c"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(1280, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_raagh"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(0, 224, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjyfx"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(256, 224, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmdjg"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(512, 224, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyanl"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(768, 224, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohn6t"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(1280, 224, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xns7l"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(0, 672, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jg4b"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(1024, 672, 256, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clwvj"]
+atlas = ExtResource("2_sbvg1")
+region = Rect2(1280, 672, 256, 224)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s7wsd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3lam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chrl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fccum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he4fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5veas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5a8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_raagh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjyfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmdjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyanl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohn6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xns7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jg4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clwvj")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 28.0
+}]
 
 [node name="Horsetail" type="Node2D" unique_id=1606568701]
 script = ExtResource("1_script")
 
 [node name="Visual" type="Node2D" parent="." unique_id=1311877550]
 
-[node name="IdleSprite" type="Sprite2D" parent="Visual" unique_id=1478047518]
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Visual" unique_id=948901432]
 texture_filter = 1
-position = Vector2(9.3562565, -4.3562565)
-scale = Vector2(0.105, 0.105)
-texture = ExtResource("2_texture")
-
-[node name="AttackSprite" type="Sprite2D" parent="Visual" unique_id=559543739]
-visible = false
-texture_filter = 1
-position = Vector2(9.3562565, -4.3562565)
-scale = Vector2(0.105, 0.105)
-texture = ExtResource("2_texture")
+position = Vector2(-5, -13)
+scale = Vector2(0.4666239, 0.4666239)
+sprite_frames = SubResource("SpriteFrames_s7wsd")
+animation = &"attack"
+frame = 13
+frame_progress = 1.0
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1729869539]
 monitoring = false
