@@ -218,7 +218,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 25.0
+"speed": 20.0
 }]
 
 [node name="GinkgoCannon" type="Node2D" unique_id=269766215]
@@ -228,7 +228,7 @@ script = ExtResource("1_script")
 
 [node name="AttackSprite" type="AnimatedSprite2D" parent="Visual" unique_id=312762765]
 texture_filter = 1
-position = Vector2(-3, -11)
+position = Vector2(4, -12.000001)
 scale = Vector2(0.4542984, 0.4542984)
 sprite_frames = SubResource("SpriteFrames_s7wsd")
 animation = &"attack"

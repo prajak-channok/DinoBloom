@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="PlantData" format=3]
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://um6v2lrw6jd5"]
 
-[ext_resource type="Script" path="res://scripts/data/plant_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/Plants/GinkgoCannonNBG.png" id="2"]
+[ext_resource type="Script" uid="uid://cxn8ef2oiq000" path="res://scripts/data/plant_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://deef31b8bj5xw" path="res://assets/Plants/GinkgoCannonNBG.png" id="2"]
 
 [resource]
 script = ExtResource("1")
@@ -14,6 +14,4 @@ placement_cost = 175
 placement_cooldown = 15.0
 plant_type = "Attack"
 ability_type = "Conversion"
-production_amount = 0
-production_interval = 0.0
 visual_reference = ExtResource("2")

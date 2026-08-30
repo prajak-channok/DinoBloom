@@ -1,29 +1,28 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bbnv6j6msse05"]
 
-[ext_resource type="Script" path="res://scripts/horsetail.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/Plants/HorsetailNBG.png" id="2_texture"]
+[ext_resource type="Script" uid="uid://ctha2oprjixsv" path="res://scripts/horsetail.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://buy0dvaevq2dd" path="res://assets/Plants/HorsetailNBG.png" id="2_texture"]
 
-[node name="Horsetail" type="Node2D"]
+[node name="Horsetail" type="Node2D" unique_id=1606568701]
 script = ExtResource("1_script")
 
-[node name="Visual" type="Node2D" parent="."]
+[node name="Visual" type="Node2D" parent="." unique_id=1311877550]
 
-[node name="IdleSprite" type="Sprite2D" parent="Visual"]
+[node name="IdleSprite" type="Sprite2D" parent="Visual" unique_id=1478047518]
 texture_filter = 1
 position = Vector2(9.3562565, -4.3562565)
 scale = Vector2(0.105, 0.105)
 texture = ExtResource("2_texture")
 
-[node name="AttackSprite" type="Sprite2D" parent="Visual"]
-texture_filter = 1
-position = Vector2(9.3562565, -4.3562565)
-scale = Vector2(0.105, 0.105)
-texture = ExtResource("2_texture")
+[node name="AttackSprite" type="Sprite2D" parent="Visual" unique_id=559543739]
 visible = false
+texture_filter = 1
+position = Vector2(9.3562565, -4.3562565)
+scale = Vector2(0.105, 0.105)
+texture = ExtResource("2_texture")
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1729869539]
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-shape = null
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=2129640666]

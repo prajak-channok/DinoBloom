@@ -3,14 +3,15 @@ class_name ThornFern
 
 const DATA: PlantData = preload("res://data/plants/thorn_fern.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
+const ATTACK_ANIMATION := "attack"
+const FIRE_FRAME := 2
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025
 @export var bob_amount: float = 3.0
 
 @onready var visual: Node2D = $Visual
-@onready var idle_sprite: Sprite2D = $Visual/IdleSprite
-@onready var attack_sprite: AnimatedSprite2D = $Visual/AttackSprite
+@onready var animated_sprite: AnimatedSprite2D = $Visual/AttackSprite
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var interaction_shape: CollisionShape2D = $InteractionArea/CollisionShape2D
 
@@ -27,23 +28,22 @@ var _hp: float = 0.0
 var _attack: float = 0.0
 var _attack_timer: float = 0.0
 var _cell_size: Vector2 = Vector2.ZERO
+var _current_target: Node2D = null
+var _fire_frame_triggered: bool = false
 
 func _ready() -> void:
 	add_to_group("plants")
 	_base_position = visual.position
 	_base_scale = visual.scale
 	_base_rotation = visual.rotation
-	attack_sprite.animation_finished.connect(_on_animation_finished)
+	animated_sprite.frame_changed.connect(_on_animation_frame_changed)
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 	_show_idle()
 
 func set_grid_cell(row: int, column: int, cell_size: Vector2) -> void:
 	grid_row = row
 	grid_column = column
 	_cell_size = cell_size
-	# Preserve the artist-authored Idle/Attack child scales and only scale the
-	# common visual anchor with the logical Cell size. At the current 1280x720
-	# design resolution the reference cell is 104 px high, so existing tuning is
-	# unchanged while other field sizes scale proportionally.
 	visual.scale = Vector2.ONE * (cell_size.y / DESIGN_CELL_HEIGHT)
 	_base_scale = visual.scale
 	interaction_shape.shape = _make_cell_shape(cell_size)
@@ -65,6 +65,7 @@ func _process(delta: float) -> void:
 
 	var squash_x: float = 1.0 + wobble * bounce_scale
 	var squash_y: float = 1.0 - wobble * bounce_scale * 0.8
+
 	visual.scale = _base_scale * Vector2(squash_x, squash_y)
 
 	var bob: float = -abs(wobble) * bob_amount
@@ -73,25 +74,74 @@ func _process(delta: float) -> void:
 func play_attack() -> void:
 	if _attacking:
 		return
+
 	_attacking = true
+	_fire_frame_triggered = false
+
 	visual.position = _base_position
 	visual.scale = _base_scale
 	visual.rotation = _base_rotation
 	bounce_time = 0.0
-	idle_sprite.visible = false
-	attack_sprite.visible = true
-	attack_sprite.frame = 0
-	attack_sprite.play("attack")
+
+	animated_sprite.animation = ATTACK_ANIMATION
+	animated_sprite.frame = 0
+	animated_sprite.play()
+
+func _on_animation_frame_changed() -> void:
+	if not _attacking:
+		return
+
+	if animated_sprite.animation != ATTACK_ANIMATION:
+		return
+
+	if _fire_frame_triggered:
+		return
+
+	if animated_sprite.frame == FIRE_FRAME:
+		_fire_frame_triggered = true
+		_spawn_projectile()
+
+func _spawn_projectile() -> void:
+	if _current_target == null or not is_instance_valid(_current_target):
+		return
+
+	if _gameplay == null:
+		return
+
+	var projectile_scene: PackedScene = load(
+		"res://scenes/plants/thorn_projectile.tscn"
+	)
+
+	if projectile_scene == null:
+		return
+
+	var projectile: Node2D = projectile_scene.instantiate() as Node2D
+
+	_gameplay.add_child(projectile)
+
+	projectile.global_position = global_position + Vector2(
+		_cell_size.x * 0.25,
+		-_cell_size.y * 0.08
+	)
+
+	projectile.setup(
+		_current_target,
+		_attack,
+		grid_row
+	)
 
 func _on_animation_finished() -> void:
-	if attack_sprite.animation == "attack":
+	if animated_sprite.animation == ATTACK_ANIMATION:
 		_show_idle()
+		_current_target = null
 
 func _show_idle() -> void:
 	_attacking = false
-	attack_sprite.stop()
-	attack_sprite.visible = false
-	idle_sprite.visible = true
+	animated_sprite.stop()
+	animated_sprite.animation = ATTACK_ANIMATION
+	animated_sprite.frame = 0
+	_fire_frame_triggered = false
+
 	bounce_time = 0.0
 	visual.position = _base_position
 	visual.scale = _base_scale
@@ -101,50 +151,62 @@ func setup_combat(gameplay: Node, row: int) -> void:
 	_gameplay = gameplay
 	grid_row = row
 	_hp = DATA.base_hp
+
 	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
 	_attack = final_stats.attack if final_stats != null else DATA.base_attack
+
 	_attack_timer = DATA.attack_interval
 	_combat_enabled = true
 
 func _combat_process(delta: float) -> void:
 	_attack_timer += delta
+
 	if _attack_timer < DATA.attack_interval:
 		return
+
 	var target: Node2D = _find_nearest_enemy()
+
 	if target == null:
 		return
+
 	_attack_timer = 0.0
+	_current_target = target
+
 	play_attack()
-	var projectile_scene: PackedScene = load("res://scenes/plants/thorn_projectile.tscn")
-	if projectile_scene == null or _gameplay == null:
-		return
-	var projectile: Node2D = projectile_scene.instantiate() as Node2D
-	projectile.position = position + Vector2(_cell_size.x * 0.25, -_cell_size.y * 0.08)
-	projectile.setup(target, _attack, grid_row)
-	_gameplay.add_child(projectile)
 
 func _find_nearest_enemy() -> Node2D:
 	var best: Node2D = null
 	var best_distance: float = INF
+
 	for node: Node in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(node) or node is not Node2D:
 			continue
+
 		if int(node.get("grid_row")) != grid_row:
 			continue
+
 		var enemy := node as Node2D
+
 		if enemy.position.x < position.x:
 			continue
+
 		var distance: float = enemy.position.x - position.x
+
 		if distance < best_distance:
-			best = node as Node2D
+			best = enemy
 			best_distance = distance
+
 	return best
 
 func get_interaction_rect() -> Rect2:
-	return Rect2(position - _cell_size * 0.5, _cell_size)
+	return Rect2(
+		position - _cell_size * 0.5,
+		_cell_size
+	)
 
 func take_damage(amount: float) -> void:
 	_hp -= amount
+
 	if _hp <= 0.0:
 		queue_free()
 

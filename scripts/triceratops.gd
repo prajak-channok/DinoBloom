@@ -95,7 +95,7 @@ func _play_eat() -> void:
 		sprite.play("eat")
 
 func _find_target_ahead(move_dir: float) -> Node2D:
-	var groups: Array[String] = ["enemies"] if move_dir > 0.0 else ["plants", "friendly_dinosaurs"]
+	var groups: Array = ["enemies"] if move_dir > 0.0 else ["plants", "friendly_dinosaurs"]
 	var best: Node2D = null
 	var best_distance: float = INF
 	for group_name in groups:
@@ -146,6 +146,7 @@ func convert_to_friendly() -> void:
 		return
 	faction = "Friendly"
 	hp = max_hp
+	sprite.flip_h = true
 	_update_hp_bar()
 	remove_from_group("enemies")
 	add_to_group("friendly_dinosaurs")

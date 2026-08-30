@@ -4,10 +4,8 @@ class_name GinkgoCannon
 const DATA: PlantData = preload("res://data/plants/ginkgo_cannon.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 const ATTACK_ANIMATION := "attack"
-const FIRE_FRAME := 6
-## Conversion Ability cooldown. Not a PlantData field: this is Ginkgo-specific
-## ability tuning, same category as SPEED/HIT_RADIUS on the projectile script.
-const CONVERSION_COOLDOWN: float = 40.0
+const FIRE_FRAME := 5
+const CONVERSION_COOLDOWN: float = 20.0
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025
@@ -34,12 +32,7 @@ var _hp: float = 0.0
 var _attack: float = 0.0
 var _attack_timer: float = 0.0
 var _cell_size: Vector2 = Vector2.ZERO
-## Ready (>= CONVERSION_COOLDOWN) means the next shot fired converts instead
-## of dealing damage. Uses the same delta-accumulation-in-_process pattern as
-## _attack_timer, so it automatically respects Engine.time_scale (1x/2x) and
-## get_tree().paused like every other gameplay timer already does.
 var _conversion_timer: float = CONVERSION_COOLDOWN
-
 var _current_target: Node2D = null
 
 
@@ -95,8 +88,6 @@ func play_attack() -> void:
 	if _attacking:
 		return
 
-	print("PLAY ATTACK CALLED")
-
 	_attacking = true
 
 	visual.position = _base_position
@@ -114,10 +105,10 @@ func _on_attack_sprite_frame_changed() -> void:
 
 	if animated_sprite.animation == ATTACK_ANIMATION \
 			and animated_sprite.frame == FIRE_FRAME:
-		_fire_projectile()
+		_spawn_projectile()
 
 
-func _fire_projectile() -> void:
+func _spawn_projectile() -> void:
 	if _current_target == null or not is_instance_valid(_current_target):
 		return
 
@@ -129,7 +120,6 @@ func _fire_projectile() -> void:
 	)
 
 	if projectile_scene == null:
-		print("PROJECTILE SCENE LOAD FAILED")
 		return
 
 	var projectile: Node2D = projectile_scene.instantiate() as Node2D
@@ -248,6 +238,3 @@ func take_damage(amount: float) -> void:
 
 func get_hp() -> float:
 	return _hp
-
-func _on_attack_sprite_animation_changed() -> void:
-	pass # Replace with function body.
