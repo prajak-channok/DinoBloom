@@ -8,15 +8,27 @@ const STAGE_IDS := ["stage_01", "stage_02", "stage_03"]
 @onready var back_button: Button = %BackButton
 @onready var dna_label: Label = %DNALabel
 @onready var locked_overlay: ColorRect = %LockedOverlay
-@onready var locked_popup: AcceptDialog = %LockedPopup
+
+# 1. เปลี่ยนชนิดของตัวแปรให้ตรงกับ Node หลักของ Popup ใหม่ (สมมติว่าใช้ CanvasLayer และใช้ชื่อเดิม %LockedPopup)
+@onready var locked_popup: CanvasLayer = %LockedPopup 
+# 2. เพิ่มตัวแปรสำหรับปุ่ม OK ในหน้าต่าง Popup
+@onready var popup_ok_button: Button = %PopupOkButton 
 
 var selected_stage_id := ""
 
 func _ready() -> void:
 	selected_stage_id = ""
+	
+	# 3. สั่งซ่อน Popup ไว้ก่อนตอนเริ่ม Scene
+	locked_popup.hide() 
+	
 	back_button.pressed.connect(_on_back_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
 	start_button.pressed.connect(_on_start_pressed)
+	
+	# 4. เชื่อมสัญญาณ (Signal) ของปุ่ม OK ให้ทำงานฟังก์ชันปิดหน้าต่าง
+	popup_ok_button.pressed.connect(_on_popup_ok_pressed) 
+	
 	for i in stage_buttons.size():
 		stage_buttons[i].pressed.connect(_on_stage_pressed.bind(STAGE_IDS[i]))
 	_refresh()
@@ -24,8 +36,13 @@ func _ready() -> void:
 func _on_stage_pressed(stage_id: String) -> void:
 	selected_stage_id = stage_id
 	if not SaveManager.is_stage_unlocked(stage_id):
-		locked_popup.popup_centered()
+		# 5. เปลี่ยนจาก popup_centered() เป็น show() เพราะเราจัดกึ่งกลางด้วย UI ไว้แล้ว
+		locked_popup.show() 
 	_refresh()
+
+# 6. เพิ่มฟังก์ชันสำหรับปุ่ม OK เมื่อกดแล้วให้ปิดหน้าต่าง
+func _on_popup_ok_pressed() -> void:
+	locked_popup.hide()
 
 func _on_start_pressed() -> void:
 	if selected_stage_id == "":
