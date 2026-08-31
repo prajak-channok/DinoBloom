@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bgvu3mrdqeir5"]
+
+[ext_resource type="AudioStream" uid="uid://ccae7i606rwg" path="res://audio/Game Selection Menu Sound Effects - 01 [Copyright Free]-[AudioTrimmer.com].mp3" id="1_k275d"]
+[ext_resource type="Script" uid="uid://bjr16gmtn4gfi" path="res://scenes/hover_sound.gd" id="2_fqux5"]
+
+[node name="HoverSound" type="AudioStreamPlayer" unique_id=537375288]
+stream = ExtResource("1_k275d")
+max_polyphony = 5
+script = ExtResource("2_fqux5")
