@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://box6vl8as1c8w"]
 
-[ext_resource type="Script" uid="uid://ut3dkpqmqp3h" path="res://scripts/thorn_fern.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dsjva1jhgot5v" path="res://scripts/thorn_fern.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c7nsdsqdvaoot" path="res://assets/Plants/SPThornFern.png" id="2_attack_texture"]
 [ext_resource type="Texture2D" uid="uid://bymdvkrc6j6x8" path="res://assets/Plants/ThornFernNBG.png" id="3_idle_texture"]
 
@@ -73,9 +73,8 @@ animation = &"attack"
 frame = 5
 frame_progress = 1.0
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1979030164]
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-shape = null
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=131498967]

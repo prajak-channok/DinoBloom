@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="StageData" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="StageData" format=3 uid="uid://b7geftxfhkqwh"]
 
-[ext_resource type="Script" path="res://scripts/stage_data.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/BackGround/FieldBG3.png" id="2_bg"]
-[ext_resource type="Texture2D" path="res://assets/BackGround/TileField1A.png" id="3_a"]
-[ext_resource type="Texture2D" path="res://assets/BackGround/TileField1B.png" id="4_b"]
+[ext_resource type="Script" uid="uid://msmwsrc2ixa6" path="res://scripts/stage_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://nxdvmggvolk2" path="res://assets/BackGround/FieldBG3.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://d0ggjwbi4qij1" path="res://assets/BackGround/TileField1A.png" id="3_a"]
+[ext_resource type="Texture2D" uid="uid://dldumb7ekrmip" path="res://assets/BackGround/TileField1B.png" id="4_b"]
 
 [resource]
 script = ExtResource("1_script")
@@ -12,6 +12,6 @@ display_name = "Tree of Evolution"
 background = ExtResource("2_bg")
 tile_a = ExtResource("3_a")
 tile_b = ExtResource("4_b")
-gameplay_area_normalized = Rect2(0.214, 0.145, 0.620, 0.710)
+gameplay_area_normalized = Rect2(0.214, 0.145, 0.62, 0.71)
 hp_multiplier = 4.0
 unlock_after_stage_id = "stage_02"
