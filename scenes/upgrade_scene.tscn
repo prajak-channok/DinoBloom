@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="1_3q44q"]
 [ext_resource type="Script" uid="uid://cybwdfutuh2w5" path="res://scripts/upgrade_scene.gd" id="1_upgscr"]
+[ext_resource type="AudioStream" uid="uid://dv6aspl7py2jv" path="res://audio/DOORS Roblox OST_ Elevator Jam.mp3" id="3_8euho"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bml3v"]
 bg_color = Color(0.1, 0.15, 0.08, 0.94)
@@ -419,7 +420,7 @@ offset_right = 215.0
 offset_bottom = 54.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "10"
+text = "0"
 vertical_alignment = 1
 
 [node name="UpgradeButton" type="Button" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/UpgradePanel/Content/BottomRow" unique_id=470765114]
@@ -468,3 +469,7 @@ theme_override_styles/pressed = SubResource("CardPressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_d8y6w")
 icon_alignment = 1
 expand_icon = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=409297627]
+stream = ExtResource("3_8euho")
+autoplay = true

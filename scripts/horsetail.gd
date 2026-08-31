@@ -1,10 +1,10 @@
 extends Node2D
-class_name ThornFern
+class_name Horsetail
 
-const DATA: PlantData = preload("res://data/plants/thorn_fern.tres")
+const DATA: PlantData = preload("res://data/plants/horsetail.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 const ATTACK_ANIMATION := "attack"
-const ATTACK_FRAME := 2
+const ATTACK_FRAME: int = 6
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025
@@ -36,8 +36,8 @@ func _ready() -> void:
 	_base_position = visual.position
 	_base_scale = visual.scale
 	_base_rotation = visual.rotation
-	animated_sprite.frame_changed.connect(_on_animation_frame_changed)
-	animated_sprite.animation_finished.connect(_on_animation_finished)
+	animated_sprite.frame_changed.connect(_on_attack_frame_changed)
+	animated_sprite.animation_finished.connect(_on_attack_animation_finished)
 	_show_idle()
 
 func set_grid_cell(row: int, column: int, cell_size: Vector2) -> void:
@@ -62,7 +62,6 @@ func _process(delta: float) -> void:
 
 	bounce_time += delta * bounce_speed * TAU * 0.3
 	var wobble: float = sin(bounce_time)
-
 	var squash_x: float = 1.0 + wobble * bounce_scale
 	var squash_y: float = 1.0 - wobble * bounce_scale * 0.8
 
@@ -85,62 +84,35 @@ func play_attack() -> void:
 
 	animated_sprite.animation = ATTACK_ANIMATION
 	animated_sprite.frame = 0
-	animated_sprite.play()
+	animated_sprite.play(ATTACK_ANIMATION)
 
-func _on_animation_frame_changed() -> void:
+func _on_attack_frame_changed() -> void:
 	if not _attacking:
 		return
 
 	if animated_sprite.animation != ATTACK_ANIMATION:
 		return
 
+	if animated_sprite.frame != ATTACK_FRAME:
+		return
+
 	if _attack_frame_triggered:
 		return
 
-	if animated_sprite.frame == ATTACK_FRAME:
-		_attack_frame_triggered = true
-		_spawn_projectile()
+	_attack_frame_triggered = true
+	_spawn_projectile()
 
-func _spawn_projectile() -> void:
-	if _current_target == null or not is_instance_valid(_current_target):
-		return
-
-	if _gameplay == null:
-		return
-
-	var projectile_scene: PackedScene = load(
-		"res://scenes/plants/thorn_projectile.tscn"
-	)
-
-	if projectile_scene == null:
-		return
-
-	var projectile: Node2D = projectile_scene.instantiate() as Node2D
-
-	_gameplay.add_child(projectile)
-
-	projectile.global_position = global_position + Vector2(
-		_cell_size.x * 0.25,
-		-_cell_size.y * 0.08
-	)
-
-	projectile.setup(
-		_current_target,
-		_attack,
-		grid_row
-	)
-
-func _on_animation_finished() -> void:
+func _on_attack_animation_finished() -> void:
 	if animated_sprite.animation == ATTACK_ANIMATION:
 		_show_idle()
-		_current_target = null
 
 func _show_idle() -> void:
 	_attacking = false
+	_attack_frame_triggered = false
+
 	animated_sprite.stop()
 	animated_sprite.animation = ATTACK_ANIMATION
 	animated_sprite.frame = 0
-	_attack_frame_triggered = false
 
 	bounce_time = 0.0
 	visual.position = _base_position
@@ -171,38 +143,60 @@ func _combat_process(delta: float) -> void:
 
 	_attack_timer = 0.0
 	_current_target = target
-
 	play_attack()
 
 func _find_nearest_enemy() -> Node2D:
 	var best: Node2D = null
-	var best_distance: float = INF
+	var attack_range: float = float(DATA.ability_data.get("attack_range", 0.0))
 
 	for node: Node in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(node) or node is not Node2D:
 			continue
 
-		if int(node.get("grid_row")) != grid_row:
-			continue
-
 		var enemy := node as Node2D
+		var distance: float = global_position.distance_to(enemy.global_position)
 
-		if enemy.position.x < position.x:
-			continue
-
-		var distance: float = enemy.position.x - position.x
-
-		if distance < best_distance:
+		if distance < attack_range:
 			best = enemy
-			best_distance = distance
+			attack_range = distance
 
 	return best
 
-func get_interaction_rect() -> Rect2:
-	return Rect2(
-		position - _cell_size * 0.5,
-		_cell_size
+func _spawn_projectile() -> void:
+	var chain_count: int = int(DATA.ability_data.get("chain_count", 0))
+	var chain_range: float = float(DATA.ability_data.get("chain_range", 0.0))
+	var chain_damage_multiplier: float = float(DATA.ability_data.get("chain_damage_multiplier", 1.0))
+	if _current_target == null or not is_instance_valid(_current_target):
+		return
+
+	if _gameplay == null:
+		return
+
+	var lightning_scene: PackedScene = load(
+		"res://scenes/plants/horsetail_lightning.tscn"
 	)
+
+	if lightning_scene == null:
+		return
+
+	var lightning: HorsetailLightning = lightning_scene.instantiate() as HorsetailLightning
+
+	if lightning == null:
+		return
+
+	_gameplay.add_child(lightning)
+	lightning.setup(
+		_current_target,
+		_attack,
+		grid_row,
+		chain_count,
+		chain_range,
+		chain_damage_multiplier,
+		global_position
+	)
+
+func get_interaction_rect() -> Rect2:
+	return Rect2(position - _cell_size * 0.5, _cell_size)
 
 func take_damage(amount: float) -> void:
 	_hp -= amount

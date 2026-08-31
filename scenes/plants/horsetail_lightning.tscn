@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://bk1en6o8x2kj6"]
+
+[ext_resource type="Script" uid="uid://c418vu2q46mje" path="res://scripts/horsetail_lightning.gd" id="1_vcrk6"]
+[ext_resource type="Texture2D" uid="uid://uqt1r3vraimf" path="res://assets/Plants/PTHorsetail.png" id="2_ye28m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcrk6"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(1230, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye28m"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(984, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kvgl"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(738, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkoj1"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(492, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kurcx"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(246, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58api"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(0, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qknlh"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(1230, 680, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aspbf"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(738, 680, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl6po"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(246, 680, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hhqg"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(738, 510, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7535"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(1230, 340, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ug66"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(246, 340, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ignur"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(246, 170, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5bx5"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(1230, 850, 246, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyes1"]
+atlas = ExtResource("2_ye28m")
+region = Rect2(984, 850, 246, 170)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s7wsd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcrk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye28m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kvgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkoj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kurcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58api")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qknlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aspbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl6po")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hhqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7535")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ug66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ignur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5bx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyes1")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 50.0
+}]
+
+[node name="HorsetailProjectile" type="Node2D" unique_id=450171142]
+script = ExtResource("1_vcrk6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=880263279]
+texture_filter = 1
+position = Vector2(29, -13)
+scale = Vector2(0.6117279, 0.6117279)
+sprite_frames = SubResource("SpriteFrames_s7wsd")
+frame_progress = 1.0
