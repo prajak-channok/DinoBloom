@@ -15,38 +15,63 @@ func setup(target: Node2D, amount: float, row: int) -> void:
 	_target = target
 	damage = amount
 	grid_row = row
+
 	if is_instance_valid(target):
-		var delta: Vector2 = target.position - position
+		var delta: Vector2 = target.global_position - global_position
+
 		if delta.length_squared() > 0.01:
 			_direction = delta.normalized()
+
 	rotation = _direction.angle()
 
 func _process(delta: float) -> void:
 	_lifetime += delta
-	var previous_position: Vector2 = position
-	position += _direction * SPEED * delta
 
-	# Collision is evaluated against Enemy runtime entities, not Visual nodes.
+	var previous_position: Vector2 = global_position
+	global_position += _direction * SPEED * delta
+
 	for node: Node in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(node) or node is not Node2D:
 			continue
+
 		if int(node.get("grid_row")) != grid_row:
 			continue
+
 		var enemy: Node2D = node as Node2D
-		if _segment_hits_point(previous_position, position, enemy.position, HIT_RADIUS):
+
+		if _segment_hits_point(
+			previous_position,
+			global_position,
+			enemy.global_position,
+			HIT_RADIUS
+		):
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(damage)
+
 			queue_free()
 			return
 
 	if _lifetime >= MAX_LIFETIME:
 		queue_free()
 
-func _segment_hits_point(a: Vector2, b: Vector2, point: Vector2, radius: float) -> bool:
+func _segment_hits_point(
+	a: Vector2,
+	b: Vector2,
+	point: Vector2,
+	radius: float
+) -> bool:
 	var segment: Vector2 = b - a
 	var length_sq: float = segment.length_squared()
+
 	if length_sq <= 0.001:
 		return a.distance_to(point) <= radius
-	var t: float = clampf((point - a).dot(segment) / length_sq, 0.0, 1.0)
+
+	var t := clampf(
+		(point - a).dot(segment) / length_sq,
+		0.0,
+		1.0
+	)
+
 	var closest: Vector2 = a + segment * t
+
 	return closest.distance_to(point) <= radius

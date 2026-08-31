@@ -30,19 +30,25 @@ const STAGE_DATA := {
 const PLANT_DATA := {
 	"Seed Bloom": preload("res://data/plants/seed_bloom.tres"),
 	"Thorn Fern": preload("res://data/plants/thorn_fern.tres"),
-	"Baobab Guardian": preload("res://data/plants/baobab_guardian.tres")
+	"Baobab Guardian": preload("res://data/plants/baobab_guardian.tres"),
+	"Ginkgo Cannon": preload("res://data/plants/ginkgo_cannon.tres"),
+	"Horsetail": preload("res://data/plants/horsetail.tres")
 }
 
 const PLANT_SCENES := {
 	"Seed Bloom": "res://scenes/plants/seed_bloom.tscn",
 	"Thorn Fern": "res://scenes/plants/thorn_fern.tscn",
-	"Baobab Guardian": "res://scenes/plants/baobab_guardian.tscn"
+	"Baobab Guardian": "res://scenes/plants/baobab_guardian.tscn",
+	"Ginkgo Cannon": "res://scenes/plants/ginkgo_cannon.tscn",
+	"Horsetail": "res://scenes/plants/horsetail.tscn"
 }
 
 const PLANT_TEXTURES := {
 	"Seed Bloom": "res://assets/Plants/SeedBloomNBG.PNG",
 	"Thorn Fern": "res://assets/Plants/ThornFernNBG.png",
-	"Baobab Guardian": "res://assets/Plants/BaobabGuardianNBG.png"
+	"Baobab Guardian": "res://assets/Plants/BaobabGuardianNBG.png",
+	"Ginkgo Cannon": "res://assets/Plants/GinkgoCannonNBG.png",
+	"Horsetail": "res://assets/Plants/HorsetailNBG.png"
 }
 
 @onready var play_area: Control = $PlayArea
@@ -210,11 +216,11 @@ func _build_plant_cards() -> void:
 	_card_buttons.clear()
 	_card_cost_labels.clear()
 
-	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian"]:
+	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian", "Ginkgo Cannon", "Horsetail"]:
 		var data: PlantData = PLANT_DATA[plant_name]
 		var card := PanelContainer.new()
 		card.name = plant_name.replace(" ", "") + "Card"
-		card.custom_minimum_size = Vector2(0, 188)
+		card.custom_minimum_size = Vector2(0, 120)
 		card.add_theme_stylebox_override("panel", _make_card_style(false))
 
 		var button := Button.new()
@@ -231,36 +237,18 @@ func _build_plant_cards() -> void:
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		icon.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+		icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		icon.offset_left = 12.0
 		icon.offset_top = 8.0
 		icon.offset_right = -12.0
-		icon.offset_bottom = 112.0
+		icon.offset_bottom = -8.0
 		button.add_child(icon)
 
-		var name_label := Label.new()
-		name_label.text = plant_name
-		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		name_label.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-		name_label.offset_left = 8.0
-		name_label.offset_top = 112.0
-		name_label.offset_right = -8.0
-		name_label.offset_bottom = 140.0
-		name_label.add_theme_font_size_override("font_size", 18)
-		button.add_child(name_label)
-
+		# Cost/cooldown label is kept (hidden) so _update_card_states() can keep
+		# writing cooldown text/color without needing a separate code path;
+		# only the icon is shown per the card's icon-only presentation.
 		var cost_label := Label.new()
-		cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		cost_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		cost_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		cost_label.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-		cost_label.offset_left = 8.0
-		cost_label.offset_top = 140.0
-		cost_label.offset_right = -8.0
-		cost_label.offset_bottom = 174.0
-		cost_label.add_theme_font_size_override("font_size", 17)
+		cost_label.visible = false
 		button.add_child(cost_label)
 
 		plant_cards.add_child(card)
@@ -421,7 +409,7 @@ func _try_place(play_position: Vector2) -> void:
 	if plant.has_method("set_grid_cell"):
 		plant.set_grid_cell(grid.x, grid.y, board.get_cell_size())
 
-	if selected_plant == "Thorn Fern" and plant.has_method("setup_combat"):
+	if plant.has_method("setup_combat"):
 		plant.setup_combat(world, grid.x)
 	elif plant.has_method("setup"):
 		plant.setup(self, grid.x)

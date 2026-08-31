@@ -33,6 +33,10 @@ var _flash_timer: float = 0.0
 ## one-shot "rumbling" animation finishes.
 var _rumble_triggered: bool = false
 var _is_rumbling: bool = false
+## Ginkgo Cannon Conversion state, same contract as every other dinosaur.
+## DATA.can_be_converted is false on trex.tres, so can_be_converted() always
+## returns false here — T-Rex simply never flips to "Friendly".
+var faction: String = "Enemy"
 
 func setup(row: int, board_rect: Rect2 = Rect2(), cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0) -> void:
 	grid_row = row
@@ -42,6 +46,7 @@ func setup(row: int, board_rect: Rect2 = Rect2(), cell_size: Vector2 = Vector2(1
 	_cell_size = cell_size
 	_attack_timer = 0.0
 	_target = null
+	faction = DATA.faction
 	add_to_group("enemies")
 	add_to_group("bosses")
 	_play_walk()
@@ -70,7 +75,7 @@ func _process(delta: float) -> void:
 			_start_rumble()
 			return
 
-	var plant := _find_next_plant_ahead()
+	var plant := _find_target_ahead()
 	if plant != null:
 		var plant_rect: Rect2 = plant.get_interaction_rect() if plant.has_method("get_interaction_rect") else Rect2(plant.position, Vector2.ZERO)
 		var stop_x := plant_rect.end.x + body_half_width + contact_padding
@@ -127,22 +132,25 @@ func _flash_attack() -> void:
 		sprite.modulate = attack_flash_color
 	_flash_timer = 0.15
 
-func _find_next_plant_ahead() -> Node2D:
+## T-Rex is always Enemy faction (never converts), so it always fights
+## Plants + Friendly Dinosaurs ahead — same rule as every other Enemy.
+func _find_target_ahead() -> Node2D:
 	var best: Node2D = null
 	var best_distance: float = INF
-	for node: Node in get_tree().get_nodes_in_group("plants"):
-		if not is_instance_valid(node) or node is not Node2D:
-			continue
-		if int(node.get("grid_row")) != grid_row:
-			continue
-		var plant := node as Node2D
-		var plant_rect: Rect2 = plant.get_interaction_rect() if plant.has_method("get_interaction_rect") else Rect2(plant.position, Vector2.ZERO)
-		if position.x < plant_rect.position.x - body_half_width:
-			continue
-		var distance_ahead := position.x - plant_rect.end.x
-		if distance_ahead < best_distance:
-			best = plant
-			best_distance = distance_ahead
+	for group_name in ["plants", "friendly_dinosaurs"]:
+		for node: Node in get_tree().get_nodes_in_group(group_name):
+			if not is_instance_valid(node) or node is not Node2D:
+				continue
+			if int(node.get("grid_row")) != grid_row:
+				continue
+			var other := node as Node2D
+			var other_rect: Rect2 = other.get_interaction_rect() if other.has_method("get_interaction_rect") else Rect2(other.position, Vector2.ZERO)
+			if position.x < other_rect.position.x - body_half_width:
+				continue
+			var distance_ahead := position.x - other_rect.end.x
+			if distance_ahead < best_distance:
+				best = other
+				best_distance = distance_ahead
 	return best
 
 func take_damage(amount: float) -> void:
@@ -154,3 +162,20 @@ func take_damage(amount: float) -> void:
 
 func get_hp() -> float:
 	return hp
+
+func get_interaction_rect() -> Rect2:
+	return Rect2(Vector2(position.x - body_half_width, position.y), Vector2(body_half_width * 2.0, 0.0))
+
+func can_be_converted() -> bool:
+	return faction == "Enemy" and DATA.can_be_converted
+
+func convert_to_friendly() -> void:
+	if not can_be_converted():
+		return
+	faction = "Friendly"
+	hp = max_hp
+	hp_changed.emit(hp, max_hp)
+	remove_from_group("enemies")
+	add_to_group("friendly_dinosaurs")
+	_target = null
+	_attack_timer = 0.0
