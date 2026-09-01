@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwrv7u3wuo60t"
+path="res://.godot/imported/Falling Bomb Sound Effect  Atomic Bomb Sound Effect  Big Explosion!-[AudioTrimmer.com].mp3-21329916980bc5f23e467837e3a8674b.mp3str"
+
+[deps]
+
+source_file="res://audio/Falling Bomb Sound Effect  Atomic Bomb Sound Effect  Big Explosion!-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/Falling Bomb Sound Effect  Atomic Bomb Sound Effect  Big Explosion!-[AudioTrimmer.com].mp3-21329916980bc5f23e467837e3a8674b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

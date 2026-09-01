@@ -57,6 +57,7 @@ const PLANT_TEXTURES := {
 	"Blast Cone": "res://assets/Plants/BlastConeNBG.png"
 }
 
+@onready var place_sound: AudioStreamPlayer = $PlantPlaceSound
 @onready var play_area: Control = $PlayArea
 @onready var world: Node2D = $PlayArea/World
 @onready var background: TextureRect = $PlayArea/Background
@@ -432,6 +433,9 @@ func _try_place(play_position: Vector2) -> void:
 	selected_plant = ""
 	placement_preview.visible = false
 	_update_card_states()
+	
+	if place_sound:
+		place_sound.play()
 
 ## M4: Ancient Seed Refund (requirement #25). Right-click a placed plant to
 ## withdraw it for floor(cost * 0.5) Ancient Seed back, rounded down.
@@ -451,6 +455,9 @@ func _try_remove_plant(play_position: Vector2) -> void:
 	plant_node.queue_free()
 	add_seed(refund)
 	_update_status("ถอน Plant คืน %d Ancient Seed" % refund)
+	
+	if place_sound:
+		place_sound.play()
 
 func _is_cell_available(grid: Vector2i) -> bool:
 	return not _occupied.has(grid)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsjva1jhgot5v" path="res://scripts/thorn_fern.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c7nsdsqdvaoot" path="res://assets/Plants/SPThornFern.png" id="2_attack_texture"]
+[ext_resource type="AudioStream" uid="uid://bujkkp6jgr6pc" path="res://audio/Sound arrow effect-[AudioTrimmer.com].mp3" id="3_wi7p4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wi7p4"]
 atlas = ExtResource("2_attack_texture")
@@ -72,3 +73,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1498269620]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1796829433]
+stream = ExtResource("3_wi7p4")

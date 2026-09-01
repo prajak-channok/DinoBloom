@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://frnkgw3d8ty5" path="res://scripts/blast_cone.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://cn357xktn0c0n" path="res://assets/Plants/SPBlastCone.png" id="2_xwjn1"]
+[ext_resource type="AudioStream" uid="uid://cwrv7u3wuo60t" path="res://audio/Falling Bomb Sound Effect  Atomic Bomb Sound Effect  Big Explosion!-[AudioTrimmer.com].mp3" id="3_poyjp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_poyjp"]
 atlas = ExtResource("2_xwjn1")
@@ -240,3 +241,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1835331837]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1781501761]
+stream = ExtResource("3_poyjp")
