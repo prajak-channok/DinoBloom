@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://b30c6kc4vta1t"]
+
+[ext_resource type="Script" uid="uid://bu70rf1sdljjg" path="res://scripts/sticky_trap_visual.gd" id="1_whg7j"]
+[ext_resource type="Texture2D" uid="uid://bupsjt87bb3uc" path="res://assets/Plants/SPStickyMoss.png" id="2_hteup"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y15yb"]
+atlas = ExtResource("2_hteup")
+region = Rect2(768, 426, 256, 213)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qb6t"]
+atlas = ExtResource("2_hteup")
+region = Rect2(1024, 426, 256, 213)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a06c"]
+atlas = ExtResource("2_hteup")
+region = Rect2(1280, 426, 256, 213)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rst3"]
+atlas = ExtResource("2_hteup")
+region = Rect2(0, 640, 256, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kriqr"]
+atlas = ExtResource("2_hteup")
+region = Rect2(256, 640, 256, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22vdp"]
+atlas = ExtResource("2_hteup")
+region = Rect2(512, 640, 256, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_faw5y"]
+atlas = ExtResource("2_hteup")
+region = Rect2(768, 640, 256, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp87e"]
+atlas = ExtResource("2_hteup")
+region = Rect2(1024, 640, 256, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nex74"]
+atlas = ExtResource("2_hteup")
+region = Rect2(1280, 640, 256, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lnq4"]
+atlas = ExtResource("2_hteup")
+region = Rect2(0, 826, 256, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c13sd"]
+atlas = ExtResource("2_hteup")
+region = Rect2(256, 826, 256, 194)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgfru"]
+atlas = ExtResource("2_hteup")
+region = Rect2(1280, 826, 256, 194)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s7wsd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y15yb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qb6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qb6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qb6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qb6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qb6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a06c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rst3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kriqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22vdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_faw5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp87e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nex74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lnq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c13sd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgfru")
+}],
+"loop": 0,
+"name": &"trap",
+"speed": 10.0
+}]
+
+[node name="StickyTrapVisual" type="Node2D" unique_id=332427909]
+script = ExtResource("1_whg7j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1898115167]
+texture_filter = 1
+position = Vector2(0, -8)
+scale = Vector2(0.40216333, 0.40216336)
+sprite_frames = SubResource("SpriteFrames_s7wsd")
+animation = &"trap"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
