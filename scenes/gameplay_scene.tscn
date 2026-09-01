@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bbmb5y70218l" path="res://scripts/wave_manager.gd" id="4_wave_manager"]
 [ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/spawn_manager.gd" id="5_spawn_manager"]
 [ext_resource type="Script" uid="uid://b2wrs8jll6jr2" path="res://scripts/match_manager.gd" id="6_match_manager"]
+[ext_resource type="AudioStream" uid="uid://0srw641n2cjb" path="res://audio/Buckshot Roulette OST - General Release (extended).mp3" id="7_cd025"]
 
 [sub_resource type="StyleBoxFlat" id="PlayAreaFrame"]
 bg_color = Color(0.05, 0.06, 0.04, 1)
@@ -588,3 +589,9 @@ theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "ABANDON"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=263023206]
+stream = ExtResource("7_cd025")
+volume_db = -3.0
+autoplay = true
+bus = &"GameSound"

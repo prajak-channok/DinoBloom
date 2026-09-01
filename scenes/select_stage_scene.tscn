@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c00lwlu8b0f6u" path="res://assets/Component/TreeEvoStateNBG.png" id="4_tree"]
 [ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="5_dna"]
 [ext_resource type="Script" uid="uid://xaxljc8wqei3" path="res://scripts/select_stage_scene.gd" id="6_script"]
+[ext_resource type="AudioStream" uid="uid://bqjc33ht2s8cv" path="res://audio/#14 Wander (Official).mp3" id="7_c6ek3"]
 
 [sub_resource type="StyleBoxFlat" id="Panel"]
 bg_color = Color(0.039215688, 0.28627452, 0.03529412, 0.78039217)
@@ -356,3 +357,8 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("Button")
 theme_override_styles/hover = SubResource("Hover")
 text = "OK"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=128901227]
+stream = ExtResource("7_c6ek3")
+autoplay = true
+bus = &"GameSound"
