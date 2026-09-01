@@ -594,3 +594,4 @@ text = "ABANDON"
 stream = ExtResource("7_cd025")
 volume_db = -3.0
 autoplay = true
+bus = &"GameSound"

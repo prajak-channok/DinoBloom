@@ -264,3 +264,4 @@ Complete the previous stage to unlock it."
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=128901227]
 stream = ExtResource("7_c6ek3")
 autoplay = true
+bus = &"GameSound"
