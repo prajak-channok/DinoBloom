@@ -4,7 +4,7 @@ class_name ThornFern
 const DATA: PlantData = preload("res://data/plants/thorn_fern.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 const ATTACK_ANIMATION := "attack"
-const ATTACK_FRAME := 2
+const ATTACK_FRAME := 7
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025

@@ -224,6 +224,10 @@ func _build_plant_cards() -> void:
 
 	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian", "Ginkgo Cannon", "Horsetail", "Sticky Moss", "Blast Cone"]:
 		var data: PlantData = PLANT_DATA[plant_name]
+
+		if not SaveManager.is_plant_unlocked(data.id):
+			continue
+
 		var card := PanelContainer.new()
 		card.name = plant_name.replace(" ", "") + "Card"
 		card.custom_minimum_size = Vector2(0, 60)

@@ -90,6 +90,8 @@ static func get_next_level_deltas(plant_id: String) -> Array:
 ## False whenever the plant has no PlantUpgradeData yet — a plant with no defined
 ## upgrade effect cannot be upgraded, regardless of DNA or level.
 static func can_upgrade(plant_id: String) -> bool:
+	if not SaveManager.is_plant_unlocked(plant_id):
+		return false
 	if get_upgrade_data(plant_id) == null:
 		return false
 	var level: int = SaveManager.get_plant_level(plant_id)
@@ -100,6 +102,8 @@ static func can_upgrade(plant_id: String) -> bool:
 ## to a single atomic, single-save SaveManager transaction. Returns false and changes
 ## nothing if any check fails.
 static func try_upgrade(plant_id: String) -> bool:
+	if not SaveManager.is_plant_unlocked(plant_id):
+		return false
 	if get_upgrade_data(plant_id) == null:
 		return false
 	var level: int = SaveManager.get_plant_level(plant_id)
