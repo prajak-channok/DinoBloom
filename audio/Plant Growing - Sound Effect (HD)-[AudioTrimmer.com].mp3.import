@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cak0a6wmhnh5g"
+path="res://.godot/imported/Plant Growing - Sound Effect (HD)-[AudioTrimmer.com].mp3-5b15797f217cc6ded9211c6f3d071703.mp3str"
+
+[deps]
+
+source_file="res://audio/Plant Growing - Sound Effect (HD)-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/Plant Growing - Sound Effect (HD)-[AudioTrimmer.com].mp3-5b15797f217cc6ded9211c6f3d071703.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

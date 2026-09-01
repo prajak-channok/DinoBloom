@@ -14,6 +14,7 @@ const ATTACK_FRAME := 7
 @onready var animated_sprite: AnimatedSprite2D = $Visual/AttackSprite
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var interaction_shape: CollisionShape2D = $InteractionArea/CollisionShape2D
+@onready var attack_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var _base_position: Vector2
 var _base_scale: Vector2
@@ -86,7 +87,7 @@ func play_attack() -> void:
 	animated_sprite.animation = ATTACK_ANIMATION
 	animated_sprite.frame = 0
 	animated_sprite.play()
-
+	
 func _on_animation_frame_changed() -> void:
 	if not _attacking:
 		return
@@ -100,6 +101,9 @@ func _on_animation_frame_changed() -> void:
 	if animated_sprite.frame == ATTACK_FRAME:
 		_attack_frame_triggered = true
 		_spawn_projectile()
+		
+		if attack_sound:
+			attack_sound.play()
 
 func _spawn_projectile() -> void:
 	if _current_target == null or not is_instance_valid(_current_target):

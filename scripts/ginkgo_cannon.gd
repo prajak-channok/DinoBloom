@@ -15,6 +15,7 @@ const CONVERSION_COOLDOWN: float = 20.0
 @onready var animated_sprite: AnimatedSprite2D = $Visual/AttackSprite
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var interaction_shape: CollisionShape2D = $InteractionArea/CollisionShape2D
+@onready var attack_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var _base_position: Vector2
 var _base_scale: Vector2
@@ -97,6 +98,9 @@ func play_attack() -> void:
 	bounce_time = 0.0
 
 	animated_sprite.play(ATTACK_ANIMATION)
+	
+	if attack_sound:
+			attack_sound.play()
 
 
 func _on_attack_sprite_frame_changed() -> void:

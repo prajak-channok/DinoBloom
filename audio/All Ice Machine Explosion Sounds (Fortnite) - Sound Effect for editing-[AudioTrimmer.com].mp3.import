@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blcp26u6otffa"
+path="res://.godot/imported/All Ice Machine Explosion Sounds (Fortnite) - Sound Effect for editing-[AudioTrimmer.com].mp3-6e18a4f747bf32c790dcfc47ad9ded8f.mp3str"
+
+[deps]
+
+source_file="res://audio/All Ice Machine Explosion Sounds (Fortnite) - Sound Effect for editing-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/All Ice Machine Explosion Sounds (Fortnite) - Sound Effect for editing-[AudioTrimmer.com].mp3-6e18a4f747bf32c790dcfc47ad9ded8f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

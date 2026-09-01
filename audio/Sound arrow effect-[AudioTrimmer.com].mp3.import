@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bujkkp6jgr6pc"
+path="res://.godot/imported/Sound arrow effect-[AudioTrimmer.com].mp3-6c7b942603c7bd8e7bf3768fa2785630.mp3str"
+
+[deps]
+
+source_file="res://audio/Sound arrow effect-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/Sound arrow effect-[AudioTrimmer.com].mp3-6c7b942603c7bd8e7bf3768fa2785630.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
