@@ -57,6 +57,36 @@ corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnrxp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.09411765, 0.14509805, 0.078431375, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u64u"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.09411765, 0.14509805, 0.078431375, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+
 [node name="SelectStageScene" type="Control" unique_id=32590936]
 layout_mode = 3
 anchors_preset = 15
@@ -252,10 +282,77 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.25)
 
-[node name="LockedPopup" type="AcceptDialog" parent="." unique_id=732610939]
+[node name="LockedPopup3" type="AcceptDialog" parent="." unique_id=732610939]
 unique_name_in_owner = true
 oversampling_override = 1.0
-size = Vector2i(333, 106)
+position = Vector2i(0, 36)
+size = Vector2i(333, 132)
 ok_button_text = "OK"
 dialog_text = "This stage is locked.
 Complete the previous stage to unlock it."
+
+[node name="LockedPopup" type="CanvasLayer" parent="." unique_id=1284107825]
+unique_name_in_owner = true
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="LockedPopup" unique_id=156699779]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -101.0
+offset_right = 188.5
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="LockedPopup/CenterContainer" unique_id=1970870587]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnrxp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LockedPopup/CenterContainer/PanelContainer" unique_id=1220569945]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderPanel" type="PanelContainer" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer" unique_id=152941362]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6u64u")
+
+[node name="TitleLabel" type="Label" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer/HeaderPanel" unique_id=1290494727]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "This stage is locked."
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer" unique_id=1607171948]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="ContentVBox" type="VBoxContainer" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=608449697]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MessageLabel" type="Label" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox" unique_id=790240870]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Complete the previous stage to unlock it."
+horizontal_alignment = 1
+
+[node name="PopupOkButton" type="Button" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox" unique_id=1910109229]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.95, 0.92, 0.75, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("Button")
+theme_override_styles/hover = SubResource("Hover")
+text = "OK"
