@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2u2cjmrnwjlc" path="res://scripts/sticky_moss.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bupsjt87bb3uc" path="res://assets/Plants/SPStickyMoss.png" id="2_ycgo2"]
+[ext_resource type="AudioStream" uid="uid://blcp26u6otffa" path="res://audio/All Ice Machine Explosion Sounds (Fortnite) - Sound Effect for editing-[AudioTrimmer.com].mp3" id="3_e360w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e360w"]
 atlas = ExtResource("2_ycgo2")
@@ -237,3 +238,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrapArea" unique_id=297880566]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1382007273]
+stream = ExtResource("3_e360w")

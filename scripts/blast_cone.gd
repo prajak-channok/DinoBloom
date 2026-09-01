@@ -15,6 +15,7 @@ var _effect_range: float = float(DATA.ability_data.get("effect_range", 3.0))
 @onready var visual: Node2D = $Visual
 @onready var animated_sprite: AnimatedSprite2D = $Visual/AttackSprite
 @onready var interaction_shape: CollisionShape2D = $InteractionArea/CollisionShape2D
+@onready var attack_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var _base_position: Vector2
 var _base_scale: Vector2
@@ -162,7 +163,9 @@ func play_attack() -> void:
 	animated_sprite.animation = "attack"
 	animated_sprite.frame = 0
 	animated_sprite.play()
-
+	
+	if attack_sound:
+			attack_sound.play()
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":

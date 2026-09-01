@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6hbkfq4o01od" path="res://scripts/gameplay_scene.gd" id="1_gameplay"]
 [ext_resource type="Script" uid="uid://ba22i5i1rori" path="res://scripts/stage_board.gd" id="2_board"]
+[ext_resource type="AudioStream" uid="uid://cak0a6wmhnh5g" path="res://audio/Plant Growing - Sound Effect (HD)-[AudioTrimmer.com].mp3" id="2_gtnmq"]
 [ext_resource type="Script" uid="uid://dnoqi86vnmc66" path="res://scripts/stage_board_visual.gd" id="3_board_visual"]
 [ext_resource type="Script" uid="uid://bbmb5y70218l" path="res://scripts/wave_manager.gd" id="4_wave_manager"]
 [ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/spawn_manager.gd" id="5_spawn_manager"]
@@ -89,6 +90,10 @@ corner_radius_bottom_left = 14
 
 [node name="GameplayScene" type="Node2D" unique_id=1113645756]
 script = ExtResource("1_gameplay")
+
+[node name="PlantPlaceSound" type="AudioStreamPlayer" parent="." unique_id=1433179184]
+stream = ExtResource("2_gtnmq")
+volume_db = 3.0
 
 [node name="Systems" type="Node" parent="." unique_id=1856141472]
 
@@ -603,6 +608,6 @@ text = "ABANDON"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=263023206]
 stream = ExtResource("7_cd025")
-volume_db = -3.0
+volume_db = -10.0
 autoplay = true
 bus = &"GameSound"

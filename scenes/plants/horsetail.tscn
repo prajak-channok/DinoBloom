@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctha2oprjixsv" path="res://scripts/horsetail.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://ctku1551v1g8e" path="res://assets/Plants/SPHorsetail.png" id="2_sbvg1"]
+[ext_resource type="AudioStream" uid="uid://l7lo6541lo7r" path="res://audio/Electric SHOCK-[AudioTrimmer.com].mp3" id="3_j3lam"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3lam"]
 atlas = ExtResource("2_sbvg1")
@@ -128,3 +129,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=2129640666]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=1271581656]
+stream = ExtResource("3_j3lam")
