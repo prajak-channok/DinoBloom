@@ -12,4 +12,7 @@ base_attack = 20.0
 placement_cost = 75
 placement_cooldown = 12.0
 plant_type = "Trap"
+ability_data = {
+"effect_range": 3.0
+}
 visual_reference = ExtResource("2")
