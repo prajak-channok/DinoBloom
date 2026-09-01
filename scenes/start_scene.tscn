@@ -157,6 +157,7 @@ bus = &"GameSound"
 
 [node name="ExitPopup" type="CanvasLayer" parent="." unique_id=1684549627]
 unique_name_in_owner = true
+visible = false
 
 [node name="Block" type="ColorRect" parent="ExitPopup" unique_id=393655389]
 anchors_preset = 15

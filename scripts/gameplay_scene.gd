@@ -149,6 +149,14 @@ func _ready() -> void:
 	for btn in all_buttons:
 		if btn:
 			btn.add_theme_stylebox_override("pressed", custom_pressed)
+	
+	# เช็คว่าเป็นด่านสุดท้ายหรือไม่
+	var stage_keys = STAGE_DATA.keys()
+	var current_index = stage_keys.find(selected_stage_id)
+	if current_index == -1 or current_index >= stage_keys.size() - 1:
+		win_next_button.hide()
+	else:
+		win_next_button.show()
 
 	# --- โค้ดเดิมของคุณ ---
 	_build_plant_cards()

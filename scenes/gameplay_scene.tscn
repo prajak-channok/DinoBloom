@@ -385,7 +385,6 @@ text = "Next wave in 5s..."
 horizontal_alignment = 1
 
 [node name="WinPopup" type="Control" parent="Popups" unique_id=376414711]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1500.0
