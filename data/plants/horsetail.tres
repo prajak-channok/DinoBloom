@@ -17,6 +17,6 @@ ability_data = {
 "attack_range": 400.0,
 "chain_count": 3,
 "chain_damage_multiplier": 0.7,
-"chain_range": 350.0
+"chain_range": 300.0
 }
 visual_reference = ExtResource("2")

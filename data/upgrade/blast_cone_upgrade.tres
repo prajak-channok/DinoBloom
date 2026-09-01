@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="PlantUpgradeData" format=3 uid="uid://61qoeb11ixlp"]
+
+[ext_resource type="Script" uid="uid://k1n5yg7qt1p6" path="res://scripts/data/upgrade_level_data.gd" id="1_0fqct"]
+[ext_resource type="Script" uid="uid://o2cftnhh8wb2" path="res://scripts/data/plant_upgrade_data.gd" id="2_6lqcg"]
+
+[sub_resource type="Resource" id="Resource_epx5n"]
+script = ExtResource("1_0fqct")
+level = 1
+attack_modifier = 10.0
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_d5uhh"]
+script = ExtResource("1_0fqct")
+level = 2
+attack_modifier = 10.0
+placement_cooldown_modifier = -2.0
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_ojcm8"]
+script = ExtResource("1_0fqct")
+level = 3
+attack_modifier = 20.0
+ability_modifiers = {
+"effect_range": 2.0
+}
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_yxy4q"]
+script = ExtResource("1_0fqct")
+level = 4
+attack_modifier = 50.0
+placement_cooldown_modifier = -2.0
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_brpa8"]
+script = ExtResource("1_0fqct")
+level = 5
+placement_cooldown_modifier = -3.0
+ability_modifiers = {
+"effect_range": 2.0
+}
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[resource]
+script = ExtResource("2_6lqcg")
+plant_id = "blast_cone"
+levels = Array[ExtResource("1_0fqct")]([SubResource("Resource_epx5n"), SubResource("Resource_d5uhh"), SubResource("Resource_ojcm8"), SubResource("Resource_yxy4q"), SubResource("Resource_brpa8")])
+metadata/_custom_type_script = "uid://o2cftnhh8wb2"

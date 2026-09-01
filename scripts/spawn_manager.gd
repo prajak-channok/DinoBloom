@@ -104,14 +104,18 @@ func _attempt_spawn() -> void:
 
 func _schedule_next_spawn() -> void:
 	if not _is_first_wave:
-		_next_spawn_time = _elapsed + randf_range(0.5, 3.0)
+		if _elapsed <= 20.0:
+			_next_spawn_time = _elapsed + randf_range(3, 5)
+		else:
+			_next_spawn_time = _elapsed + randf_range(0.5, 3)
 		return
-	# Requirement #6: ~2-3 spawns in the first 15s of the wave (spaced out),
-	# then exactly one at a time on a random 1-5s cadence after that.
-	if _elapsed < 15.0:
-		_next_spawn_time = _elapsed + randf_range(7.0, 12.0)
-	else:
-		_next_spawn_time = _elapsed + randf_range(1.0, 6.0)
+
+	if _elapsed <= 50.0:
+		_next_spawn_time = _elapsed + randf_range(15, 17)
+	elif _elapsed <= 70.0:
+		_next_spawn_time = _elapsed + randf_range(6, 8)
+	elif _elapsed <= 80.0:
+		_next_spawn_time = _elapsed + randf_range(1.0, 3)
 
 func _pick_available_lane() -> int:
 	var lanes: Array = range(ROWS)

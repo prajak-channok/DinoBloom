@@ -322,6 +322,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="PlantDescription" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo/Panel" unique_id=1125276354]
+visible = false
 custom_minimum_size = Vector2(170, 150)
 custom_maximum_size = Vector2(170, 150)
 layout_mode = 2
@@ -364,6 +365,7 @@ theme_override_font_sizes/font_size = 25
 text = "DPS: -"
 
 [node name="Skill" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=745113618]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25

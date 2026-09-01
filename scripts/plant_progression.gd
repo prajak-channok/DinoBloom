@@ -54,7 +54,7 @@ static func get_final_stats(plant_id: String) -> Variant:
 				continue
 			for stat_key in STAT_FIELD_MAP:
 				stats[stat_key] += level_data.get("%s_modifier" % stat_key)
-
+	
 	return stats
 
 ## Cost to go from `level` to `level + 1`. -1 if already at MAX_LEVEL / no cost defined.
@@ -84,6 +84,10 @@ static func get_next_level_deltas(plant_id: String) -> Array:
 			var value = level_data.get("%s_modifier" % stat_key)
 			if value != 0:
 				deltas.append({"stat": stat_key, "value": value})
+		for ability_key in level_data.ability_modifiers:
+			var ability_value = level_data.ability_modifiers[ability_key]
+			if ability_value != 0:
+				deltas.append({"stat": ability_key, "value": ability_value})
 		return deltas
 	return []
 

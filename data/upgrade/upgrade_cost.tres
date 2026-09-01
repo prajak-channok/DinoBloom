@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1")
-costs = Array[int]([3, 5, 7, 10, 20])
+costs = Array[int]([5, 8, 12, 20, 30])

@@ -21,6 +21,13 @@ const STAT_DISPLAY_NAMES := {
 	"attack": "ATK",
 	"placement_cooldown": "Cooldown",
 	"placement_cost": "Cost",
+	"chain_count": "Chain Count",
+	"chain_range": "Chain Range",
+	"chain_damage_multiplier": "Chain DMG %",
+	"effect_range": "Effect Range",
+	"effect_duration": "Effect Duration",
+	"attack_range": "Attack Range",
+	"passive_cooldown": "Passive Cooldown"
 }
 
 @onready var back_button: Button = %BackButton
@@ -173,7 +180,7 @@ func _format_next_upgrade(plant_id: String, level: int) -> String:
 	for delta in deltas:
 		var stat_label: String = STAT_DISPLAY_NAMES.get(delta.stat, delta.stat)
 		var value = delta.value
-		parts.append("%s %s%s" % [stat_label, "+" if value > 0 else "", str(value)])
+		parts.append("%s %s %s" % [stat_label, "+" if value > 0 else "", str(value)])
 	return "Next Upgrade: %s" % ", ".join(parts)
 
 func _on_upgrade_pressed() -> void:

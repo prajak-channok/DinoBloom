@@ -67,62 +67,6 @@ region = Rect2(630, 380, 151, 274)
 atlas = ExtResource("2_attack_texture")
 region = Rect2(781, 380, 151, 274)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v7nsf"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(932, 380, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nd58h"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(1083, 380, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tndtq"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(1234, 380, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lx600"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(1385, 380, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ndnt"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(26, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5dxhk"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(177, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mkhgj"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(328, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kinym"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(479, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2s0y6"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(630, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_33rve"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(781, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fagl"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(932, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_esv4o"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(1083, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1n647"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(1234, 654, 151, 274)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qc8ja"]
-atlas = ExtResource("2_attack_texture")
-region = Rect2(1385, 654, 151, 274)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_thorn_attack"]
 animations = [{
 "frames": [{
@@ -173,52 +117,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pjyvg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v7nsf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nd58h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tndtq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lx600")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ndnt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5dxhk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mkhgj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kinym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2s0y6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_33rve")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7fagl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_esv4o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1n647")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qc8ja")
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 10.0
+"speed": 15.0
 }]
 
 [node name="ThornFern" type="Node2D" unique_id=1551226339]
@@ -232,6 +134,8 @@ position = Vector2(3, -24.999998)
 scale = Vector2(0.45228475, 0.4522848)
 sprite_frames = SubResource("SpriteFrames_thorn_attack")
 animation = &"attack"
+frame = 15
+frame_progress = 1.0
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=138389234]
 monitoring = false

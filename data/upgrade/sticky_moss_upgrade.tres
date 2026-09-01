@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="PlantUpgradeData" format=3 uid="uid://b48swbwolclat"]
+
+[ext_resource type="Script" uid="uid://k1n5yg7qt1p6" path="res://scripts/data/upgrade_level_data.gd" id="1_yv6l1"]
+[ext_resource type="Script" uid="uid://o2cftnhh8wb2" path="res://scripts/data/plant_upgrade_data.gd" id="2_sr01m"]
+
+[sub_resource type="Resource" id="Resource_3ot3u"]
+script = ExtResource("1_yv6l1")
+level = 1
+placement_cooldown_modifier = -2.0
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_fenqm"]
+script = ExtResource("1_yv6l1")
+level = 2
+ability_modifiers = {
+"effect_duration": 2.0
+}
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_p13k3"]
+script = ExtResource("1_yv6l1")
+level = 3
+placement_cooldown_modifier = -3.0
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_gfxvm"]
+script = ExtResource("1_yv6l1")
+level = 4
+ability_modifiers = {
+"effect_duration": 3.0
+}
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[sub_resource type="Resource" id="Resource_jr5ea"]
+script = ExtResource("1_yv6l1")
+level = 5
+placement_cost_modifier = -5
+ability_modifiers = {
+"effect_range": 2.0
+}
+metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
+
+[resource]
+script = ExtResource("2_sr01m")
+plant_id = "sticky_moss"
+levels = Array[ExtResource("1_yv6l1")]([SubResource("Resource_3ot3u"), SubResource("Resource_fenqm"), SubResource("Resource_p13k3"), SubResource("Resource_gfxvm"), SubResource("Resource_jr5ea")])
+metadata/_custom_type_script = "uid://o2cftnhh8wb2"

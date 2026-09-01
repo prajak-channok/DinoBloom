@@ -1,14 +1,5 @@
 extends Node
 class_name MatchManager
-## M4: Responsible for Match *state* and Win/Lose decisions only. It reads
-## Wave data from WaveManager, tells SpawnManager when to spawn, and reacts to
-## its signals. UI never decides gameplay outcomes — it only calls into this
-## node (toggle_pause / toggle_speed / request_surrender / ...).
-##
-## Runs with PROCESS_MODE_ALWAYS (set in gameplay_scene.tscn) so its own
-## popup countdown timers keep advancing even while get_tree().paused is true
-## for gameplay (Wave Start / Wave Clear / Pause / Win / Lose all pause the
-## rest of the game — see set_state()).
 
 enum State {
 	PREPARING,
@@ -21,12 +12,9 @@ enum State {
 	SURRENDER_CONFIRM,
 }
 
-## Design/UX timing choices (not specified exactly by the design doc, which
-## only mandates the 5s Wave Clear break). Kept as named consts so they are
-## easy to tune without touching logic.
 const WAVE_START_POPUP_SECONDS := 2.0
-const WAVE_CLEAR_BREAK_SECONDS := 5.0
-const SEED_DROP_CHANCE := 0.10
+const WAVE_CLEAR_BREAK_SECONDS := 3.0
+const SEED_DROP_CHANCE := 0.30
 const SEED_DROP_AMOUNT := 25
 
 signal state_changed(new_state: int)
