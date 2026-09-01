@@ -4,29 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://bvb1kfs78nmpw" path="res://assets/Dinosaurs/SPVelociraptorEatNBG.png" id="3_eat"]
 [ext_resource type="Texture2D" uid="uid://pwx66tqwcf60" path="res://assets/Dinosaurs/SPVelociraptorWalkNBG.png" id="3_soohs"]
 
-[sub_resource type="AtlasTexture" id="Eat1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_soohs"]
 atlas = ExtResource("3_eat")
-region = Rect2(0, 0, 512, 512)
+region = Rect2(0, 58, 512, 415)
 
-[sub_resource type="AtlasTexture" id="Eat2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_empy5"]
 atlas = ExtResource("3_eat")
-region = Rect2(512, 0, 512, 512)
+region = Rect2(512, 58, 512, 415)
 
-[sub_resource type="AtlasTexture" id="Eat3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d07n6"]
 atlas = ExtResource("3_eat")
-region = Rect2(1024, 0, 512, 512)
+region = Rect2(1024, 58, 512, 415)
 
-[sub_resource type="AtlasTexture" id="Eat4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfoeh"]
 atlas = ExtResource("3_eat")
-region = Rect2(0, 512, 512, 512)
+region = Rect2(0, 473, 512, 415)
 
-[sub_resource type="AtlasTexture" id="Eat5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjl25"]
 atlas = ExtResource("3_eat")
-region = Rect2(512, 512, 512, 512)
+region = Rect2(512, 473, 512, 415)
 
-[sub_resource type="AtlasTexture" id="Eat6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_07r82"]
 atlas = ExtResource("3_eat")
-region = Rect2(1024, 512, 512, 512)
+region = Rect2(1024, 473, 512, 415)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s6fa7"]
 atlas = ExtResource("3_soohs")
@@ -56,22 +56,22 @@ region = Rect2(1024, 512, 512, 512)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("Eat1")
+"texture": SubResource("AtlasTexture_soohs")
 }, {
 "duration": 1.0,
-"texture": SubResource("Eat2")
+"texture": SubResource("AtlasTexture_empy5")
 }, {
 "duration": 1.0,
-"texture": SubResource("Eat3")
+"texture": SubResource("AtlasTexture_d07n6")
 }, {
 "duration": 1.0,
-"texture": SubResource("Eat4")
+"texture": SubResource("AtlasTexture_gfoeh")
 }, {
 "duration": 1.0,
-"texture": SubResource("Eat5")
+"texture": SubResource("AtlasTexture_cjl25")
 }, {
 "duration": 1.0,
-"texture": SubResource("Eat6")
+"texture": SubResource("AtlasTexture_07r82")
 }],
 "loop": 1,
 "name": &"eat",
@@ -126,9 +126,9 @@ texture_filter = 1
 position = Vector2(0, 26)
 scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("VeloFrames")
-animation = &"walk"
+animation = &"eat"
 autoplay = "walk"
-frame_progress = 0.33027774
+frame_progress = 0.9674651
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1377409152]
 offset_left = -46.0

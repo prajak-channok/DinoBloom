@@ -290,6 +290,14 @@ color = Color(0, 0, 0, 0.25)
 unique_name_in_owner = true
 visible = false
 
+[node name="Block" type="ColorRect" parent="LockedPopup" unique_id=239519505]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="CenterContainer" type="CenterContainer" parent="LockedPopup" unique_id=156699779]
 anchors_preset = 8
 anchor_left = 0.5

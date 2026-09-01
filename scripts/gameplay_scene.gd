@@ -88,7 +88,8 @@ const PLANT_TEXTURES := {
 @onready var wave_clear_dna: Label = $Popups/WaveClearPopup/Panel/VBox/DnaLabel
 @onready var wave_clear_countdown: Label = $Popups/WaveClearPopup/Panel/VBox/CountdownLabel
 @onready var win_popup: Control = $Popups/WinPopup
-@onready var win_button: Button = $Popups/WinPopup/Panel/VBox/BackButton
+@onready var win_button: Button = $Popups/WinPopup/Panel/VBox/Hbox/BackButton
+@onready var win_next_button: Button = $Popups/WinPopup/Panel/VBox/Hbox/NextButton
 @onready var lose_popup: Control = $Popups/LosePopup
 @onready var lose_button: Button = $Popups/LosePopup/Panel/VBox/BackButton
 @onready var surrender_popup: Control = $Popups/SurrenderPopup
@@ -178,6 +179,7 @@ func _start_match() -> void:
 		"wave_clear_countdown": wave_clear_countdown,
 		"win_popup": win_popup,
 		"win_button": win_button,
+		"win_next_button": win_next_button,
 		"lose_popup": lose_popup,
 		"lose_button": lose_button,
 		"surrender_popup": surrender_popup,

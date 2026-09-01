@@ -13,6 +13,8 @@ config_version=5
 config/name="DinoBloom_version_Conferm"
 run/main_scene="res://scenes/start_scene.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/image="uid://32r516i3m6l8"
+config/icon="uid://jghm4e1yjn4c"
 
 [autoload]
 

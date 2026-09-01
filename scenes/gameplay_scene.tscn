@@ -416,16 +416,27 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.85, 0.72, 1)
 theme_override_font_sizes/font_size = 16
-text = "Stage Cleared — DNA saved."
+text = "Stage Clear!"
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="Popups/WinPopup/Panel/VBox" unique_id=968268493]
-custom_minimum_size = Vector2(0, 48)
+[node name="HBox" type="HBoxContainer" parent="Popups/WinPopup/Panel/VBox" unique_id=305013725]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+
+[node name="BackButton" type="Button" parent="Popups/WinPopup/Panel/VBox/HBox" unique_id=968268493]
+custom_minimum_size = Vector2(182, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "BACK TO SELECT STAGE"
+
+[node name="NextButton" type="Button" parent="Popups/WinPopup/Panel/VBox/HBox" unique_id=911823638]
+custom_minimum_size = Vector2(182, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "NEXT STAGE"
 
 [node name="LosePopup" type="Control" parent="Popups" unique_id=670739323]
 visible = false

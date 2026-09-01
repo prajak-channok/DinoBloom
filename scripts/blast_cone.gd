@@ -189,7 +189,7 @@ func setup_combat(gameplay: Node, row: int) -> void:
 
 	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
 	var base_attack: float = final_stats.attack if final_stats != null else DATA.base_attack
-	_attack = base_attack * 5
+	_attack = base_attack * 10
 
 func get_interaction_rect() -> Rect2:
 	var rect := Rect2(

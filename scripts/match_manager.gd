@@ -16,6 +16,9 @@ const WAVE_START_POPUP_SECONDS := 2.0
 const WAVE_CLEAR_BREAK_SECONDS := 3.0
 const SEED_DROP_CHANCE := 0.30
 const SEED_DROP_AMOUNT := 25
+## Fixed stage progression order; stage_03 has no "next" (last implemented stage).
+const STAGE_ORDER := ["stage_01", "stage_02", "stage_03"]
+
 
 signal state_changed(new_state: int)
 
@@ -52,6 +55,7 @@ var ui_wave_clear_countdown: Label
 
 var ui_win_popup: Control
 var ui_win_button: Button
+var ui_win_next_button: Button
 
 var ui_lose_popup: Control
 var ui_lose_button: Button
@@ -89,6 +93,7 @@ func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: Spawn
 
 	ui_win_popup = ui.get("win_popup")
 	ui_win_button = ui.get("win_button")
+	ui_win_next_button = ui.get("win_next_button")
 
 	ui_lose_popup = ui.get("lose_popup")
 	ui_lose_button = ui.get("lose_button")
@@ -113,6 +118,8 @@ func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: Spawn
 		ui_surrender_cancel_button.pressed.connect(cancel_surrender)
 	if ui_win_button:
 		ui_win_button.pressed.connect(_return_to_stage_select)
+	if ui_win_next_button:
+		ui_win_next_button.pressed.connect(_go_to_next_stage)
 	if ui_lose_button:
 		ui_lose_button.pressed.connect(_return_to_stage_select)
 
@@ -253,6 +260,22 @@ func _return_to_stage_select() -> void:
 	Engine.time_scale = 1.0
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/select_stage_scene.tscn")
+	
+func _get_next_stage_id() -> String:
+	var idx := STAGE_ORDER.find(stage_id)
+	if idx < 0 or idx + 1 >= STAGE_ORDER.size():
+		return ""
+	return STAGE_ORDER[idx + 1]
+
+func _go_to_next_stage() -> void:
+	var next_id := _get_next_stage_id()
+	if next_id == "" or not SaveManager.is_stage_unlocked(next_id):
+		_return_to_stage_select()
+		return
+	Engine.time_scale = 1.0
+	get_tree().paused = false
+	GameManager.selected_stage_id = next_id
+	GameManager.start_selected_stage()
 
 # ---------------------------------------------------------------------------
 # Pause / Speed
@@ -302,6 +325,8 @@ func _update_popup_visibility() -> void:
 		ui_wave_clear_popup.visible = state == State.WAVE_CLEAR
 	if ui_win_popup:
 		ui_win_popup.visible = state == State.WIN
+	if ui_win_next_button:
+		ui_win_next_button.visible = state == State.WIN and _get_next_stage_id() != ""
 	if ui_lose_popup:
 		ui_lose_popup.visible = state == State.LOSE
 	if ui_surrender_popup:

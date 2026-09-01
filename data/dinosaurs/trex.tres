@@ -1,16 +1,14 @@
-[gd_resource type="Resource" script_class="DinosaurData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="DinosaurData" format=3 uid="uid://4dryed5ixmck"]
 
-[ext_resource type="Script" path="res://scripts/data/dinosaur_data.gd" id="1"]
+[ext_resource type="Script" uid="uid://bdrxs855ogvqy" path="res://scripts/data/dinosaur_data.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 id = "trex"
 display_name = "T-Rex"
 base_hp = 1000.0
-attack = 200.0
+attack = 400.0
 attack_interval = 4.0
 movement_speed = 20.0
-armor = 0.0
-faction = "Enemy"
 is_boss = true
 can_be_converted = false
