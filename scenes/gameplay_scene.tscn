@@ -180,7 +180,7 @@ horizontal_alignment = 1
 [node name="Cards" type="VBoxContainer" parent="UI/PlantPanel/Margin/VBox" unique_id=1467634648]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 3
 
 [node name="TopBar" type="PanelContainer" parent="UI" unique_id=1026740592]
 offset_right = 1500.0

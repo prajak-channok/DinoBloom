@@ -24,6 +24,8 @@ var _target: Node2D = null
 var _state := "walking"
 ## Ginkgo Cannon Conversion owns this instance's Faction, not a new type/scene.
 var faction: String = "Enemy"
+var _stunned: bool = false
+var _stun_timer: float = 0.0
 
 func setup(row: int, board_rect: Rect2 = Rect2(), _cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0) -> void:
 	grid_row = row
@@ -44,6 +46,18 @@ func _ready() -> void:
 	_play_walk()
 
 func _process(delta: float) -> void:
+	if _stunned:
+		_stun_timer -= delta
+
+		if _stun_timer <= 0.0:
+			_stunned = false
+			_stun_timer = 0.0
+			_state = "walking"
+			_play_walk()
+
+		return
+
+	_clear_freeze_tint()
 	var move_dir: float = 1.0 if faction == "Friendly" else -1.0
 	var target := _find_target_ahead(move_dir)
 	if target != null:
@@ -150,3 +164,19 @@ func convert_to_friendly() -> void:
 	add_to_group("friendly_dinosaurs")
 	_target = null
 	_attack_timer = 0.0
+	
+func apply_stun(duration: float) -> void:
+	_stunned = true
+	_stun_timer = maxf(_stun_timer, duration)
+	_state = "stunned"
+	_target = null
+	_attack_timer = 0.0
+
+	if sprite != null:
+		sprite.stop()
+		sprite.animation = &"walk"
+		sprite.frame = 0
+		
+func _clear_freeze_tint() -> void:
+	if modulate != Color.WHITE:
+		modulate = Color.WHITE

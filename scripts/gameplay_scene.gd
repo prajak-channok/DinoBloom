@@ -32,7 +32,9 @@ const PLANT_DATA := {
 	"Thorn Fern": preload("res://data/plants/thorn_fern.tres"),
 	"Baobab Guardian": preload("res://data/plants/baobab_guardian.tres"),
 	"Ginkgo Cannon": preload("res://data/plants/ginkgo_cannon.tres"),
-	"Horsetail": preload("res://data/plants/horsetail.tres")
+	"Horsetail": preload("res://data/plants/horsetail.tres"),
+	"Sticky Moss": preload("res://data/plants/sticky_moss.tres"),
+	"Blast Cone": preload("res://data/plants/blast_cone.tres")
 }
 
 const PLANT_SCENES := {
@@ -40,7 +42,9 @@ const PLANT_SCENES := {
 	"Thorn Fern": "res://scenes/plants/thorn_fern.tscn",
 	"Baobab Guardian": "res://scenes/plants/baobab_guardian.tscn",
 	"Ginkgo Cannon": "res://scenes/plants/ginkgo_cannon.tscn",
-	"Horsetail": "res://scenes/plants/horsetail.tscn"
+	"Horsetail": "res://scenes/plants/horsetail.tscn",
+	"Sticky Moss": "res://scenes/plants/sticky_moss.tscn",
+	"Blast Cone": "res://scenes/plants/blast_cone.tscn"
 }
 
 const PLANT_TEXTURES := {
@@ -48,7 +52,9 @@ const PLANT_TEXTURES := {
 	"Thorn Fern": "res://assets/Plants/ThornFernNBG.png",
 	"Baobab Guardian": "res://assets/Plants/BaobabGuardianNBG.png",
 	"Ginkgo Cannon": "res://assets/Plants/GinkgoCannonNBG.png",
-	"Horsetail": "res://assets/Plants/HorsetailNBG.png"
+	"Horsetail": "res://assets/Plants/HorsetailNBG.png",
+	"Sticky Moss": "res://assets/Plants/StickyMossNBG.png",
+	"Blast Cone": "res://assets/Plants/BlastConeNBG.png"
 }
 
 @onready var play_area: Control = $PlayArea
@@ -216,11 +222,12 @@ func _build_plant_cards() -> void:
 	_card_buttons.clear()
 	_card_cost_labels.clear()
 
-	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian", "Ginkgo Cannon", "Horsetail"]:
+	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian", "Ginkgo Cannon", "Horsetail", "Sticky Moss", "Blast Cone"]:
 		var data: PlantData = PLANT_DATA[plant_name]
 		var card := PanelContainer.new()
 		card.name = plant_name.replace(" ", "") + "Card"
-		card.custom_minimum_size = Vector2(0, 120)
+		card.custom_minimum_size = Vector2(0, 60)
+		card.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		card.add_theme_stylebox_override("panel", _make_card_style(false))
 
 		var button := Button.new()
