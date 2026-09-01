@@ -12,6 +12,6 @@ display_name = "Tree of Evolution"
 background = ExtResource("2_bg")
 tile_a = ExtResource("3_a")
 tile_b = ExtResource("4_b")
-gameplay_area_normalized = Rect2(0.214, 0.145, 0.62, 0.71)
+gameplay_area_normalized = Rect2(0.23, 0.175, 0.62, 0.71)
 hp_multiplier = 4.0
 unlock_after_stage_id = "stage_02"

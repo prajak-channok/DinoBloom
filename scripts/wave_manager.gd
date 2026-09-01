@@ -50,11 +50,71 @@ const WAVE_CONFIG := {
 			"dna_bonus_min": 1,
 			"dna_bonus_max": 3,
 		},
+	},
+	"stage_02": {
+		1: {
+			"dinosaur_count": 15,
+			"allowed_ids": ["dryosaurus"],
+			"wave_hp_multiplier": 2.0,
+			"has_boss": false,
+			"boss_id": "",
+			"dna_guaranteed": 1,
+			"dna_bonus_min": 1,
+			"dna_bonus_max": 3,
+		},
+		2: {
+			"dinosaur_count": 25,
+			"allowed_ids": ["dryosaurus", "velociraptor"],
+			"wave_hp_multiplier": 2.5,
+			"has_boss": false,
+			"boss_id": "",
+			"dna_guaranteed": 1,
+			"dna_bonus_min": 1,
+			"dna_bonus_max": 3,
+		},
+		3: {
+			"dinosaur_count": 30,
+			"allowed_ids": ["dryosaurus", "velociraptor", "triceratops"],
+			"wave_hp_multiplier": 3.25,
+			"has_boss": true,
+			"boss_id": "trex",
+			"dna_guaranteed": 3,
+			"dna_bonus_min": 1,
+			"dna_bonus_max": 3,
+		}
+	},
+	"stage_03": {
+		1: {
+			"dinosaur_count": 15,
+			"allowed_ids": ["dryosaurus"],
+			"wave_hp_multiplier": 3.0,
+			"has_boss": false,
+			"boss_id": "",
+			"dna_guaranteed": 1,
+			"dna_bonus_min": 1,
+			"dna_bonus_max": 3,
+		},
+		2: {
+			"dinosaur_count": 25,
+			"allowed_ids": ["dryosaurus", "velociraptor"],
+			"wave_hp_multiplier": 3.5,
+			"has_boss": false,
+			"boss_id": "",
+			"dna_guaranteed": 1,
+			"dna_bonus_min": 1,
+			"dna_bonus_max": 3,
+		},
+		3: {
+			"dinosaur_count": 30,
+			"allowed_ids": ["dryosaurus", "velociraptor", "triceratops"],
+			"wave_hp_multiplier": 4.25,
+			"has_boss": true,
+			"boss_id": "trex",
+			"dna_guaranteed": 3,
+			"dna_bonus_min": 1,
+			"dna_bonus_max": 3,
+		}
 	}
-	## stage_02 / stage_03 Wave Composition is out of scope for M4 (see
-	## requirement #2/#39). Add "stage_02": {...} / "stage_03": {...} here,
-	## with the same shape, when those stages' gameplay is implemented —
-	## SpawnManager and MatchManager need no changes to support it.
 }
 
 func is_stage_supported(stage_id: String) -> bool:
