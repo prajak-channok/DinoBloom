@@ -49,6 +49,29 @@ func _ready() -> void:
 	_build_plant_grid()
 	_refresh_dna_label()
 	_select_plant("")
+	
+	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
+	var custom_pressed = StyleBoxFlat.new()
+	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
+	
+	# ตั้งค่าความมน (สมมติว่าใช้ความมนระดับ 15 ถ้าของเดิมมนกว่านี้ก็แก้เลขได้เลย)
+	var corner = 15 
+	custom_pressed.corner_radius_top_left = corner
+	custom_pressed.corner_radius_top_right = corner
+	custom_pressed.corner_radius_bottom_left = corner
+	custom_pressed.corner_radius_bottom_right = corner
+	
+	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
+	var all_buttons: Array[Button] = [
+		back_button, 
+		upgrade_button, 
+		back_button, 
+	]
+	
+	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
+	for btn in all_buttons:
+		if btn: # เช็คกันเหนียวเผื่อหาปุ่มไม่เจอ
+			btn.add_theme_stylebox_override("pressed", custom_pressed)
 
 func _build_plant_grid() -> void:
 	for child in plant_grid.get_children():

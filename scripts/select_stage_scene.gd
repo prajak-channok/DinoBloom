@@ -22,6 +22,31 @@ func _ready() -> void:
 	# 3. สั่งซ่อน Popup ไว้ก่อนตอนเริ่ม Scene
 	locked_popup.hide() 
 	
+	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
+	var custom_pressed = StyleBoxFlat.new()
+	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
+	
+	# ตั้งค่าความมน (สมมติว่าใช้ความมนระดับ 15 ถ้าของเดิมมนกว่านี้ก็แก้เลขได้เลย)
+	var corner = 15 
+	custom_pressed.corner_radius_top_left = corner
+	custom_pressed.corner_radius_top_right = corner
+	custom_pressed.corner_radius_bottom_left = corner
+	custom_pressed.corner_radius_bottom_right = corner
+	
+	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
+	var all_buttons: Array[Button] = [
+		start_button, 
+		upgrade_button, 
+		back_button, 
+		popup_ok_button # ถ้าสร้างตัวแปรปุ่ม OK ไว้แล้วก็ใส่มาด้วย
+	]
+	all_buttons.append_array(stage_buttons) # เอาปุ่มด่าน 1, 2, 3 มารวมด้วย
+	
+	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
+	for btn in all_buttons:
+		if btn: # เช็คกันเหนียวเผื่อหาปุ่มไม่เจอ
+			btn.add_theme_stylebox_override("pressed", custom_pressed)
+	
 	back_button.pressed.connect(_on_back_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
 	start_button.pressed.connect(_on_start_pressed)

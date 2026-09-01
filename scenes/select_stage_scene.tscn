@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="5_dna"]
 [ext_resource type="Script" uid="uid://xaxljc8wqei3" path="res://scripts/select_stage_scene.gd" id="6_script"]
 [ext_resource type="AudioStream" uid="uid://bqjc33ht2s8cv" path="res://audio/#14 Wander (Official).mp3" id="7_c6ek3"]
+[ext_resource type="Texture2D" uid="uid://easpnpht45jr" path="res://audio/sound on.png" id="8_a0ok6"]
+[ext_resource type="Script" uid="uid://cjxj6dh1u2im3" path="res://scenes/texture_button.gd" id="9_24nay"]
+[ext_resource type="Texture2D" uid="uid://iftlgocmnq1m" path="res://audio/sound off.png" id="10_ayhf4"]
 
 [sub_resource type="StyleBoxFlat" id="Panel"]
 bg_color = Color(0.039215688, 0.28627452, 0.03529412, 0.78039217)
@@ -79,7 +82,7 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-bg_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+bg_color = Color(0.12941177, 0.1764706, 0.101960786, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -283,15 +286,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.25)
 
-[node name="LockedPopup3" type="AcceptDialog" parent="." unique_id=732610939]
-unique_name_in_owner = true
-oversampling_override = 1.0
-position = Vector2i(0, 36)
-size = Vector2i(333, 132)
-ok_button_text = "OK"
-dialog_text = "This stage is locked.
-Complete the previous stage to unlock it."
-
 [node name="LockedPopup" type="CanvasLayer" parent="." unique_id=1284107825]
 unique_name_in_owner = true
 visible = false
@@ -324,7 +318,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_6u64u")
 
 [node name="TitleLabel" type="Label" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer/HeaderPanel" unique_id=1290494727]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
 theme_override_font_sizes/font_size = 24
 text = "This stage is locked."
 horizontal_alignment = 1
@@ -342,7 +336,7 @@ theme_override_constants/separation = 20
 
 [node name="MessageLabel" type="Label" parent="LockedPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox" unique_id=790240870]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.12941177, 0.1764706, 0.101960786, 1)
 theme_override_font_sizes/font_size = 20
 text = "Complete the previous stage to unlock it."
 horizontal_alignment = 1
@@ -362,3 +356,18 @@ text = "OK"
 stream = ExtResource("7_c6ek3")
 autoplay = true
 bus = &"GameSound"
+
+[node name="Sound button" type="TextureButton" parent="." unique_id=23245702]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 788.0
+offset_right = 60.0
+offset_bottom = 845.0
+texture_normal = ExtResource("8_a0ok6")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("9_24nay")
+icon_sound_on = ExtResource("8_a0ok6")
+icon_sound_off = ExtResource("10_ayhf4")
+
+[connection signal="pressed" from="Sound button" to="Sound button" method="_on_pressed"]
