@@ -12,28 +12,32 @@ metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
 [sub_resource type="Resource" id="Resource_avk3h"]
 script = ExtResource("1_3ot3u")
 level = 2
-attack_modifier = 20.0
+attack_modifier = 30.0
 metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
 
 [sub_resource type="Resource" id="Resource_sxq77"]
 script = ExtResource("1_3ot3u")
 level = 3
-attack_modifier = 10.0
-placement_cooldown_modifier = -2.0
+attack_modifier = 50.0
+ability_modifiers = {
+"chain_range": 100.0
+}
 metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
 
 [sub_resource type="Resource" id="Resource_rlddi"]
 script = ExtResource("1_3ot3u")
 level = 4
-placement_cooldown_modifier = -3.0
+placement_cooldown_modifier = -5.0
+placement_cost_modifier = -25
 metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
 
 [sub_resource type="Resource" id="Resource_t7prg"]
 script = ExtResource("1_3ot3u")
 level = 5
-attack_modifier = 30.0
-placement_cooldown_modifier = -3.0
-placement_cost_modifier = -25
+ability_modifiers = {
+"attack_range": 100.0,
+"chain_count": 2
+}
 metadata/_custom_type_script = "uid://k1n5yg7qt1p6"
 
 [resource]

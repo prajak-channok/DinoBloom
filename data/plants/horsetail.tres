@@ -10,13 +10,13 @@ display_name = "Horsetail"
 base_hp = 60.0
 base_attack = 20.0
 attack_interval = 1.5
-placement_cost = 150
+placement_cost = 175
 placement_cooldown = 10.0
 plant_type = "Attack"
 ability_data = {
 "attack_range": 400.0,
 "chain_count": 3,
 "chain_damage_multiplier": 0.7,
-"chain_range": 350.0
+"chain_range": 300.0
 }
 visual_reference = ExtResource("2")

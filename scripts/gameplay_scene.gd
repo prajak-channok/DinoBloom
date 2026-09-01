@@ -118,6 +118,37 @@ func _ready() -> void:
 	if not STAGE_DATA.has(selected_stage_id):
 		selected_stage_id = "stage_01"
 
+	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
+	var custom_pressed = StyleBoxFlat.new()
+	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
+	
+	# ตั้งค่าความมน (ปรับเลข 15 ให้เข้ากับปุ่มในหน้านี้)
+	var corner = 15 
+	custom_pressed.corner_radius_top_left = corner
+	custom_pressed.corner_radius_top_right = corner
+	custom_pressed.corner_radius_bottom_left = corner
+	custom_pressed.corner_radius_bottom_right = corner
+	
+	# --- 2. นำปุ่มทั้งหมดในหน้านี้มาใส่ใน Array ---
+	# ข้อควรระวัง: ถ้าคุณมีปุ่ม Pause หรือ 1x ให้เพิ่มตัวแปรปุ่มเหล่านั้นเข้ามาในนี้ด้วย (คั่นด้วยลูกน้ำ)
+	var all_buttons: Array[Button] = [
+		remove_plant_button,
+		pause_button, 
+		speed_button,
+		win_button,
+		lose_button,
+		surrender_confirm_button,
+		surrender_cancel_button,
+		resume_button,
+		abandon_button
+	]
+	
+	# --- 3. วนลูปยัดสไตล์ตอนกดลงไปให้ทุกปุ่ม ---
+	for btn in all_buttons:
+		if btn:
+			btn.add_theme_stylebox_override("pressed", custom_pressed)
+
+	# --- โค้ดเดิมของคุณ ---
 	_build_plant_cards()
 	_update_seed_label()
 	_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
@@ -224,6 +255,10 @@ func _build_plant_cards() -> void:
 
 	for plant_name in ["Seed Bloom", "Thorn Fern", "Baobab Guardian", "Ginkgo Cannon", "Horsetail", "Sticky Moss", "Blast Cone"]:
 		var data: PlantData = PLANT_DATA[plant_name]
+
+		if not SaveManager.is_plant_unlocked(data.id):
+			continue
+
 		var card := PanelContainer.new()
 		card.name = plant_name.replace(" ", "") + "Card"
 		card.custom_minimum_size = Vector2(0, 60)
@@ -255,7 +290,24 @@ func _build_plant_cards() -> void:
 		# writing cooldown text/color without needing a separate code path;
 		# only the icon is shown per the card's icon-only presentation.
 		var cost_label := Label.new()
-		cost_label.visible = false
+		cost_label.name = "CostLabel"
+		
+		# 1. กางพื้นที่ Label ให้คลุมเต็มปุ่ม
+		cost_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		
+		# 2. จัดให้ตัวอักษรไปชิดมุมขวาล่าง
+		cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		cost_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		
+		# 3. หดขอบขวาและขอบล่างเข้ามานิดนึง เพื่อไม่ให้ตัวเลขเบียดเส้นขอบเกินไป
+		cost_label.offset_right = -12.0
+		cost_label.offset_bottom = -2.0
+		
+		# ตกแต่งตัวอักษรให้อ่านง่าย
+		cost_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
+		cost_label.add_theme_constant_override("outline_size", 4)
+		cost_label.add_theme_font_size_override("font_size", 14) 
+		
 		button.add_child(cost_label)
 
 		plant_cards.add_child(card)
@@ -297,15 +349,24 @@ func _update_card_states() -> void:
 		button.disabled = not ready
 
 		if cooldown > 0.0:
-			_card_cost_labels[plant_name].text = "Cooldown %.1fs" % cooldown
+			# ตอนติดคูลดาวน์ โชว์เป็นตัวเลขวินาที
+			_card_cost_labels[plant_name].text = "%.1fs" % cooldown 
 			_card_cost_labels[plant_name].add_theme_color_override("font_color", Color(0.75, 0.75, 0.75, 1.0))
 		else:
-			_card_cost_labels[plant_name].text = "Cost  %d Seed" % stats.cost
+			# ตอนพร้อมใช้ โชว์แค่ตัวเลขราคาเพียวๆ (ถ้าอยากได้ไอคอนต้องใช้ HBoxContainer แทน แต่แบบนี้จะง่ายและคลีนกว่า)
+			_card_cost_labels[plant_name].text = str(stats.cost) 
 			_card_cost_labels[plant_name].add_theme_color_override("font_color", Color(0.94, 0.84, 0.45, 1.0))
 
 		card.add_theme_stylebox_override("panel", _make_card_style(plant_name == selected_plant))
 
 func _on_plant_card_pressed(plant_name: String) -> void:
+	if selected_plant == plant_name:
+		selected_plant = ""
+		placement_preview.visible = false
+		_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
+		_update_card_states()
+		return
+	
 	var stats: Dictionary = _get_placement_stats(plant_name)
 	if float(_plant_cooldowns.get(plant_name, 0.0)) > 0.0:
 		return

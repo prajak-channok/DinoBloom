@@ -54,7 +54,7 @@ static func get_final_stats(plant_id: String) -> Variant:
 				continue
 			for stat_key in STAT_FIELD_MAP:
 				stats[stat_key] += level_data.get("%s_modifier" % stat_key)
-
+	
 	return stats
 
 ## Cost to go from `level` to `level + 1`. -1 if already at MAX_LEVEL / no cost defined.
@@ -84,12 +84,18 @@ static func get_next_level_deltas(plant_id: String) -> Array:
 			var value = level_data.get("%s_modifier" % stat_key)
 			if value != 0:
 				deltas.append({"stat": stat_key, "value": value})
+		for ability_key in level_data.ability_modifiers:
+			var ability_value = level_data.ability_modifiers[ability_key]
+			if ability_value != 0:
+				deltas.append({"stat": ability_key, "value": ability_value})
 		return deltas
 	return []
 
 ## False whenever the plant has no PlantUpgradeData yet — a plant with no defined
 ## upgrade effect cannot be upgraded, regardless of DNA or level.
 static func can_upgrade(plant_id: String) -> bool:
+	if not SaveManager.is_plant_unlocked(plant_id):
+		return false
 	if get_upgrade_data(plant_id) == null:
 		return false
 	var level: int = SaveManager.get_plant_level(plant_id)
@@ -100,6 +106,8 @@ static func can_upgrade(plant_id: String) -> bool:
 ## to a single atomic, single-save SaveManager transaction. Returns false and changes
 ## nothing if any check fails.
 static func try_upgrade(plant_id: String) -> bool:
+	if not SaveManager.is_plant_unlocked(plant_id):
+		return false
 	if get_upgrade_data(plant_id) == null:
 		return false
 	var level: int = SaveManager.get_plant_level(plant_id)

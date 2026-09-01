@@ -9,11 +9,11 @@ id = "sticky_moss"
 display_name = "Sticky Moss"
 base_hp = 40.0
 base_attack = 20.0
-placement_cost = 75
-placement_cooldown = 8.0
+placement_cost = 25
+placement_cooldown = 20.0
 plant_type = "Trap"
 ability_data = {
-"effect_duration": 5.0,
-"effect_range": 5.0
+"effect_duration": 3.0,
+"effect_range": 3.0
 }
 visual_reference = ExtResource("2")

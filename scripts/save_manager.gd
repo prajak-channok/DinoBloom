@@ -8,6 +8,11 @@ const SAVE_VERSION := 1
 var dna: int = 0
 var completed_stages: Array[String] = []
 var unlocked_plants: Array[String] = ["seed_bloom", "thorn_fern", "baobab_guardian"]
+const PLANT_UNLOCK_COSTS: Dictionary = {
+	"horsetail": 50,
+	"sticky_moss": 50,
+	"blast_cone": 50,
+}
 var plant_levels: Dictionary = {
 	"seed_bloom": 0,
 	"thorn_fern": 0,
@@ -67,7 +72,11 @@ func mark_stage_completed(stage_id: String) -> void:
 	if stage_id == "stage_01" or stage_id == "stage_02" or stage_id == "stage_03":
 		if not stage_id in completed_stages:
 			completed_stages.append(stage_id)
-			save_game()
+
+		if stage_id == "stage_01" and not is_plant_unlocked("ginkgo_cannon"):
+			unlocked_plants.append("ginkgo_cannon")
+
+		save_game()
 
 func save_game() -> bool:
 	var payload := {
@@ -119,3 +128,30 @@ func reset_save() -> bool:
 	for plant_id in plant_levels.keys():
 		plant_levels[plant_id] = 0
 	return save_game()
+	
+func is_plant_unlocked(plant_id: String) -> bool:
+	return plant_id in unlocked_plants
+
+## Atomic unlock transaction: spend DNA + add to unlocked_plants in a single save.
+## Mirrors apply_plant_upgrade's rollback-on-failure pattern. Only works for plants
+## listed in PLANT_UNLOCK_COSTS — stage-gated plants (ginkgo_cannon) go through
+## mark_stage_completed instead, never this function.
+func purchase_plant(plant_id: String) -> bool:
+	if is_plant_unlocked(plant_id):
+		return false
+	if not PLANT_UNLOCK_COSTS.has(plant_id):
+		return false
+
+	var cost: int = PLANT_UNLOCK_COSTS[plant_id]
+	if cost > dna:
+		return false
+
+	dna -= cost
+	unlocked_plants.append(plant_id)
+
+	if not save_game():
+		dna += cost
+		unlocked_plants.erase(plant_id)
+		return false
+
+	return true

@@ -21,6 +21,13 @@ const STAT_DISPLAY_NAMES := {
 	"attack": "ATK",
 	"placement_cooldown": "Cooldown",
 	"placement_cost": "Cost",
+	"chain_count": "Chain Count",
+	"chain_range": "Chain Range",
+	"chain_damage_multiplier": "Chain DMG %",
+	"effect_range": "Effect Range",
+	"effect_duration": "Effect Duration",
+	"attack_range": "Attack Range",
+	"passive_cooldown": "Passive Cooldown"
 }
 
 @onready var back_button: Button = %BackButton
@@ -41,6 +48,7 @@ const STAT_DISPLAY_NAMES := {
 
 var _plant_buttons: Dictionary = {}
 var _selected_id: String = ""
+var _button_mode: String = ""  # "upgrade" | "buy" | "locked"
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
@@ -48,6 +56,29 @@ func _ready() -> void:
 	_build_plant_grid()
 	_refresh_dna_label()
 	_select_plant("")
+	
+	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
+	var custom_pressed = StyleBoxFlat.new()
+	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
+	
+	# ตั้งค่าความมน (สมมติว่าใช้ความมนระดับ 15 ถ้าของเดิมมนกว่านี้ก็แก้เลขได้เลย)
+	var corner = 15 
+	custom_pressed.corner_radius_top_left = corner
+	custom_pressed.corner_radius_top_right = corner
+	custom_pressed.corner_radius_bottom_left = corner
+	custom_pressed.corner_radius_bottom_right = corner
+	
+	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
+	var all_buttons: Array[Button] = [
+		back_button, 
+		upgrade_button, 
+		back_button, 
+	]
+	
+	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
+	for btn in all_buttons:
+		if btn: # เช็คกันเหนียวเผื่อหาปุ่มไม่เจอ
+			btn.add_theme_stylebox_override("pressed", custom_pressed)
 
 func _build_plant_grid() -> void:
 	for child in plant_grid.get_children():
@@ -65,8 +96,10 @@ func _build_plant_grid() -> void:
 			button.icon = load(texture_path)
 
 		var has_data: bool = PlantProgression.get_plant_data(plant_id) != null
+		var unlocked: bool = SaveManager.is_plant_unlocked(plant_id)
+
 		button.disabled = not has_data
-		button.modulate = Color(1, 1, 1, 1) if has_data else Color(1, 1, 1, 0.45)
+		button.modulate = Color(1, 1, 1, 1) if unlocked else Color(1, 1, 1, 0.45)
 
 		if has_data:
 			button.pressed.connect(_on_plant_button_pressed.bind(plant_id))
@@ -110,6 +143,7 @@ func _refresh_left_panel(plant_id: String) -> void:
 		progress_bar.value = 0.0
 		next_upgrade_label.text = "Next Upgrade: No data"
 		dna_cost_label.text = "-"
+		upgrade_button.text = "Upgrade"
 		upgrade_button.disabled = true
 		return
 
@@ -132,7 +166,7 @@ func _refresh_left_panel(plant_id: String) -> void:
 	var cost: int = PlantProgression.get_upgrade_cost(level)
 	dna_cost_label.text = str(cost) if cost >= 0 else "-"
 
-	upgrade_button.disabled = not PlantProgression.can_upgrade(plant_id)
+	_refresh_upgrade_button(plant_id)
 
 func _format_next_upgrade(plant_id: String, level: int) -> String:
 	if level >= PlantProgression.MAX_LEVEL:
@@ -146,19 +180,52 @@ func _format_next_upgrade(plant_id: String, level: int) -> String:
 	for delta in deltas:
 		var stat_label: String = STAT_DISPLAY_NAMES.get(delta.stat, delta.stat)
 		var value = delta.value
-		parts.append("%s %s%s" % [stat_label, "+" if value > 0 else "", str(value)])
+		parts.append("%s %s %s" % [stat_label, "+" if value > 0 else "", str(value)])
 	return "Next Upgrade: %s" % ", ".join(parts)
 
 func _on_upgrade_pressed() -> void:
 	if _selected_id == "":
 		return
-	if not PlantProgression.try_upgrade(_selected_id):
-		return
-	_refresh_dna_label()
-	_refresh_left_panel(_selected_id)
+
+	match _button_mode:
+		"buy":
+			if not SaveManager.purchase_plant(_selected_id):
+				return
+			_refresh_dna_label()
+			_build_plant_grid()
+			_select_plant(_selected_id)
+		"upgrade":
+			if not PlantProgression.try_upgrade(_selected_id):
+				return
+			_refresh_dna_label()
+			_refresh_left_panel(_selected_id)
+		_:
+			pass
 
 func _refresh_dna_label() -> void:
 	dna_label.text = str(SaveManager.dna)
+	
+func _on_buy_plant_pressed(plant_id: String) -> void:
+	if not SaveManager.purchase_plant(plant_id):
+		return
+
+	_refresh_dna_label()
+	_build_plant_grid()
+	
+func _refresh_upgrade_button(plant_id: String) -> void:
+	if SaveManager.is_plant_unlocked(plant_id):
+		_button_mode = "upgrade"
+		upgrade_button.text = "Upgrade"
+		upgrade_button.disabled = not PlantProgression.can_upgrade(plant_id)
+	elif SaveManager.PLANT_UNLOCK_COSTS.has(plant_id):
+		_button_mode = "buy"
+		var cost: int = SaveManager.PLANT_UNLOCK_COSTS[plant_id]
+		upgrade_button.text = "Buy %d DNA" % cost
+		upgrade_button.disabled = cost > SaveManager.dna
+	else:
+		_button_mode = "locked"
+		upgrade_button.text = "Locked"
+		upgrade_button.disabled = true
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/select_stage_scene.tscn")

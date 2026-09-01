@@ -1,19 +1,16 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://bymsbyy6lpcse"]
 
-[ext_resource type="Script" path="res://scripts/data/plant_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/Plants/SeedBloomNBG.PNG" id="2"]
+[ext_resource type="Script" uid="uid://cxn8ef2oiq000" path="res://scripts/data/plant_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://13wh0mqk6gf" path="res://assets/Plants/SeedBloomNBG.PNG" id="2"]
 
 [resource]
 script = ExtResource("1")
 id = "seed_bloom"
 display_name = "Seed Bloom"
 base_hp = 50.0
-base_attack = 0.0
-attack_interval = 0.0
 placement_cost = 50
 placement_cooldown = 5.0
 plant_type = "Producer"
-ability_type = "SeedProduction"
 production_amount = 50
 production_interval = 5.0
 visual_reference = ExtResource("2")

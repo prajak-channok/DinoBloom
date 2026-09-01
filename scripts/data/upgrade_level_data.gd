@@ -6,3 +6,4 @@ class_name UpgradeLevelData
 @export var attack_modifier: float = 0.0
 @export var placement_cooldown_modifier: float = 0.0
 @export var placement_cost_modifier: int = 0
+@export var ability_modifiers: Dictionary = {}
