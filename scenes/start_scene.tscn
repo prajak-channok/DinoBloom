@@ -34,6 +34,36 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2l3yw"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.09411765, 0.14509805, 0.078431375, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2525w"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.14117648, 0.19607843, 0.11372549, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.09411765, 0.14509805, 0.078431375, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+
 [node name="StartScene" type="Control" unique_id=845572804]
 layout_mode = 3
 anchors_preset = 15
@@ -120,17 +150,89 @@ script = ExtResource("4_0kdh5")
 icon_sound_on = ExtResource("3_2l3yw")
 icon_sound_off = ExtResource("4_2525w")
 
-[node name="ExitDialog" type="ConfirmationDialog" parent="." unique_id=2004083345]
-unique_name_in_owner = true
-oversampling_override = 1.0
-position = Vector2i(0, 36)
-ok_button_text = "EXIT"
-dialog_text = "Exit DinoBloom?"
-cancel_button_text = "CANCEL"
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=593131669]
 stream = ExtResource("4_i331m")
 autoplay = true
 bus = &"GameSound"
+
+[node name="ExitPopup" type="CanvasLayer" parent="." unique_id=1684549627]
+unique_name_in_owner = true
+
+[node name="CenterContainer" type="CenterContainer" parent="ExitPopup" unique_id=1595469222]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -101.0
+offset_right = 188.5
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="ExitPopup/CenterContainer" unique_id=53872033]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2l3yw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExitPopup/CenterContainer/PanelContainer" unique_id=1446722496]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderPanel" type="PanelContainer" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer" unique_id=675045444]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2525w")
+
+[node name="TitleLabel" type="Label" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer/HeaderPanel" unique_id=1236619154]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+theme_override_font_sizes/font_size = 24
+text = "Wait!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer" unique_id=2115365859]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="ContentVBox" type="VBoxContainer" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=307765540]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MessageLabel" type="Label" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox" unique_id=1567526080]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.20392157, 0.12156863, 1)
+theme_override_font_sizes/font_size = 20
+text = "The dinos will miss you. Are you sure?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox" unique_id=1666050748]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ConfirmExitButton" type="Button" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox/HBoxContainer" unique_id=163415769]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "YES"
+
+[node name="CancelExitButton" type="Button" parent="ExitPopup/CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContentVBox/HBoxContainer" unique_id=1672317154]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+text = "NO"
 
 [connection signal="pressed" from="Sound button" to="Sound button" method="_on_pressed"]
