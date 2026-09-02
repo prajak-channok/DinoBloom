@@ -462,12 +462,12 @@ func _try_place(play_position: Vector2) -> void:
 	if grid.x < 0:
 		return
 	if not _is_cell_available(grid):
-		_update_status("ช่องนี้ถูกใช้งานแล้ว")
+		_update_status("This grid was placed!")
 		return
 
 	var stats: Dictionary = _get_placement_stats(selected_plant)
 	if ancient_seed < stats.cost:
-		_update_status("Ancient Seed ไม่พอ")
+		_update_status("Ancient Seed isn't enough")
 		return
 	if float(_plant_cooldowns.get(selected_plant, 0.0)) > 0.0:
 		return
@@ -500,7 +500,7 @@ func _try_place(play_position: Vector2) -> void:
 	_occupied[grid] = {"node": plant, "cost": stats.cost}
 	_plant_cooldowns[selected_plant] = stats.cooldown
 	_update_seed_label()
-	_update_status("%s วางแล้ว" % selected_plant)
+	_update_status("%s was placed!" % selected_plant)
 	selected_plant = ""
 	placement_preview.visible = false
 	_update_card_states()
@@ -525,7 +525,7 @@ func _try_remove_plant(play_position: Vector2) -> void:
 	var refund := floori(cost * 0.5)
 	plant_node.queue_free()
 	add_seed(refund)
-	_update_status("ถอน Plant คืน %d Ancient Seed" % refund)
+	_update_status("Remove plant and gain %d Ancient Seed" % refund)
 	
 	if place_sound:
 		place_sound.play()
@@ -538,7 +538,7 @@ func add_seed(amount: int) -> void:
 	_update_seed_label()
 
 func _on_seed_generated(amount: int) -> void:
-	_update_status("Seed Bloom ผลิต +%d Ancient Seed" % amount)
+	_update_status("Seed Bloom produce +%d Ancient Seed" % amount)
 
 func _update_seed_label() -> void:
 	seed_label.text = "Ancient Seed  %d / %d" % [ancient_seed, MAX_SEED]

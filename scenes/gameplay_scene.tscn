@@ -179,7 +179,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.75, 0.68, 1)
 theme_override_font_sizes/font_size = 13
-text = "เลือกการ์ด แล้วคลิกช่องบนสนาม"
+text = "Select plant card. "
 horizontal_alignment = 1
 
 [node name="Cards" type="VBoxContainer" parent="UI/PlantPanel/Margin/VBox" unique_id=1467634648]
@@ -209,13 +209,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
-text = "ถอนพืช"
+text = "Remove"
 
 [node name="StatusLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1478087897]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 17
-text = "เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง"
+text = "Select a plant and click on field to place."
 vertical_alignment = 1
 
 [node name="SeedLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=86908434]
