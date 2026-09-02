@@ -150,12 +150,6 @@ script = ExtResource("4_0kdh5")
 icon_sound_on = ExtResource("3_2l3yw")
 icon_sound_off = ExtResource("4_2525w")
 
-[node name="DevButton" type="Button" parent="." unique_id=313207573]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 27.0
-offset_bottom = 27.0
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=593131669]
 stream = ExtResource("4_i331m")
 autoplay = true
@@ -251,4 +245,3 @@ theme_override_styles/hover = SubResource("ButtonHover")
 text = "NO"
 
 [connection signal="pressed" from="Sound button" to="Sound button" method="_on_pressed"]
-[connection signal="pressed" from="DevButton" to="." method="_on_dev_button_pressed"]

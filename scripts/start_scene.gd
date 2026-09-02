@@ -2,13 +2,11 @@ extends Control
 
 @onready var play_button: Button = %PlayButton
 @onready var exit_button: Button = %ExitButton
-@onready var dev_button: Button = %DevButton
 @onready var exit_popup: CanvasLayer = %ExitPopup 
 @onready var confirm_exit_button: Button = %ConfirmExitButton
 @onready var cancel_exit_button: Button = %CancelExitButton
 
 func _ready() -> void:
-	SaveManager.reset_save()
 	exit_popup.hide()
 	play_button.pressed.connect(_on_play_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
