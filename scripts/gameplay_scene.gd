@@ -161,7 +161,7 @@ func _ready() -> void:
 	# --- โค้ดเดิมของคุณ ---
 	_build_plant_cards()
 	_update_seed_label()
-	_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
+	_update_status("Select plant to place on field")
 	placement_preview.visible = false
 	_layout_gameplay()
 	remove_plant_button.pressed.connect(_on_toggle_remove_mode)
@@ -374,7 +374,7 @@ func _on_plant_card_pressed(plant_name: String) -> void:
 	if selected_plant == plant_name:
 		selected_plant = ""
 		placement_preview.visible = false
-		_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
+		_update_status("Select plant to place on field")
 		_update_card_states()
 		return
 	
@@ -382,13 +382,13 @@ func _on_plant_card_pressed(plant_name: String) -> void:
 	if float(_plant_cooldowns.get(plant_name, 0.0)) > 0.0:
 		return
 	if ancient_seed < stats.cost:
-		_update_status("Ancient Seed ไม่พอ")
+		_update_status("Ancient Seed isn't enough")
 		return
 
 	if remove_mode:
 		_set_remove_mode(false)
 	selected_plant = plant_name
-	_update_status("กำลังวาง %s — เลือกช่องบนสนาม" % plant_name)
+	_update_status("Placing %s — select grid" % plant_name)
 	_update_card_states()
 
 func _on_toggle_remove_mode() -> void:
@@ -400,15 +400,15 @@ func _set_remove_mode(enabled: bool) -> void:
 		selected_plant = ""
 		placement_preview.visible = false
 		_update_card_states()
-		_update_status("โหมดถอนพืช: คลิกพืชที่ต้องการถอน")
+		_update_status("Remove Mode: Click a plant to remove")
 	else:
-		_update_status("เลือก Plant แล้วคลิกช่องบนสนามเพื่อวาง")
+		_update_status("Select plant to place")
 	_update_remove_button_visual()
 
 func _update_remove_button_visual() -> void:
 	if remove_plant_button == null:
 		return
-	remove_plant_button.text = "ถอนพืช: ON" if remove_mode else "ถอนพืช"
+	remove_plant_button.text = "Remove: ON" if remove_mode else "Remove"
 	remove_plant_button.add_theme_color_override("font_color", Color(0.95, 0.35, 0.3, 1.0) if remove_mode else Color(1, 1, 1, 1))
 
 func _unhandled_input(event: InputEvent) -> void:
