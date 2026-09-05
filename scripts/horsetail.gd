@@ -31,6 +31,10 @@ var _attack_timer: float = 0.0
 var _cell_size: Vector2 = Vector2.ZERO
 var _current_target: Node2D = null
 var _attack_frame_triggered: bool = false
+var _attack_range: float = 0.0
+var _chain_count: int = 0
+var _chain_range: float = 0.0
+var _chain_damage_multiplier: float = 1.0
 
 func _ready() -> void:
 	add_to_group("plants")
@@ -131,6 +135,12 @@ func setup_combat(gameplay: Node, row: int) -> void:
 	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
 	_attack = final_stats.attack if final_stats != null else DATA.base_attack
 
+	var ability_data: Dictionary = final_stats.ability_data if final_stats != null else DATA.ability_data
+	_attack_range = float(ability_data.get("attack_range", 0.0))
+	_chain_count = int(ability_data.get("chain_count", 0))
+	_chain_range = float(ability_data.get("chain_range", 0.0))
+	_chain_damage_multiplier = float(ability_data.get("chain_damage_multiplier", 1.0))
+
 	_attack_timer = DATA.attack_interval
 	_combat_enabled = true
 
@@ -151,7 +161,7 @@ func _combat_process(delta: float) -> void:
 
 func _find_nearest_enemy() -> Node2D:
 	var best: Node2D = null
-	var attack_range: float = float(DATA.ability_data.get("attack_range", 0.0))
+	var attack_range: float = _attack_range
 
 	for node: Node in get_tree().get_nodes_in_group("enemies"):
 		if not is_instance_valid(node) or node is not Node2D:
@@ -167,9 +177,9 @@ func _find_nearest_enemy() -> Node2D:
 	return best
 
 func _spawn_projectile() -> void:
-	var chain_count: int = int(DATA.ability_data.get("chain_count", 0))
-	var chain_range: float = float(DATA.ability_data.get("chain_range", 0.0))
-	var chain_damage_multiplier: float = float(DATA.ability_data.get("chain_damage_multiplier", 1.0))
+	var chain_count: int = _chain_count
+	var chain_range: float = _chain_range
+	var chain_damage_multiplier: float = _chain_damage_multiplier
 	if _current_target == null or not is_instance_valid(_current_target):
 		return
 

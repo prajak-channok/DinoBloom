@@ -14,6 +14,6 @@ placement_cost = 250
 placement_cooldown = 15.0
 plant_type = "Attack"
 ability_data = {
-"passaive_cooldown": 40.0
+"passive_cooldown": 50.0
 }
 visual_reference = ExtResource("2")

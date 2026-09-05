@@ -7,6 +7,7 @@ const FREEZE_TINT_COLOR: Color = Color(0.55, 0.85, 1.0, 1.0)
 const TRAP_VISUAL_SCENE_PATH: String = "res://scenes/plants/sticky_trap_visual.tscn"
 
 var _effect_range: float = float(DATA.ability_data.get("effect_range", 5.0))
+var _effect_duration: float = float(DATA.ability_data.get("effect_duration", 0.0))
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025
@@ -119,13 +120,9 @@ func _trigger_trap(target: Node2D) -> void:
 
 	_affected_targets[target.get_instance_id()] = true
 
-	var duration: float = float(
-		DATA.ability_data.get("effect_duration", 0.0)
-	)
-
 	for enemy: Node2D in _find_enemies_in_effect_range():
 		if enemy.has_method("apply_stun"):
-			enemy.apply_stun(duration)
+			enemy.apply_stun(_effect_duration)
 		_apply_freeze_tint(enemy)
 
 	_spawn_trap_visual()
@@ -173,6 +170,11 @@ func setup_combat(gameplay: Node, row: int) -> void:
 	grid_row = row
 	_hp = DATA.base_hp
 	_combat_enabled = true
+
+	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
+	var ability_data: Dictionary = final_stats.ability_data if final_stats != null else DATA.ability_data
+	_effect_range = float(ability_data.get("effect_range", 5.0))
+	_effect_duration = float(ability_data.get("effect_duration", 0.0))
 
 
 func get_interaction_rect() -> Rect2:

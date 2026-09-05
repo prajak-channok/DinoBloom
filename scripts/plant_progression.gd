@@ -46,6 +46,8 @@ static func get_final_stats(plant_id: String) -> Variant:
 	for stat_key in STAT_FIELD_MAP:
 		stats[stat_key] = base.get(STAT_FIELD_MAP[stat_key])
 
+	var ability_stats: Dictionary = base.ability_data.duplicate()
+
 	var level: int = SaveManager.get_plant_level(plant_id)
 	var upgrade: PlantUpgradeData = get_upgrade_data(plant_id)
 	if upgrade != null:
@@ -54,7 +56,14 @@ static func get_final_stats(plant_id: String) -> Variant:
 				continue
 			for stat_key in STAT_FIELD_MAP:
 				stats[stat_key] += level_data.get("%s_modifier" % stat_key)
-	
+			for ability_key in level_data.ability_modifiers:
+				var delta = level_data.ability_modifiers[ability_key]
+				if ability_stats.has(ability_key):
+					ability_stats[ability_key] += delta
+				else:
+					ability_stats[ability_key] = delta
+
+	stats["ability_data"] = ability_stats
 	return stats
 
 ## Cost to go from `level` to `level + 1`. -1 if already at MAX_LEVEL / no cost defined.

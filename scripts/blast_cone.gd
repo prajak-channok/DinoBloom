@@ -194,6 +194,9 @@ func setup_combat(gameplay: Node, row: int) -> void:
 	var base_attack: float = final_stats.attack if final_stats != null else DATA.base_attack
 	_attack = base_attack * 10
 
+	var ability_data: Dictionary = final_stats.ability_data if final_stats != null else DATA.ability_data
+	_effect_range = float(ability_data.get("effect_range", 3.0))
+
 func get_interaction_rect() -> Rect2:
 	var rect := Rect2(
 		position - _cell_size * 0.5,

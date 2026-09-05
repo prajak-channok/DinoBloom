@@ -5,7 +5,6 @@ const DATA: PlantData = preload("res://data/plants/ginkgo_cannon.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 const ATTACK_ANIMATION := "attack"
 const ATTACK_FRAME := 5
-const CONVERSION_COOLDOWN: float = 20.0
 
 @export var bounce_speed: float = 0.7
 @export var bounce_scale: float = 0.025
@@ -33,8 +32,9 @@ var _hp: float = 0.0
 var _attack: float = 0.0
 var _attack_timer: float = 0.0
 var _cell_size: Vector2 = Vector2.ZERO
-var _conversion_timer: float = CONVERSION_COOLDOWN
+var _conversion_timer: float = 0.0
 var _current_target: Node2D = null
+var _conversion_cooldown: float = 0.0
 
 
 func _ready() -> void:
@@ -135,7 +135,7 @@ func _spawn_projectile() -> void:
 
 	# Effect and damage are mutually exclusive per shot: a Conversion shot
 	# deals no damage, a damage shot never attempts Conversion.
-	var use_conversion: bool = _conversion_timer >= CONVERSION_COOLDOWN
+	var use_conversion: bool = _conversion_timer >= _conversion_cooldown
 	if use_conversion:
 		_conversion_timer = 0.0
 
@@ -179,15 +179,18 @@ func setup_combat(gameplay: Node, row: int) -> void:
 
 	_attack = final_stats.attack if final_stats != null else DATA.base_attack
 
+	var ability_data: Dictionary = final_stats.ability_data if final_stats != null else DATA.ability_data
+	_conversion_cooldown = float(ability_data.get("passive_cooldown", 20.0))
+
 	_attack_timer = DATA.attack_interval
 	# Ready to use the Conversion Ability immediately on first placement.
-	_conversion_timer = CONVERSION_COOLDOWN
+	_conversion_timer = _conversion_cooldown
 	_combat_enabled = true
 
 
 func _combat_process(delta: float) -> void:
 	_attack_timer += delta
-	_conversion_timer = minf(_conversion_timer + delta, CONVERSION_COOLDOWN)
+	_conversion_timer = minf(_conversion_timer + delta, _conversion_cooldown)
 
 	if _attack_timer < DATA.attack_interval:
 		return

@@ -11,6 +11,7 @@ signal hp_changed(current: float, max_hp: float)
 
 const DATA: DinosaurData = preload("res://data/dinosaurs/trex.tres")
 const COLUMNS := 8
+const EAT_FRAME := 2
 
 ## T-Rex is a Boss: bigger gameplay footprint than normal dinosaurs.
 @export var body_half_width: float = 84.0
@@ -33,6 +34,7 @@ var _flash_timer: float = 0.0
 ## one-shot "rumbling" animation finishes.
 var _rumble_triggered: bool = false
 var _state = "walking"
+var _eating: bool = false
 var _is_rumbling: bool = false
 ## Ginkgo Cannon Conversion state, same contract as every other dinosaur.
 ## DATA.can_be_converted is false on trex.tres, so can_be_converted() always
@@ -60,64 +62,55 @@ func _ready() -> void:
 		hp = DATA.base_hp
 		max_hp = DATA.base_hp
 	_play_walk()
+	_state = "walking"
 	if is_instance_valid(sprite):
 		sprite.animation_finished.connect(_on_animation_finished)
 
 func _process(delta: float) -> void:
-	if _stunned:
-		_stun_timer -= delta
-
-		if _stun_timer <= 0.0:
-			_stunned = false
-			_stun_timer = 0.0
-			_state = "walking"
-			_play_walk()
-
+	if _eating:
+		_attack_timer -= delta
 		return
-
-	_clear_freeze_tint()
-		
-	if _flash_timer > 0.0:
-		_flash_timer -= delta
-		if _flash_timer <= 0.0 and is_instance_valid(sprite):
-			sprite.modulate = Color.WHITE
-
-	if _is_rumbling:
+	
+	if _attack_timer > 0.0:
+		_attack_timer -= delta
 		return
-
-	if not _rumble_triggered and _board_rect.size.x > 0.0 and _cell_size.x > 0.0:
-		var rumble_trigger_x := _board_rect.position.x + (float(COLUMNS) - 1.5) * _cell_size.x
-		if position.x <= rumble_trigger_x:
-			_start_rumble()
-			return
 
 	var plant := _find_target_ahead()
+
 	if plant != null:
 		var plant_rect: Rect2 = plant.get_interaction_rect() if plant.has_method("get_interaction_rect") else Rect2(plant.position, Vector2.ZERO)
 		var stop_x := plant_rect.end.x + body_half_width + contact_padding
 
 		if position.x > stop_x:
 			_target = null
-			_play_walk()
+			sprite.play("walk")
+			_state = "walking"
 			position.x = maxf(position.x - DATA.movement_speed * delta, stop_x)
 		else:
-			_target = plant
-			_play_eat()
-			_attack_timer += delta
-			if _attack_timer >= DATA.attack_interval:
-				_attack_timer -= DATA.attack_interval
+			if _target != plant:
+				_target = plant
+				_attack_timer = DATA.attack_interval
 				_flash_attack()
-				if is_instance_valid(plant) and plant.has_method("take_damage"):
-					plant.take_damage(DATA.attack)
+				_state = "eat"
+				_play_eat()
+				_eating = true
+
+			else:
+				_attack_timer -= delta
+
+				if _attack_timer <= 0.0:
+					_attack_timer = DATA.attack_interval
+					_flash_attack()
+					_state = "eat"
+					_play_eat()
+					_eating = true
+
 	else:
 		_target = null
 		_attack_timer = 0.0
-		_play_walk()
+		_state = "walking"
+		sprite.play("walk")
 		position.x -= DATA.movement_speed * delta
-
-	if _board_rect.size.x > 0.0 and position.x < _board_rect.position.x - body_half_width:
-		reached_boundary.emit()
-		queue_free()
 
 func _start_rumble() -> void:
 	_rumble_triggered = true
@@ -128,20 +121,35 @@ func _start_rumble() -> void:
 		sprite.play("rumbling")
 
 func _on_animation_finished() -> void:
-	if is_instance_valid(sprite) and sprite.animation == &"rumbling":
+	if not is_instance_valid(sprite):
+		return
+
+	if sprite.animation == &"rumbling":
 		_is_rumbling = false
+		return
+
+	if sprite.animation == &"eat":
+		_eating = false
+		_clear_freeze_tint()
+		sprite.play("idle")
+
+		if is_instance_valid(_target):
+			_state = "eat"
+		else:
+			_state = "walking"
+
+	elif sprite.animation == &"walk":
+		_state = "walking"
 
 func _play_walk() -> void:
 	if sprite == null:
 		return
-	if sprite.animation != &"walk" or not sprite.is_playing():
-		sprite.play("walk")
+	sprite.play("walk")
 
 func _play_eat() -> void:
 	if sprite == null:
 		return
-	if sprite.animation != &"eat" or not sprite.is_playing():
-		sprite.play("eat")
+	sprite.play("eat")
 
 func _flash_attack() -> void:
 	if is_instance_valid(sprite):
@@ -209,5 +217,13 @@ func apply_stun(duration: float) -> void:
 		sprite.frame = 0
 		
 func _clear_freeze_tint() -> void:
-	if modulate != Color.WHITE:
-		modulate = Color.WHITE
+	if is_instance_valid(sprite):
+		sprite.modulate = Color.WHITE
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	var plant := _find_target_ahead()
+	
+	if sprite.animation == "eat" and sprite.frame == 2:
+		if is_instance_valid(plant) and plant.has_method("take_damage"):
+			plant.take_damage(DATA.attack)
