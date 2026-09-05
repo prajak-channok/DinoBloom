@@ -67,6 +67,17 @@ func _ready() -> void:
 		sprite.animation_finished.connect(_on_animation_finished)
 
 func _process(delta: float) -> void:
+	if _stunned:
+		_stun_timer -= delta
+
+		if _stun_timer <= 0.0:
+			_stunned = false
+			_stun_timer = 0.0
+			_state = "walking"
+			_play_walk()
+
+		return
+
 	if _eating:
 		_attack_timer -= delta
 		return
@@ -111,6 +122,12 @@ func _process(delta: float) -> void:
 		_state = "walking"
 		sprite.play("walk")
 		position.x -= DATA.movement_speed * delta
+
+	if _board_rect.size.x <= 0.0:
+		return
+	if position.x < _board_rect.position.x - body_half_width:
+		reached_boundary.emit()
+		queue_free()
 
 func _start_rumble() -> void:
 	_rumble_triggered = true

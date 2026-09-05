@@ -7,4 +7,5 @@
 stream = ExtResource("1_k275d")
 volume_db = -10.0
 max_polyphony = 5
+bus = &"Effect"
 script = ExtResource("2_fqux5")

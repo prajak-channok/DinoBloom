@@ -12,7 +12,8 @@ const STAGE_IDS := ["stage_01", "stage_02", "stage_03"]
 # 1. เปลี่ยนชนิดของตัวแปรให้ตรงกับ Node หลักของ Popup ใหม่ (สมมติว่าใช้ CanvasLayer และใช้ชื่อเดิม %LockedPopup)
 @onready var locked_popup: CanvasLayer = %LockedPopup 
 # 2. เพิ่มตัวแปรสำหรับปุ่ม OK ในหน้าต่าง Popup
-@onready var popup_ok_button: Button = %PopupOkButton 
+@onready var popup_ok_button: Button = %PopupOkButton
+@onready var setting_button: Button = %SettingButton
 
 var selected_stage_id := ""
 
@@ -36,9 +37,10 @@ func _ready() -> void:
 	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
 	var all_buttons: Array[Button] = [
 		start_button, 
-		upgrade_button, 
-		back_button, 
-		popup_ok_button # ถ้าสร้างตัวแปรปุ่ม OK ไว้แล้วก็ใส่มาด้วย
+		upgrade_button,
+		back_button,
+		popup_ok_button, # ถ้าสร้างตัวแปรปุ่ม OK ไว้แล้วก็ใส่มาด้วย
+		setting_button
 	]
 	all_buttons.append_array(stage_buttons) # เอาปุ่มด่าน 1, 2, 3 มารวมด้วย
 	
@@ -52,7 +54,8 @@ func _ready() -> void:
 	start_button.pressed.connect(_on_start_pressed)
 	
 	# 4. เชื่อมสัญญาณ (Signal) ของปุ่ม OK ให้ทำงานฟังก์ชันปิดหน้าต่าง
-	popup_ok_button.pressed.connect(_on_popup_ok_pressed) 
+	popup_ok_button.pressed.connect(_on_popup_ok_pressed)
+	setting_button.pressed.connect(_on_setting_pressed)
 	
 	for i in stage_buttons.size():
 		stage_buttons[i].pressed.connect(_on_stage_pressed.bind(STAGE_IDS[i]))
@@ -68,6 +71,10 @@ func _on_stage_pressed(stage_id: String) -> void:
 # 6. เพิ่มฟังก์ชันสำหรับปุ่ม OK เมื่อกดแล้วให้ปิดหน้าต่าง
 func _on_popup_ok_pressed() -> void:
 	locked_popup.hide()
+
+func _on_setting_pressed() -> void:
+	var popup := preload("res://scenes/settings_popup.tscn").instantiate()
+	add_child(popup)
 
 func _on_start_pressed() -> void:
 	if selected_stage_id == "":

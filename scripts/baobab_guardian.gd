@@ -45,7 +45,7 @@ func _ready() -> void:
 	sprite_next.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	_stage = 0
 
-func setup(gameplay: Node, row: int) -> void:
+func setup(_gameplay: Node, row: int) -> void:
 	grid_row = row
 	_hp = _get_hp()
 	add_to_group("plants")

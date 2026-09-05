@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://dj4vqhqxk1s8w"]
+
+[ext_resource type="Script" path="res://scripts/settings_popup.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="PopupPanelStyle"]
+bg_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.09411765, 0.14509805, 0.078431375, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="SliderBg"]
+bg_color = Color(0.15, 0.15, 0.12, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="SliderFill"]
+bg_color = Color(0.25, 0.75, 0.3, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="SettingsPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.01, 0.01, 0.01, 0.55)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(520, 420)
+layout_mode = 2
+theme_override_styles/panel = SubResource("PopupPanelStyle")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/Margin/VBox"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Sound" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="MelodyRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MelodyIcon" type="TextureButton" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MelodyMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+text = "-"
+
+[node name="MelodySlider" type="HSlider" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 10.0
+theme_override_styles/slider = SubResource("SliderBg")
+theme_override_styles/grabber_area = SubResource("SliderFill")
+theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
+
+[node name="MelodyPlusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+text = "+"
+
+[node name="MelodyPercentLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="EffectRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EffectIcon" type="TextureButton" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="EffectMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+text = "-"
+
+[node name="EffectSlider" type="HSlider" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+step = 10.0
+theme_override_styles/slider = SubResource("SliderBg")
+theme_override_styles/grabber_area = SubResource("SliderFill")
+theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
+
+[node name="EffectPlusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+text = "+"
+
+[node name="EffectPercentLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Dev" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset Save Game"
+vertical_alignment = 1
+
+[node name="ResetButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+text = "RESET"
+
+[node name="SaveCloseButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "SAVE AND CLOSE"

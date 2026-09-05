@@ -241,3 +241,4 @@ monitorable = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1382007273]
 stream = ExtResource("3_e360w")
+bus = &"Effect"

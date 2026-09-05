@@ -5,6 +5,7 @@ extends Control
 @onready var exit_popup: CanvasLayer = %ExitPopup 
 @onready var confirm_exit_button: Button = %ConfirmExitButton
 @onready var cancel_exit_button: Button = %CancelExitButton
+@onready var setting_button: Button = %SettingButton
 
 func _ready() -> void:
 	exit_popup.hide()
@@ -12,6 +13,7 @@ func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_pressed)
 	confirm_exit_button.pressed.connect(_on_exit_confirmed)
 	cancel_exit_button.pressed.connect(_on_exit_cancelled)
+	setting_button.pressed.connect(_on_setting_pressed)
 	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
 	var custom_pressed = StyleBoxFlat.new()
 	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
@@ -25,10 +27,11 @@ func _ready() -> void:
 	
 	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
 	var all_buttons: Array[Button] = [
-		play_button, 
-		exit_button, 
+		play_button,
+		exit_button,
 		confirm_exit_button,
-		cancel_exit_button
+		cancel_exit_button,
+		setting_button
 	]
 	
 	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
@@ -50,6 +53,10 @@ func _on_exit_confirmed() -> void:
 
 func _on_exit_cancelled() -> void:
 	exit_popup.hide()
+
+func _on_setting_pressed() -> void:
+	var popup := preload("res://scenes/settings_popup.tscn").instantiate()
+	add_child(popup)
 
 
 func _on_dev_button_pressed() -> void:

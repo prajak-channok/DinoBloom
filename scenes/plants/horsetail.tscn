@@ -132,3 +132,4 @@ monitorable = false
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=1271581656]
 stream = ExtResource("3_j3lam")
+bus = &"Effect"

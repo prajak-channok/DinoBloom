@@ -99,6 +99,7 @@ const PLANT_TEXTURES := {
 @onready var paused_overlay: Control = $Popups/PausedOverlay
 @onready var resume_button: Button = $Popups/PausedOverlay/Panel/VBox/ButtonRow/ResumeButton
 @onready var abandon_button: Button = $Popups/PausedOverlay/Panel/VBox/ButtonRow/AbandonButton
+@onready var setting_button: Button = $Popups/PausedOverlay/SettingButton
 
 var selected_stage_id := "stage_01"
 var selected_plant := ""
@@ -142,7 +143,8 @@ func _ready() -> void:
 		surrender_confirm_button,
 		surrender_cancel_button,
 		resume_button,
-		abandon_button
+		abandon_button,
+		setting_button
 	]
 	
 	# --- 3. วนลูปยัดสไตล์ตอนกดลงไปให้ทุกปุ่ม ---
@@ -165,8 +167,13 @@ func _ready() -> void:
 	placement_preview.visible = false
 	_layout_gameplay()
 	remove_plant_button.pressed.connect(_on_toggle_remove_mode)
+	setting_button.pressed.connect(_on_setting_pressed)
 	_update_remove_button_visual()
 	_start_match()
+
+func _on_setting_pressed() -> void:
+	var popup := preload("res://scenes/settings_popup.tscn").instantiate()
+	$Popups.add_child(popup)
 
 func _start_match() -> void:
 	var stage: StageData = STAGE_DATA[selected_stage_id]
@@ -356,8 +363,8 @@ func _update_card_states() -> void:
 		var button := card.get_node("SelectButton") as Button
 		var stats: Dictionary = _get_placement_stats(plant_name)
 		var cooldown := float(_plant_cooldowns.get(plant_name, 0.0))
-		var ready := cooldown <= 0.0
-		button.disabled = not ready
+		var is_card_available := cooldown <= 0.0
+		button.disabled = not is_card_available
 
 		if cooldown > 0.0:
 			# ตอนติดคูลดาวน์ โชว์เป็นตัวเลขวินาที

@@ -20,6 +20,7 @@ config/icon="uid://jghm4e1yjn4c"
 
 SaveManager="*res://scripts/save_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
+SettingsManager="*res://scripts/settings_manager.gd"
 HoverSound="*uid://bgvu3mrdqeir5"
 
 [display]

@@ -475,4 +475,4 @@ expand_icon = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=409297627]
 stream = ExtResource("3_8euho")
 autoplay = true
-bus = &"GameSound"
+bus = &"Melody"
