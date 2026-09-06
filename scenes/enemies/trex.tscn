@@ -210,8 +210,8 @@ script = ExtResource("1_script")
 position = Vector2(0, -70)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=709393079]
-position = Vector2(4, -6)
-scale = Vector2(0.64467597, 0.64467597)
+position = Vector2(40, -19.999998)
+scale = Vector2(0.7945024, 0.79450256)
 sprite_frames = SubResource("SpriteFrames_s7wsd")
 animation = &"idle"
 frame = 2

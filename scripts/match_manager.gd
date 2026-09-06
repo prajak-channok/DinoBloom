@@ -13,7 +13,7 @@ enum State {
 }
 
 const WAVE_START_POPUP_SECONDS := 2.0
-const WAVE_CLEAR_BREAK_SECONDS := 3.0
+const WAVE_CLEAR_BREAK_SECONDS := 2.5
 const SEED_DROP_CHANCE := 0.30
 const SEED_DROP_AMOUNT := 25
 ## Fixed stage progression order; stage_03 has no "next" (last implemented stage).
@@ -191,8 +191,6 @@ func _on_wave_finished() -> void:
 		set_state(State.WAVE_CLEAR)
 
 func _on_enemy_died(_dino_id: String) -> void:
-	# Requirement #24: 10% chance to gain +25 Ancient Seed per kill, capped
-	# by add_seed()'s own MAX_SEED clamp on the gameplay scene.
 	if randf() < SEED_DROP_CHANCE:
 		if gameplay and gameplay.has_method("add_seed"):
 			gameplay.add_seed(SEED_DROP_AMOUNT)

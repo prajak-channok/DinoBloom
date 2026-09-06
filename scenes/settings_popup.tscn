@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dj4vqhqxk1s8w"]
 
-[ext_resource type="Script" path="res://scripts/settings_popup.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://credvk6b1wfhh" path="res://scripts/settings_popup.gd" id="1_script"]
 
 [sub_resource type="StyleBoxFlat" id="PopupPanelStyle"]
-bg_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+bg_color = Color(0.47208336, 0.55, 0.41250002, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -14,21 +14,147 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="SliderBg"]
-bg_color = Color(0.15, 0.15, 0.12, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6ek3"]
+bg_color = Color(0.07049999, 0.47, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.52, 0.47666663, 0, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="SliderFill"]
-bg_color = Color(0.25, 0.75, 0.3, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvuff"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.59, 0.59, 0.59, 0.99607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0, 0.33, 0, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
 
-[node name="SettingsPopup" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3l5t"]
+content_margin_left = 15.0
+content_margin_right = 15.0
+bg_color = Color(0.93, 0.93, 0.93, 0.99607843)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 1
+border_color = Color(0.15049995, 0.43, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m133j"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48881894, 0.70850223, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 3
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4ftr"]
+bg_color = Color(0.79, 0.79, 0.79, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48881894, 0.70850223, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 3
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wv7nd"]
+bg_color = Color(0.12, 0.18, 0.1, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kxbx"]
+bg_color = Color(0.12, 0.18, 0.1, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w425h"]
+bg_color = Color(0.2, 0.28, 0.14, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.86, 0.48, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdmib"]
+bg_color = Color(0.12, 0.18, 0.1, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lb85q"]
+bg_color = Color(0.12, 0.18, 0.1, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bd2y"]
+bg_color = Color(0.2, 0.28, 0.14, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.86, 0.48, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="SettingsPopup" type="Control" unique_id=1659140241]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +163,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Dim" type="ColorRect" parent="."]
+[node name="Dim" type="ColorRect" parent="." unique_id=1935579305]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +173,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.01, 0.01, 0.01, 0.55)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1005771913]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,72 +181,158 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(520, 420)
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=762852895]
+custom_minimum_size = Vector2(570, 450)
 layout_mode = 2
 theme_override_styles/panel = SubResource("PopupPanelStyle")
 
-[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1786204829]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin"]
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin" unique_id=2023710985]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 16
 
-[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/Margin/VBox"]
-custom_minimum_size = Vector2(0, 300)
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/Margin/VBox" unique_id=1087059164]
+custom_minimum_size = Vector2(445, 300)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_selected_color = Color(0.09199997, 0.46, 0, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(0.14500001, 0.3, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6ek3")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_fvuff")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_fvuff")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_s3l5t")
+current_tab = 0
 
-[node name="Sound" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer"]
+[node name="Sound" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer" unique_id=218387450]
 layout_mode = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/separation = 28
 alignment = 1
+metadata/_tab_index = 0
 
-[node name="MelodyRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound"]
+[node name="MelodyRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound" unique_id=2058352561]
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="MelodyIcon" type="TextureButton" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+[node name="MelodyIcon" type="TextureButton" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow" unique_id=2105899166]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="MelodyMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+[node name="MelodyMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow" unique_id=810335539]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(30, 20)
+custom_maximum_size = Vector2(-1, 20)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.06820001, 0.62, 0.06820001, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_m133j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d4ftr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m133j")
 text = "-"
 
-[node name="MelodySlider" type="HSlider" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+[node name="MelodySlider" type="HSlider" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow" unique_id=1198943939]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(220, 20)
+custom_minimum_size = Vector2(180, 20)
 layout_mode = 2
-size_flags_horizontal = 3
-max_value = 100.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
 step = 10.0
-theme_override_styles/slider = SubResource("SliderBg")
-theme_override_styles/grabber_area = SubResource("SliderFill")
-theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
 
-[node name="MelodyPlusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+[node name="MelodyPlusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow" unique_id=370941274]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(30, 20)
+custom_maximum_size = Vector2(-1, 20)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_m133j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d4ftr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m133j")
 text = "+"
 
-[node name="MelodyPercentLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow"]
+[node name="MelodyPercentLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/MelodyRow" unique_id=1566907875]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="EffectRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound" unique_id=1212256632]
+custom_minimum_size = Vector2(400, 40)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="EffectIcon" type="TextureButton" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow" unique_id=1215440689]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="EffectMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow" unique_id=618887893]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 36)
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_m133j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d4ftr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m133j")
+text = "-"
+
+[node name="EffectSlider" type="HSlider" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow" unique_id=1399192333]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+step = 10.0
+
+[node name="EffectPlusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow" unique_id=1604728793]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 36)
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.06666667, 0.61960787, 0.06666667, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_m133j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d4ftr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m133j")
+text = "+"
+
+[node name="EffectPercentLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow" unique_id=2078786509]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
@@ -128,70 +340,55 @@ text = "100%"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="EffectRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="EffectIcon" type="TextureButton" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
+[node name="FullScreenBtn" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound" unique_id=655830832]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 5
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_wv7nd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8kxbx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w425h")
+text = "Full Screen"
 
-[node name="EffectMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
+[node name="Dev" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer" unique_id=748685846]
+visible = false
+custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
-text = "-"
+metadata/_tab_index = 1
 
-[node name="EffectSlider" type="HSlider" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(220, 20)
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev" unique_id=570947543]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="ResetLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev" unique_id=1723883563]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 100.0
-step = 10.0
-theme_override_styles/slider = SubResource("SliderBg")
-theme_override_styles/grabber_area = SubResource("SliderFill")
-theme_override_styles/grabber_area_highlight = SubResource("SliderFill")
-
-[node name="EffectPlusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-text = "+"
-
-[node name="EffectPercentLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(56, 0)
-layout_mode = 2
-text = "100%"
-horizontal_alignment = 2
+text = "Reset save game"
 vertical_alignment = 1
 
-[node name="Dev" type="HBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer"]
-layout_mode = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ResetLabel" type="Label" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Reset Save Game"
-vertical_alignment = 1
-
-[node name="ResetButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev"]
+[node name="ResetButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Dev" unique_id=130203562]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 44)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_wv7nd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8kxbx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w425h")
 text = "RESET"
 
-[node name="SaveCloseButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox"]
+[node name="SaveCloseButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox" unique_id=1620641771]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "SAVE AND CLOSE"
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.72156864, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fdmib")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lb85q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2bd2y")
+text = "Save"

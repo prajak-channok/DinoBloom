@@ -10,8 +10,8 @@ script = ExtResource("1_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=112711075]
 texture_filter = 1
-position = Vector2(13, -7.977498)
-scale = Vector2(0.22707708, 0.2270771)
+position = Vector2(9, -16.000002)
+scale = Vector2(0.24206638, 0.2420664)
 texture = ExtResource("2_texture")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1051083508]

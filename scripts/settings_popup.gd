@@ -11,6 +11,7 @@ extends Control
 @onready var effect_minus_button: Button = %EffectMinusButton
 @onready var effect_plus_button: Button = %EffectPlusButton
 @onready var effect_percent_label: Label = %EffectPercentLabel
+@onready var full_screen_button: Button = %FullScreenBtn
 
 @onready var reset_button: Button = %ResetButton
 @onready var save_close_button: Button = %SaveCloseButton
@@ -39,6 +40,7 @@ func _ready() -> void:
 	effect_minus_button.pressed.connect(_on_step_pressed.bind("Effect", -10))
 	effect_plus_button.pressed.connect(_on_step_pressed.bind("Effect", 10))
 	effect_icon.pressed.connect(_on_icon_pressed.bind("Effect"))
+	full_screen_button.pressed.connect(_on_full_screen_pressed)
 
 	reset_button.pressed.connect(_on_reset_pressed)
 	save_close_button.pressed.connect(_on_save_close_pressed)
@@ -69,6 +71,41 @@ func _update_row_visual(bus_name: String) -> void:
 	var muted := SettingsManager.is_muted(bus_name) or slider.value <= 0
 	icon.texture_normal = _icon_close[bus_name] if muted else _icon_open[bus_name]
 	percent_label.text = "%d%%" % int(slider.value)
+
+func _on_full_screen_pressed() -> void:
+	if OS.has_feature("web"):
+		_toggle_web_fullscreen()
+	else:
+		var mode := DisplayServer.window_get_mode()
+		if mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+func _toggle_web_fullscreen() -> void:
+	var js := """
+	(function() {
+		var canvas = document.getElementById('canvas');
+		if (!document.fullscreenElement) {
+			if (canvas.requestFullscreen) {
+				canvas.requestFullscreen();
+			} else if (canvas.webkitRequestFullscreen) {
+				canvas.webkitRequestFullscreen();
+			} else if (canvas.mozRequestFullScreen) {
+				canvas.mozRequestFullScreen();
+			}
+		} else {
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			}
+		}
+	})();
+	"""
+	JavaScriptBridge.eval(js, true)
 
 func _on_reset_pressed() -> void:
 	SaveManager.reset_save()

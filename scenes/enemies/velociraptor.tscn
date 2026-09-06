@@ -123,8 +123,8 @@ position = Vector2(0, -42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=675767353]
 texture_filter = 1
-position = Vector2(0, 26)
-scale = Vector2(0.35, 0.35)
+position = Vector2(-9.021686, 33.312504)
+scale = Vector2(0.31475905, 0.31475905)
 sprite_frames = SubResource("VeloFrames")
 animation = &"eat"
 autoplay = "walk"

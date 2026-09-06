@@ -123,8 +123,8 @@ position = Vector2(0, -46)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1276682694]
 texture_filter = 1
-position = Vector2(-10, 2.0000014)
-scale = Vector2(0.39714453, 0.39714453)
+position = Vector2(5, -1.9999995)
+scale = Vector2(0.4902814, 0.4902814)
 sprite_frames = SubResource("TriFrames")
 animation = &"walk"
 autoplay = "walk"
