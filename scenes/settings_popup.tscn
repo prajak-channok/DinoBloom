@@ -211,6 +211,7 @@ theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_fvuff")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_fvuff")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_s3l5t")
 current_tab = 0
+tab_1/hidden = true
 
 [node name="Sound" type="VBoxContainer" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer" unique_id=218387450]
 layout_mode = 2
@@ -292,7 +293,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 ignore_texture_size = true
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="EffectMinusButton" type="Button" parent="CenterContainer/PanelContainer/Margin/VBox/TabContainer/Sound/EffectRow" unique_id=618887893]
 unique_name_in_owner = true

@@ -99,7 +99,7 @@ const PLANT_TEXTURES := {
 @onready var paused_overlay: Control = $Popups/PausedOverlay
 @onready var resume_button: Button = $Popups/PausedOverlay/Panel/VBox/ButtonRow/ResumeButton
 @onready var abandon_button: Button = $Popups/PausedOverlay/Panel/VBox/ButtonRow/AbandonButton
-@onready var setting_button: Button = $Popups/PausedOverlay/SettingButton
+@onready var setting_button: Button = $Popups/PausedOverlay/Panel/VBox/SettingButton
 
 var selected_stage_id := "stage_01"
 var selected_plant := ""

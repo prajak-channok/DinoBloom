@@ -85,6 +85,15 @@ func _process(delta: float) -> void:
 	if _attack_timer > 0.0:
 		_attack_timer -= delta
 		return
+		
+	if _is_rumbling:
+		return
+
+	if not _rumble_triggered and _board_rect.size.x > 0.0 and _cell_size.x > 0.0:
+		var rumble_trigger_x := _board_rect.position.x + (float(COLUMNS) - 1.5) * _cell_size.x
+		if position.x <= rumble_trigger_x:
+			_start_rumble()
+			return
 
 	var plant := _find_target_ahead()
 

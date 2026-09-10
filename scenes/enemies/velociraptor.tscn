@@ -98,7 +98,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 7.0
+"speed": 13.0
 }]
 
 [sub_resource type="StyleBoxFlat" id="HPBG"]
@@ -126,9 +126,9 @@ texture_filter = 1
 position = Vector2(-9.021686, 33.312504)
 scale = Vector2(0.31475905, 0.31475905)
 sprite_frames = SubResource("VeloFrames")
-animation = &"eat"
+animation = &"walk"
 autoplay = "walk"
-frame_progress = 0.9674651
+frame_progress = 0.6316189
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1377409152]
 offset_left = -46.0

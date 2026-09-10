@@ -68,6 +68,8 @@ var ui_paused_overlay: Control
 
 var _boss_node: Node2D = null
 
+var speed_normal_style: StyleBox
+
 func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: SpawnManager, p_stage: StageData, p_stage_id: String, ui: Dictionary) -> void:
 	gameplay = p_gameplay
 	wave_manager = p_wave_manager
@@ -107,6 +109,7 @@ func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: Spawn
 	if ui_pause_button:
 		ui_pause_button.pressed.connect(toggle_pause)
 	if ui_speed_button:
+		speed_normal_style = ui_speed_button.get_theme_stylebox("normal")
 		ui_speed_button.pressed.connect(toggle_speed)
 	if ui_surrender_button:
 		ui_surrender_button.pressed.connect(request_surrender)
@@ -289,17 +292,34 @@ func toggle_pause() -> void:
 func toggle_speed() -> void:
 	if Engine.time_scale < 1.5:
 		Engine.time_scale = 2.0
+		
+		if ui_speed_button:
+			ui_speed_button.add_theme_stylebox_override(
+				"normal",
+				ui_speed_button.get_theme_stylebox("hover")
+			)
+			ui_speed_button.text = "2×"
 	else:
 		Engine.time_scale = 1.0
-	if ui_speed_button:
-		ui_speed_button.text = "2×" if Engine.time_scale >= 1.5 else "1×"
+		
+		if ui_speed_button:
+			ui_speed_button.add_theme_stylebox_override(
+				"normal",
+				speed_normal_style
+			)
+			ui_speed_button.text = "1×"
 
 ## Requirement (2026-08-21): when the Wave Clear / Win UI appears, force back
 ## to 1x so the player has to explicitly re-press 2x for the next wave.
 func _reset_speed() -> void:
 	Engine.time_scale = 1.0
+	
 	if ui_speed_button:
 		ui_speed_button.text = "1×"
+		ui_speed_button.add_theme_stylebox_override(
+			"normal",
+			speed_normal_style
+		)
 
 # ---------------------------------------------------------------------------
 # State machine

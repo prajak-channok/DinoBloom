@@ -8,6 +8,7 @@ extends Control
 @onready var setting_button: Button = %SettingButton
 
 func _ready() -> void:
+	SaveManager.reset_save()
 	exit_popup.hide()
 	play_button.pressed.connect(_on_play_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)

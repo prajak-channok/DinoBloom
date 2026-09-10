@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b5vffcjmccmb0"]
+[gd_scene format=3 uid="uid://dutd4jjye6oxr"]
 
 [ext_resource type="Script" uid="uid://diwovsktlyslr" path="res://scripts/baobab_guardian.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://cw41e313pecuk" path="res://assets/Plants/BaobabGuardianDamage.png" id="2_damage_texture"]
@@ -46,7 +46,7 @@ script = ExtResource("1_script")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=857516001]
 texture_filter = 1
-position = Vector2(5, -20)
+position = Vector2(3, -20)
 scale = Vector2(0.2810188, 0.24565215)
 sprite_frames = SubResource("SpriteFrames_baobab_damage")
 animation = &"damage"
@@ -54,10 +54,12 @@ animation = &"damage"
 [node name="SpriteNext" type="AnimatedSprite2D" parent="Visual" unique_id=604321584]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-position = Vector2(6.0000005, -8)
+position = Vector2(3, -8)
 scale = Vector2(0.28657436, 0.23695654)
 sprite_frames = SubResource("SpriteFrames_baobab_damage")
 animation = &"damage"
+frame = 3
+frame_progress = 1.0
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=2135581901]
 position = Vector2(1, 1)

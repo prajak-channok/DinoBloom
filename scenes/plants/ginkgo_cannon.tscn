@@ -229,8 +229,8 @@ script = ExtResource("1_script")
 
 [node name="AttackSprite" type="AnimatedSprite2D" parent="Visual" unique_id=312762765]
 texture_filter = 1
-position = Vector2(4, -12.000001)
-scale = Vector2(0.4542984, 0.4542984)
+position = Vector2(2, -7)
+scale = Vector2(0.39871782, 0.39871782)
 sprite_frames = SubResource("SpriteFrames_s7wsd")
 animation = &"attack"
 frame = 29
@@ -244,6 +244,7 @@ monitorable = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=591791199]
 stream = ExtResource("3_wahvw")
+volume_db = 10.0
 bus = &"Effect"
 
 [connection signal="animation_finished" from="Visual/AttackSprite" to="." method="_on_attack_sprite_animation_finished"]
