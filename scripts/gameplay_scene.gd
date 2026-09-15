@@ -18,7 +18,8 @@ const PLAY_AREA_SIZE := Vector2(1280.0, 720.0)
 const LEFT_PANEL_WIDTH := 220.0
 const TOP_BAR_HEIGHT := 124.0
 const DESIGN_CANVAS_SIZE := Vector2(1500.0, 844.0)
-const MAX_SEED := 1000
+const DEFAULT_MAX_SEED := 400
+const SEED_OVERFLOW_PER_DINO := 15
 const TARGET_ASPECT := 16.0 / 9.0
 
 const STAGE_DATA := {
@@ -66,6 +67,7 @@ const PLANT_TEXTURES := {
 @onready var placement_preview: ColorRect = $PlayArea/World/PlacementPreview
 @onready var plant_cards: VBoxContainer = $UI/PlantPanel/Margin/VBox/Cards
 @onready var seed_label: Label = $UI/TopBar/Content/HBox/SeedLabel
+@onready var additional_dino_label: Label = $UI/TopBar/Content/HBox/AdditionalDinoLabel
 @onready var status_label: Label = $UI/TopBar/Content/HBox/StatusLabel
 @onready var debug_label: Label = $DebugOverlay/DebugLabel
 @onready var debug_panel: PanelContainer = $DebugOverlay/Panel
@@ -105,6 +107,15 @@ var selected_stage_id := "stage_01"
 var selected_plant := ""
 var remove_mode := false
 var ancient_seed := 100
+## Mutable so a future Max Seed Upgrade (400/500/600/700, persisted via
+## SaveManager DNA spend) can raise it; storage/overflow math below is
+## generic over whatever this is set to.
+var max_seed: int = DEFAULT_MAX_SEED
+## Overflow remainder (< SEED_OVERFLOW_PER_DINO) carried across production
+## ticks so it's never dropped, per Seed Storage & Overflow spec.
+var _seed_overflow_remainder: int = 0
+## Bonus Dinosaurs earned from Seed overflow, queued for the next Wave.
+var pending_bonus_dinos: int = 0
 var _card_buttons: Dictionary = {}
 var _card_cost_labels: Dictionary = {}
 var _plant_cooldowns: Dictionary = {}
@@ -120,6 +131,9 @@ func _ready() -> void:
 	selected_stage_id = GameManager.selected_stage_id
 	if not STAGE_DATA.has(selected_stage_id):
 		selected_stage_id = "stage_01"
+
+	# ข้อ 7: Max Seed Persistent Upgrade — ทุก Match ใช้ Max Seed ที่ผู้เล่นอัปเกรดไว้ใน Save.
+	max_seed = SaveManager.get_max_seed()
 
 	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
 	var custom_pressed = StyleBoxFlat.new()
@@ -541,14 +555,50 @@ func _is_cell_available(grid: Vector2i) -> bool:
 	return not _occupied.has(grid)
 
 func add_seed(amount: int) -> void:
-	ancient_seed = mini(MAX_SEED, ancient_seed + amount)
+	var total := ancient_seed + amount
+	if total > max_seed:
+		_add_overflow(total - max_seed)
+		ancient_seed = max_seed
+	else:
+		ancient_seed = total
 	_update_seed_label()
+
+## floor(overflow / SEED_OVERFLOW_PER_DINO) bonus Dinosaurs, remainder kept
+## for the next overflow instead of discarded.
+func _add_overflow(overflow: int) -> void:
+	var combined := _seed_overflow_remainder + overflow
+	pending_bonus_dinos += int(float(combined) / SEED_OVERFLOW_PER_DINO)
+	_seed_overflow_remainder = combined % SEED_OVERFLOW_PER_DINO
+	_update_additional_dino_label()
+
+## Called by MatchManager when the next Wave starts. Match-only, never saved.
+func consume_pending_bonus_dinos() -> int:
+	var amount := pending_bonus_dinos
+	pending_bonus_dinos = 0
+	_update_additional_dino_label()
+	return amount
+
+## Final Wave has no "next Wave" to receive Additional Dino, so the indicator
+## stays hidden even if Overflow still accumulates during it.
+func _is_final_wave() -> bool:
+	if match_manager == null or match_manager.wave_manager == null:
+		return false
+	return match_manager.current_wave >= match_manager.wave_manager.TOTAL_WAVES
+
+func _update_additional_dino_label() -> void:
+	if additional_dino_label == null:
+		return
+	if pending_bonus_dinos > 0 and not _is_final_wave():
+		additional_dino_label.text = "+%d Dino" % pending_bonus_dinos
+		additional_dino_label.visible = true
+	else:
+		additional_dino_label.visible = false
 
 func _on_seed_generated(amount: int) -> void:
 	_update_status("Seed Bloom produce +%d Ancient Seed" % amount)
 
 func _update_seed_label() -> void:
-	seed_label.text = "Ancient Seed  %d / %d" % [ancient_seed, MAX_SEED]
+	seed_label.text = "Ancient Seed  %d / %d" % [ancient_seed, max_seed]
 	_update_card_states()
 
 func _update_status(message: String) -> void:

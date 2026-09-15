@@ -31,7 +31,7 @@ const WAVE_CONFIG := {
 			"dna_bonus_max": 3,
 		},
 		2: {
-			"dinosaur_count": 15,
+			"dinosaur_count": 25,
 			"allowed_ids": ["dryosaurus", "velociraptor"],
 			"wave_hp_multiplier": 1.5,
 			"has_boss": false,
@@ -41,7 +41,7 @@ const WAVE_CONFIG := {
 			"dna_bonus_max": 3,
 		},
 		3: {
-			"dinosaur_count": 25,
+			"dinosaur_count": 35,
 			"allowed_ids": ["dryosaurus", "velociraptor", "triceratops"],
 			"wave_hp_multiplier": 2.25,
 			"has_boss": true,
@@ -135,6 +135,16 @@ func compute_hp_multiplier(stage: StageData, wave_data: Dictionary) -> float:
 	if stage != null:
 		stage_multiplier = stage.hp_multiplier
 	return stage_multiplier * float(wave_data.get("wave_hp_multiplier", 1.0))
+
+## Seed Overflow Additional Dino (System 5): returns a *copy* of wave_data
+## with dinosaur_count bumped by additional_dinos. WAVE_CONFIG — the Stage's
+## base Wave Configuration — is never mutated.
+func apply_additional_dinos(wave_data: Dictionary, additional_dinos: int) -> Dictionary:
+	if additional_dinos <= 0 or wave_data.is_empty():
+		return wave_data
+	var adjusted := wave_data.duplicate()
+	adjusted["dinosaur_count"] = int(adjusted.get("dinosaur_count", 0)) + additional_dinos
+	return adjusted
 
 ## DNA Reward Formula (requirement #21). Uses Godot's RNG, never hardcoded.
 func compute_dna_reward(wave_data: Dictionary) -> int:

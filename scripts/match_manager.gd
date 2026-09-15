@@ -154,6 +154,10 @@ func _begin_wave_start() -> void:
 func _begin_playing() -> void:
 	set_state(State.PLAYING)
 	var wave_data := wave_manager.get_wave_data(stage_id, current_wave)
+	var additional_dinos := 0
+	if gameplay and gameplay.has_method("consume_pending_bonus_dinos"):
+		additional_dinos = gameplay.consume_pending_bonus_dinos()
+	wave_data = wave_manager.apply_additional_dinos(wave_data, additional_dinos)
 	var hp_multiplier := wave_manager.compute_hp_multiplier(stage, wave_data)
 	spawn_manager.start_wave(wave_data, hp_multiplier, current_wave == 1)
 

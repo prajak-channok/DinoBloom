@@ -17,6 +17,12 @@ signal boss_spawned(enemy: Node2D)
 const LANE_CAPACITY := 10
 const ROWS := 5
 
+## Seed Bloom Lane Lure: a lane with >= this many Seed Bloom gets a spawn
+## weight boost, applied only when picking a lane for a new spawn.
+const SEED_BLOOM_LURE_THRESHOLD := 2
+const SEED_BLOOM_LURE_WEIGHT := 1.4
+const NORMAL_LANE_WEIGHT := 1.0
+
 const DINOSAUR_SCENES := {
 	"dryosaurus": "res://scenes/enemies/dryosaurus.tscn",
 	"velociraptor": "res://scenes/enemies/velociraptor.tscn",
@@ -118,12 +124,37 @@ func _schedule_next_spawn() -> void:
 		_next_spawn_time = _elapsed + randf_range(1.0, 3)
 
 func _pick_available_lane() -> int:
-	var lanes: Array = range(ROWS)
-	lanes.shuffle()
-	for lane in lanes:
+	var seed_bloom_counts := _count_seed_blooms_per_lane()
+	var available: Array[int] = []
+	var weights: Array[float] = []
+	var total_weight := 0.0
+	for lane in ROWS:
 		if int(_lane_counts.get(lane, 0)) < LANE_CAPACITY:
-			return lane
-	return -1
+			var weight := SEED_BLOOM_LURE_WEIGHT if int(seed_bloom_counts.get(lane, 0)) >= SEED_BLOOM_LURE_THRESHOLD else NORMAL_LANE_WEIGHT
+			available.append(lane)
+			weights.append(weight)
+			total_weight += weight
+	if available.is_empty():
+		return -1
+
+	var roll := randf() * total_weight
+	var cumulative := 0.0
+	for i in available.size():
+		cumulative += weights[i]
+		if roll < cumulative:
+			return available[i]
+	return available[-1]
+
+## Reuses the existing "plants" group (already populated by every placed
+## plant, SeedBloom included) instead of a second lane-tracking store.
+func _count_seed_blooms_per_lane() -> Dictionary:
+	var counts: Dictionary = {}
+	if world == null:
+		return counts
+	for node in world.get_tree().get_nodes_in_group("plants"):
+		if node is SeedBloom and is_instance_valid(node):
+			counts[node.grid_row] = int(counts.get(node.grid_row, 0)) + 1
+	return counts
 
 func _spawn_one(dino_id: String, lane: int) -> void:
 	if not DINOSAUR_SCENES.has(dino_id):

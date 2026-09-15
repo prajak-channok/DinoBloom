@@ -23,6 +23,13 @@ var plant_levels: Dictionary = {
 	"blast_cone": 0
 }
 
+## ข้อ 7: Max Seed Persistent Upgrade. Level index 0..3 maps to MAX_SEED_LEVELS
+## below (400 -> 500 -> 600 -> 700). Old saves have no "max_seed_level" field,
+## so load_game() defaults it to 0 (= 400), matching the spec's requirement.
+const MAX_SEED_LEVELS: Array[int] = [400, 500, 600, 700]
+const MAX_SEED_UPGRADE_COSTS: Array[int] = [50, 75, 100]
+var max_seed_level: int = 0
+
 func _ready() -> void:
 	load_game()
 
@@ -68,6 +75,29 @@ func apply_plant_upgrade(plant_id: String, cost: int) -> bool:
 		return false
 	return true
 
+func get_max_seed() -> int:
+	return MAX_SEED_LEVELS[max_seed_level]
+
+## -1 if already at MAX_SEED_LEVELS' last entry (700).
+func get_max_seed_upgrade_cost() -> int:
+	if max_seed_level >= MAX_SEED_UPGRADE_COSTS.size():
+		return -1
+	return MAX_SEED_UPGRADE_COSTS[max_seed_level]
+
+## Atomic upgrade transaction: spend DNA + bump Max Seed level in a single save.
+## Mirrors apply_plant_upgrade's rollback-on-failure pattern.
+func apply_max_seed_upgrade() -> bool:
+	var cost := get_max_seed_upgrade_cost()
+	if cost < 0 or cost > dna:
+		return false
+	dna -= cost
+	max_seed_level += 1
+	if not save_game():
+		dna += cost
+		max_seed_level -= 1
+		return false
+	return true
+
 func mark_stage_completed(stage_id: String) -> void:
 	if stage_id == "stage_01" or stage_id == "stage_02" or stage_id == "stage_03":
 		if not stage_id in completed_stages:
@@ -84,7 +114,8 @@ func save_game() -> bool:
 		"dna": dna,
 		"completed_stages": completed_stages,
 		"unlocked_plants": unlocked_plants,
-		"plant_levels": plant_levels
+		"plant_levels": plant_levels,
+		"max_seed_level": max_seed_level
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
@@ -119,6 +150,7 @@ func load_game() -> bool:
 	var saved_levels: Dictionary = parsed.get("plant_levels", {})
 	for plant_id in plant_levels.keys():
 		plant_levels[plant_id] = int(saved_levels.get(plant_id, 0))
+	max_seed_level = clampi(int(parsed.get("max_seed_level", 0)), 0, MAX_SEED_LEVELS.size() - 1)
 	return true
 
 func reset_save() -> bool:
@@ -127,6 +159,7 @@ func reset_save() -> bool:
 	unlocked_plants = ["seed_bloom", "thorn_fern", "baobab_guardian"]
 	for plant_id in plant_levels.keys():
 		plant_levels[plant_id] = 0
+	max_seed_level = 0
 	return save_game()
 	
 func is_plant_unlocked(plant_id: String) -> bool:

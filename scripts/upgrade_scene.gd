@@ -46,6 +46,10 @@ const STAT_DISPLAY_NAMES := {
 @onready var dna_cost_label: Label = %DNACostValue
 @onready var upgrade_button: Button = %UpgradeButton
 
+@onready var max_seed_label: Label = %MaxSeedValue
+@onready var max_seed_cost_label: Label = %MaxSeedCostValue
+@onready var max_seed_upgrade_button: Button = %MaxSeedUpgradeButton
+
 var _plant_buttons: Dictionary = {}
 var _selected_id: String = ""
 var _button_mode: String = ""  # "upgrade" | "buy" | "locked"
@@ -53,8 +57,10 @@ var _button_mode: String = ""  # "upgrade" | "buy" | "locked"
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
+	max_seed_upgrade_button.pressed.connect(_on_max_seed_upgrade_pressed)
 	_build_plant_grid()
 	_refresh_dna_label()
+	_refresh_max_seed_panel()
 	_select_plant("")
 	
 	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
@@ -70,9 +76,10 @@ func _ready() -> void:
 	
 	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
 	var all_buttons: Array[Button] = [
-		back_button, 
-		upgrade_button, 
-		back_button, 
+		back_button,
+		upgrade_button,
+		back_button,
+		max_seed_upgrade_button,
 	]
 	
 	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
@@ -204,7 +211,27 @@ func _on_upgrade_pressed() -> void:
 
 func _refresh_dna_label() -> void:
 	dna_label.text = str(SaveManager.dna)
-	
+
+func _refresh_max_seed_panel() -> void:
+	max_seed_label.text = str(SaveManager.get_max_seed())
+	var cost := SaveManager.get_max_seed_upgrade_cost()
+	if cost < 0:
+		max_seed_cost_label.text = "MAX"
+		max_seed_upgrade_button.text = "MAX"
+		max_seed_upgrade_button.disabled = true
+	else:
+		max_seed_cost_label.text = str(cost)
+		max_seed_upgrade_button.text = "Upgrade"
+		max_seed_upgrade_button.disabled = cost > SaveManager.dna
+
+func _on_max_seed_upgrade_pressed() -> void:
+	if not SaveManager.apply_max_seed_upgrade():
+		return
+	_refresh_dna_label()
+	_refresh_max_seed_panel()
+	if _selected_id != "":
+		_refresh_upgrade_button(_selected_id)
+
 func _on_buy_plant_pressed(plant_id: String) -> void:
 	if not SaveManager.purchase_plant(plant_id):
 		return

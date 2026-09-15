@@ -312,6 +312,16 @@ text = "Ancient Seed  100 / 1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AdditionalDinoLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1892037442]
+visible = false
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
+theme_override_font_sizes/font_size = 18
+text = "+0 Dino"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="WaveLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1892037441]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
@@ -517,6 +527,7 @@ custom_minimum_size = Vector2(182, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_gtnmq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_uyhvn")
