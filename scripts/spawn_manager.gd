@@ -63,7 +63,7 @@ func start_wave(wave_data: Dictionary, hp_multiplier: float, is_first_wave: bool
 	_hp_multiplier = hp_multiplier
 	_finished_emitted = false
 	_is_first_wave = is_first_wave
-	_next_spawn_time = randf_range(3.0, 5.0) if _is_first_wave else randf_range(0.5, 3.0)
+	_next_spawn_time = randf_range(12.0, 15.0) if _is_first_wave else randf_range(5.0, 7.0)
 	_active = true
 
 ## Immediately halts further spawning (used on Lose / Surrender).
@@ -110,17 +110,19 @@ func _attempt_spawn() -> void:
 
 func _schedule_next_spawn() -> void:
 	if not _is_first_wave:
-		if _elapsed <= 20.0:
+		if _elapsed <= 30.0:
 			_next_spawn_time = _elapsed + randf_range(3, 5)
 		else:
 			_next_spawn_time = _elapsed + randf_range(0.5, 3)
 		return
 
-	if _elapsed <= 50.0:
-		_next_spawn_time = _elapsed + randf_range(15, 17)
-	elif _elapsed <= 70.0:
+	if _elapsed <= 60.0:
+		_next_spawn_time = _elapsed + randf_range(20, 21)
+	elif _elapsed <= 90.0:
 		_next_spawn_time = _elapsed + randf_range(6, 8)
-	elif _elapsed <= 80.0:
+	elif _elapsed <= 110.0:
+		_next_spawn_time = _elapsed + randf_range(1.0, 3)
+	else:
 		_next_spawn_time = _elapsed + randf_range(1.0, 3)
 
 func _pick_available_lane() -> int:
