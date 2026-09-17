@@ -7,16 +7,16 @@
 script = ExtResource("1")
 id = "horsetail"
 display_name = "Horsetail"
-base_hp = 60.0
-base_attack = 20.0
-attack_interval = 1.5
-placement_cost = 175
-placement_cooldown = 10.0
+base_hp = 100.0
+base_attack = 100.0
+attack_interval = 7.0
+placement_cost = 200
+placement_cooldown = 15.0
 plant_type = "Attack"
 ability_data = {
-"attack_range": 400.0,
+"attack_range": 1200.0,
 "chain_count": 3,
 "chain_damage_multiplier": 0.7,
-"chain_range": 300.0
+"chain_range": 200.0
 }
 visual_reference = ExtResource("2")

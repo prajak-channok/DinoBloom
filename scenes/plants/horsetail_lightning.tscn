@@ -113,7 +113,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"default",
-"speed": 50.0
+"speed": 30.0
 }]
 
 [node name="HorsetailProjectile" type="Node2D" unique_id=450171142]

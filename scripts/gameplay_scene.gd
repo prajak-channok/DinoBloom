@@ -19,7 +19,7 @@ const LEFT_PANEL_WIDTH := 220.0
 const TOP_BAR_HEIGHT := 124.0
 const DESIGN_CANVAS_SIZE := Vector2(1500.0, 844.0)
 const DEFAULT_MAX_SEED := 400
-const SEED_OVERFLOW_PER_DINO := 15
+const SEED_OVERFLOW_PER_DINO := 20
 const TARGET_ASPECT := 16.0 / 9.0
 
 const STAGE_DATA := {
@@ -106,33 +106,25 @@ const PLANT_TEXTURES := {
 var selected_stage_id := "stage_01"
 var selected_plant := ""
 var remove_mode := false
-var ancient_seed := 100
-## Mutable so a future Max Seed Upgrade (400/500/600/700, persisted via
-## SaveManager DNA spend) can raise it; storage/overflow math below is
-## generic over whatever this is set to.
-var max_seed: int = DEFAULT_MAX_SEED
-## Overflow remainder (< SEED_OVERFLOW_PER_DINO) carried across production
-## ticks so it's never dropped, per Seed Storage & Overflow spec.
-var _seed_overflow_remainder: int = 0
-## Bonus Dinosaurs earned from Seed overflow, queued for the next Wave.
-var pending_bonus_dinos: int = 0
 var _card_buttons: Dictionary = {}
 var _card_cost_labels: Dictionary = {}
 var _plant_cooldowns: Dictionary = {}
-## M4: each entry is {"node": Node2D, "cost": int} so a right-click can
-## refund floor(cost * 0.5) Ancient Seed (requirement #25) without adding a
-## second lookup table.
 var _occupied: Dictionary = {}
 var _preview_grid := Vector2i(-1, -1)
 var debug_grid_enabled := false
 var _warned_background_aspect: Dictionary = {}
+
+## max seed and overflow system
+var ancient_seed := 100
+var max_seed: int = DEFAULT_MAX_SEED
+var _seed_overflow_remainder: int = 0
+var pending_bonus_dinos: int = 0
 
 func _ready() -> void:
 	selected_stage_id = GameManager.selected_stage_id
 	if not STAGE_DATA.has(selected_stage_id):
 		selected_stage_id = "stage_01"
 
-	# ข้อ 7: Max Seed Persistent Upgrade — ทุก Match ใช้ Max Seed ที่ผู้เล่นอัปเกรดไว้ใน Save.
 	max_seed = SaveManager.get_max_seed()
 
 	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
