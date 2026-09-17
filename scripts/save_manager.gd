@@ -9,9 +9,7 @@ var dna: int = 0
 var completed_stages: Array[String] = []
 var unlocked_plants: Array[String] = ["seed_bloom", "thorn_fern", "baobab_guardian"]
 const PLANT_UNLOCK_COSTS: Dictionary = {
-	"horsetail": 50,
-	"sticky_moss": 50,
-	"blast_cone": 50,
+	"horsetail": 15,
 }
 var plant_levels: Dictionary = {
 	"seed_bloom": 0,
@@ -100,10 +98,16 @@ func mark_stage_completed(stage_id: String) -> void:
 		if not stage_id in completed_stages:
 			completed_stages.append(stage_id)
 
-		if stage_id == "stage_01" and not is_plant_unlocked("ginkgo_cannon"):
+		if stage_id == "stage_02" and not is_plant_unlocked("ginkgo_cannon"):
 			unlocked_plants.append("ginkgo_cannon")
 
 		save_game()
+
+func unlock_plant_free(plant_id: String) -> void:
+	if is_plant_unlocked(plant_id):
+		return
+	unlocked_plants.append(plant_id)
+	save_game()
 
 func save_game() -> bool:
 	var payload := {

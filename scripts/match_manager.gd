@@ -186,6 +186,11 @@ func _on_wave_finished() -> void:
 	var dna_reward := wave_manager.compute_dna_reward(wave_data)
 	SaveManager.add_dna(dna_reward)
 
+	if stage_id == "stage_01" and current_wave == 1:
+		SaveManager.unlock_plant_free("sticky_moss")
+	elif stage_id == "stage_01" and current_wave == 3:
+		SaveManager.unlock_plant_free("blast_cone")
+
 	if current_wave >= wave_manager.TOTAL_WAVES:
 		_trigger_win(dna_reward)
 	else:
