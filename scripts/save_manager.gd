@@ -23,11 +23,8 @@ var plant_levels: Dictionary = {
 	"blast_cone": 0
 }
 
-## ข้อ 7: Max Seed Persistent Upgrade. Level index 0..3 maps to MAX_SEED_LEVELS
-## below (400 -> 500 -> 600 -> 700). Old saves have no "max_seed_level" field,
-## so load_game() defaults it to 0 (= 400), matching the spec's requirement.
 const MAX_SEED_LEVELS: Array[int] = [400, 500, 600, 700]
-const MAX_SEED_UPGRADE_COSTS: Array[int] = [50, 75, 100]
+const MAX_SEED_UPGRADE_COSTS: Array[int] = [25, 50, 100]
 var max_seed_level: int = 0
 
 func _ready() -> void:

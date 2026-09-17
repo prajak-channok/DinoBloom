@@ -102,10 +102,10 @@ func _vertical_run(seed_bloom: SeedBloom) -> Array:
 				same_column.append(node)
 	return _contiguous_run(same_column, seed_bloom, func(n: SeedBloom) -> int: return n.grid_row)
 
-func _contiguous_run(candidates: Array, _seed_bloom: SeedBloom, position_of: Callable) -> Array:
+func _contiguous_run(candidates: Array, seed_bloom: SeedBloom, position_of: Callable) -> Array:
 	candidates.sort_custom(func(a: SeedBloom, b: SeedBloom) -> bool: return position_of.call(a) < position_of.call(b))
 
-	var seed_index := candidates.find(seed)
+	var seed_index := candidates.find(seed_bloom)
 	if seed_index == -1:
 		return []
 

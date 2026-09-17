@@ -20,7 +20,7 @@ const ROWS := 5
 ## Seed Bloom Lane Lure: a lane with >= this many Seed Bloom gets a spawn
 ## weight boost, applied only when picking a lane for a new spawn.
 const SEED_BLOOM_LURE_THRESHOLD := 2
-const SEED_BLOOM_LURE_WEIGHT := 1.4
+const SEED_BLOOM_LURE_WEIGHT := 2.0
 const NORMAL_LANE_WEIGHT := 1.0
 
 const DINOSAUR_SCENES := {
