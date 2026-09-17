@@ -182,7 +182,6 @@ func _process(delta: float) -> void:
 func _on_wave_finished() -> void:
 	if _match_ended:
 		return
-	_reset_speed()
 	var wave_data := wave_manager.get_wave_data(stage_id, current_wave)
 	var dna_reward := wave_manager.compute_dna_reward(wave_data)
 	SaveManager.add_dna(dna_reward)
@@ -312,18 +311,6 @@ func toggle_speed() -> void:
 				speed_normal_style
 			)
 			ui_speed_button.text = "1×"
-
-## Requirement (2026-08-21): when the Wave Clear / Win UI appears, force back
-## to 1x so the player has to explicitly re-press 2x for the next wave.
-func _reset_speed() -> void:
-	Engine.time_scale = 1.0
-	
-	if ui_speed_button:
-		ui_speed_button.text = "1×"
-		ui_speed_button.add_theme_stylebox_override(
-			"normal",
-			speed_normal_style
-		)
 
 # ---------------------------------------------------------------------------
 # State machine

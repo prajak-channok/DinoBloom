@@ -159,7 +159,6 @@ func convert_to_friendly() -> void:
 	if not can_be_converted():
 		return
 	faction = "Friendly"
-	hp = max_hp
 	sprite.flip_h = true
 	_update_hp_bar()
 	remove_from_group("enemies")

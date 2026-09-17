@@ -47,7 +47,7 @@ const STAT_DISPLAY_NAMES := {
 @onready var upgrade_button: Button = %UpgradeButton
 
 @onready var max_seed_label: Label = %MaxSeedValue
-@onready var max_seed_cost_label: Label = %MaxSeedCostValue
+@onready var max_seed_cost_label: Button = %MaxSeedUpgradeButton
 @onready var max_seed_upgrade_button: Button = %MaxSeedUpgradeButton
 
 var _plant_buttons: Dictionary = {}
@@ -218,10 +218,9 @@ func _refresh_max_seed_panel() -> void:
 	if cost < 0:
 		max_seed_cost_label.text = "MAX"
 		max_seed_upgrade_button.text = "MAX"
-		max_seed_upgrade_button.disabled = true
+		max_seed_upgrade_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	else:
 		max_seed_cost_label.text = str(cost)
-		max_seed_upgrade_button.text = "Upgrade"
 		max_seed_upgrade_button.disabled = cost > SaveManager.dna
 
 func _on_max_seed_upgrade_pressed() -> void:

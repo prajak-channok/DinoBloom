@@ -9,6 +9,6 @@ display_name = "T-Rex"
 base_hp = 1500.0
 attack = 2000.0
 attack_interval = 3.0
-movement_speed = 5.0
+movement_speed = 10.0
 is_boss = true
 can_be_converted = false

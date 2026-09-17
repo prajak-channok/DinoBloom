@@ -30,6 +30,30 @@ corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1e6j"]
+bg_color = Color(0.028500041, 0.57, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.02745098, 0.20784314, 0.019607844, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bn62"]
+bg_color = Color(0.02745098, 0.20784314, 0.019607844, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.72, 0.42, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5odw"]
 bg_color = Color(0.0287667, 0.20703113, 0.019072557, 1)
 border_width_left = 2
@@ -95,18 +119,6 @@ corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7rlf"]
 bg_color = Color(1, 1, 1, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bn62"]
-bg_color = Color(0.1, 0.15, 0.08, 0.94)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.78, 0.72, 0.42, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
 
 [sub_resource type="StyleBoxFlat" id="Card"]
 bg_color = Color(0.91, 0.89, 0.83, 1)
@@ -184,62 +196,82 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_bml3v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_8euho")
 text = "Back"
 
-[node name="MaxSeedPanel" type="PanelContainer" parent="TopBar" unique_id=1469533177]
+[node name="MaxSeedPanel" type="Panel" parent="TopBar" unique_id=1363225414]
+custom_minimum_size = Vector2(250, 60)
+custom_maximum_size = Vector2(250, 60)
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -486.0
-offset_top = 35.0
-offset_right = -266.0
-offset_bottom = 103.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b5odw")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 267.0
+offset_top = -33.0
+offset_right = 517.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w1e6j")
 
-[node name="Row" type="HBoxContainer" parent="TopBar/MaxSeedPanel" unique_id=1894599395]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="MaxSeedTitle" type="Label" parent="TopBar/MaxSeedPanel/Row" unique_id=1894599396]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.98, 0.93, 0.7, 1)
-theme_override_font_sizes/font_size = 18
-text = "Max Seed"
+[node name="MaxSeedTitle" type="Label" parent="TopBar/MaxSeedPanel" unique_id=1894599396]
+custom_maximum_size = Vector2(80, -1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -11.5
+offset_right = 98.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.98, 0.98, 0.98, 1)
+theme_override_font_sizes/font_size = 16
+text = "Max Seed:"
 vertical_alignment = 1
 
-[node name="MaxSeedValue" type="Label" parent="TopBar/MaxSeedPanel/Row" unique_id=1894599397]
+[node name="MaxSeedValue" type="Label" parent="TopBar/MaxSeedPanel" unique_id=1894599397]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.98, 0.93, 0.7, 1)
-theme_override_font_sizes/font_size = 23
+layout_mode = 0
+offset_left = 102.0
+offset_top = 15.0
+offset_right = 152.0
+offset_bottom = 43.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.98, 0.98, 0.98, 1)
+theme_override_font_sizes/font_size = 20
 text = "400"
 vertical_alignment = 1
 
-[node name="MaxSeedCostValue" type="Label" parent="TopBar/MaxSeedPanel/Row" unique_id=1894599398]
+[node name="MaxSeedUpgradeButton" type="Button" parent="TopBar/MaxSeedPanel" unique_id=1894599399]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.85, 0.6, 1)
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="MaxSeedUpgradeButton" type="Button" parent="TopBar/MaxSeedPanel/Row" unique_id=1894599399]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(85, 34)
-layout_mode = 2
+custom_minimum_size = Vector2(80, 34)
+custom_maximum_size = Vector2(80, -1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -18.0
+offset_right = -17.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_2bn62")
 theme_override_styles/hover = SubResource("StyleBoxFlat_8euho")
-text = "Upgrade"
+text = "50"
 
 [node name="TopRight" type="PanelContainer" parent="TopBar" unique_id=1469533176]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -256.0
+offset_left = -201.0
 offset_top = 35.0
 offset_right = -26.0
 offset_bottom = 103.0
