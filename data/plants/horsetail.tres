@@ -8,10 +8,10 @@ script = ExtResource("1")
 id = "horsetail"
 display_name = "Horsetail"
 base_hp = 100.0
-base_attack = 100.0
+base_attack = 150.0
 attack_interval = 7.0
-placement_cost = 200
-placement_cooldown = 15.0
+placement_cost = 150
+placement_cooldown = 20.0
 plant_type = "Attack"
 ability_data = {
 "attack_range": 1200.0,

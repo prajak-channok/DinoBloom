@@ -159,7 +159,8 @@ func _begin_playing() -> void:
 		additional_dinos = gameplay.consume_pending_bonus_dinos()
 	wave_data = wave_manager.apply_additional_dinos(wave_data, additional_dinos)
 	var hp_multiplier := wave_manager.compute_hp_multiplier(stage, wave_data)
-	spawn_manager.start_wave(wave_data, hp_multiplier, current_wave == 1)
+	var atk_multiplier: float = stage.hp_multiplier
+	spawn_manager.start_wave(wave_data, hp_multiplier, atk_multiplier, current_wave == 1)
 
 func _process(delta: float) -> void:
 	match state:

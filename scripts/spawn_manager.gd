@@ -41,6 +41,7 @@ var _active: bool = false
 var _elapsed: float = 0.0
 var _next_spawn_time: float = 0.0
 var _hp_multiplier: float = 1.0
+var _atk_multiplier: float = 1.0
 var _finished_emitted: bool = false
 ## Requirement (2026-08-21): only Wave 1 of every stage uses the original
 ## slow-start pacing below; Wave 2 onward uses a flat 0.5-3s random cadence.
@@ -52,7 +53,7 @@ func setup(p_world: Node2D, p_board: StageBoard) -> void:
 
 ## Starts spawning dinosaurs for one wave. wave_data comes from
 ## WaveManager.get_wave_data(); hp_multiplier from WaveManager.compute_hp_multiplier().
-func start_wave(wave_data: Dictionary, hp_multiplier: float, is_first_wave: bool = true) -> void:
+func start_wave(wave_data: Dictionary, hp_multiplier: float, atk_multiplier: float, is_first_wave: bool = true) -> void:
 	_queue = _build_queue(wave_data)
 	_spawn_index = 0
 	_alive_count = 0
@@ -61,9 +62,10 @@ func start_wave(wave_data: Dictionary, hp_multiplier: float, is_first_wave: bool
 		_lane_counts[lane] = 0
 	_elapsed = 0.0
 	_hp_multiplier = hp_multiplier
+	_atk_multiplier = atk_multiplier
 	_finished_emitted = false
 	_is_first_wave = is_first_wave
-	_next_spawn_time = randf_range(10.0, 12.0) if _is_first_wave else randf_range(5.0, 7.0)
+	_next_spawn_time = randf_range(8.0, 10.0) if _is_first_wave else randf_range(5.0, 7.0)
 	_active = true
 
 ## Immediately halts further spawning (used on Lose / Surrender).
@@ -117,7 +119,7 @@ func _schedule_next_spawn() -> void:
 		return
 
 	if _elapsed <= 60.0:
-		_next_spawn_time = _elapsed + randf_range(15, 20)
+		_next_spawn_time = _elapsed + randf_range(13, 15)
 	elif _elapsed <= 90.0:
 		_next_spawn_time = _elapsed + randf_range(6, 8)
 	elif _elapsed <= 110.0:
@@ -177,7 +179,7 @@ func _spawn_one(dino_id: String, lane: int) -> void:
 	world.add_child(enemy)
 
 	if enemy.has_method("setup"):
-		enemy.setup(lane, board.board_rect, cell_size, _hp_multiplier)
+		enemy.setup(lane, board.board_rect, cell_size, _hp_multiplier, _atk_multiplier)
 
 	_lane_counts[lane] = int(_lane_counts.get(lane, 0)) + 1
 	_alive_count += 1

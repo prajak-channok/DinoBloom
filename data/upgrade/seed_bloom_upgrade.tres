@@ -17,7 +17,7 @@ hp_modifier = 100.0
 script = ExtResource("2")
 level = 3
 hp_modifier = 50.0
-placement_cooldown_modifier = -1.0
+placement_cooldown_modifier = -2.0
 
 [sub_resource type="Resource" id="SubResource_sb_l4"]
 script = ExtResource("2")
@@ -28,7 +28,7 @@ hp_modifier = 150.0
 script = ExtResource("2")
 level = 5
 hp_modifier = 100.0
-placement_cooldown_modifier = -1.0
+placement_cooldown_modifier = -3.0
 
 [resource]
 script = ExtResource("1")

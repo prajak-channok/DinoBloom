@@ -11,25 +11,24 @@ attack_modifier = 25.0
 [sub_resource type="Resource" id="SubResource_tf_l2"]
 script = ExtResource("2")
 level = 2
-hp_modifier = 50.0
 attack_modifier = 50.0
 
 [sub_resource type="Resource" id="SubResource_tf_l3"]
 script = ExtResource("2")
 level = 3
-hp_modifier = 100.0
-attack_modifier = 100.0
+placement_cooldown_modifier = -1.0
+placement_cost_modifier = -25
 
 [sub_resource type="Resource" id="SubResource_tf_l4"]
 script = ExtResource("2")
 level = 4
-attack_modifier = 100.0
-placement_cost_modifier = -25
+hp_modifier = 150.0
+attack_modifier = 50.0
 
 [sub_resource type="Resource" id="SubResource_tf_l5"]
 script = ExtResource("2")
 level = 5
-attack_modifier = 200.0
+attack_modifier = 100.0
 placement_cooldown_modifier = -2.0
 
 [resource]

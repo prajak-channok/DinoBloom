@@ -25,6 +25,8 @@ const DATA: DinosaurData = preload("res://data/dinosaurs/dryosaurus.tres")
 var grid_row: int = 0
 var hp: float = 0.0
 var max_hp: float = 0.0
+var attack: float = 0.0
+var atk_multiplier: float = 0.0
 var _attack_timer: float = 0.0
 var _board_rect := Rect2()
 var _state := "walking"
@@ -37,10 +39,11 @@ var _stun_timer: float = 0.0
 
 ## M4: hp_multiplier is Runtime-computed (stage_multiplier x wave_multiplier)
 ## by WaveManager/MatchManager. Base Data (.tres) is never modified.
-func setup(row: int, board_rect: Rect2 = Rect2(), _cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0) -> void:
+func setup(row: int, board_rect: Rect2 = Rect2(), _cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0, atk_multiplier: float = 1.0) -> void:
 	grid_row = row
 	hp = DATA.base_hp * hp_multiplier
 	max_hp = hp
+	attack = DATA.attack * atk_multiplier
 	_board_rect = board_rect
 	_attack_timer = 0.0
 	_state = "walking"
@@ -55,6 +58,7 @@ func _ready() -> void:
 	if hp <= 0.0:
 		hp = DATA.base_hp
 		max_hp = DATA.base_hp
+		attack = DATA.attack
 	_update_hp_bar()
 	_play_walk()
 
@@ -97,7 +101,10 @@ func _process(delta: float) -> void:
 			if _attack_timer >= DATA.attack_interval:
 				_attack_timer -= DATA.attack_interval
 				if is_instance_valid(target) and target.has_method("take_damage"):
-					target.take_damage(DATA.attack)
+					if target.is_in_group("friendly_dinosaurs") or target.is_in_group("enemies"):
+						target.take_damage(attack * 3)
+					else:
+						target.take_damage(attack)
 	else:
 		_state = "walking"
 		_target = null
