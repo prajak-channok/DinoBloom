@@ -50,6 +50,11 @@ const STAT_DISPLAY_NAMES := {
 @onready var max_seed_cost_label: Button = %MaxSeedUpgradeButton
 @onready var max_seed_upgrade_button: Button = %MaxSeedUpgradeButton
 
+var old_upgrade_normal_style: StyleBoxFlat
+var old_upgrade_hover_style: StyleBoxFlat
+var new_upgrade_normal_style: StyleBox
+var new_upgrade_hover_style: StyleBox
+
 var _plant_buttons: Dictionary = {}
 var _selected_id: String = ""
 var _button_mode: String = ""  # "upgrade" | "buy" | "locked"
@@ -62,6 +67,13 @@ func _ready() -> void:
 	_refresh_dna_label()
 	_refresh_max_seed_panel()
 	_select_plant("")
+	
+	old_upgrade_normal_style = upgrade_button.get_theme_stylebox("normal").duplicate()
+	old_upgrade_hover_style = upgrade_button.get_theme_stylebox("hover").duplicate()
+	new_upgrade_normal_style = old_upgrade_normal_style.duplicate() as StyleBoxFlat
+	new_upgrade_hover_style = old_upgrade_hover_style.duplicate() as StyleBoxFlat
+	new_upgrade_normal_style.bg_color = Color(0.85, 0.1, 0.1)     
+	new_upgrade_hover_style.bg_color = Color(0.55, 0.03, 0.03)
 	
 	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
 	var custom_pressed = StyleBoxFlat.new()
@@ -237,16 +249,20 @@ func _on_buy_plant_pressed(plant_id: String) -> void:
 
 	_refresh_dna_label()
 	_build_plant_grid()
-	
+
 func _refresh_upgrade_button(plant_id: String) -> void:
 	if SaveManager.is_plant_unlocked(plant_id):
 		_button_mode = "upgrade"
+		upgrade_button.add_theme_stylebox_override("normal", old_upgrade_normal_style)
+		upgrade_button.add_theme_stylebox_override("hover", old_upgrade_hover_style)
 		upgrade_button.text = "Upgrade"
 		upgrade_button.disabled = not PlantProgression.can_upgrade(plant_id)
 	elif SaveManager.PLANT_UNLOCK_COSTS.has(plant_id):
 		_button_mode = "buy"
 		var cost: int = SaveManager.PLANT_UNLOCK_COSTS[plant_id]
-		upgrade_button.text = "Buy %d DNA" % cost
+		upgrade_button.add_theme_stylebox_override("normal", new_upgrade_normal_style)
+		upgrade_button.add_theme_stylebox_override("hover", new_upgrade_hover_style)
+		upgrade_button.text = "%d DNA" % cost
 		upgrade_button.disabled = cost > SaveManager.dna
 	else:
 		_button_mode = "locked"
