@@ -95,6 +95,7 @@ func _process(delta: float) -> void:
 		if position.x <= rumble_trigger_x:
 			_start_rumble()
 			return
+			
 
 	var plant := _find_target_ahead()
 
@@ -238,13 +239,16 @@ func apply_stun(duration: float) -> void:
 	_target = null
 	_attack_timer = 0.0
 	_eating = false
+	_is_rumbling = false 
 
 	if sprite != null:
 		sprite.stop()
 		sprite.animation = &"walk"
 		sprite.frame = 0
+		sprite.modulate = Color.WHITE
 		
 func _clear_freeze_tint() -> void:
+	modulate = Color.WHITE
 	if is_instance_valid(sprite):
 		sprite.modulate = Color.WHITE
 
