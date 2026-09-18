@@ -3,7 +3,9 @@ extends Node
 ## The save is deliberately limited to meta-progression; current gameplay/wave state is never saved.
 
 const SAVE_PATH := "user://dinobloom_save.json"
-const SAVE_VERSION := 1
+## v2: one-time wipe for the full-release deploy — existing saves get reset once
+## on next load (version mismatch below), then locked to v2 so it never repeats.
+const SAVE_VERSION := 2
 
 var dna: int = 0
 var completed_stages: Array[String] = []
