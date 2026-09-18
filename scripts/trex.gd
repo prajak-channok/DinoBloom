@@ -74,6 +74,7 @@ func _process(delta: float) -> void:
 			_stunned = false
 			_stun_timer = 0.0
 			_state = "walking"
+			_clear_freeze_tint()
 			_play_walk()
 
 		return
@@ -236,6 +237,7 @@ func apply_stun(duration: float) -> void:
 	_state = "stunned"
 	_target = null
 	_attack_timer = 0.0
+	_eating = false
 
 	if sprite != null:
 		sprite.stop()
