@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c22tmxsc2jsul"]
 
-[ext_resource type="Script" uid="uid://drmw7eju7ng0m" path="res://scripts/ginkgo_cannon.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://drmw7eju7ng0m" path="res://scripts/character/plants/ginkgo_cannon.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bb5or3ppvu6ry" path="res://assets/Plants/SPGinkgoCannon.png" id="2_pc7ld"]
 [ext_resource type="AudioStream" uid="uid://ddttrtidujbc5" path="res://audio/CANNON SOUND EFFECT (HD FOR VIDEOS and GAMES)-[AudioTrimmer.com].mp3" id="3_wahvw"]
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://35iwd5egtiar"]
 
-[ext_resource type="Script" uid="uid://cddoemdt8tnt6" path="res://scripts/blast_cone_visual.gd" id="1_nb2mu"]
+[ext_resource type="Script" uid="uid://cddoemdt8tnt6" path="res://scripts/character/plants/blast_cone_visual.gd" id="1_nb2mu"]
 [ext_resource type="Texture2D" uid="uid://cn357xktn0c0n" path="res://assets/Plants/SPBlastCone.png" id="2_kdobs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_brogp"]

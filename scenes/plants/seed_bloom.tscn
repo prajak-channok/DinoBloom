@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dvsutu2wmf2pi"]
 
-[ext_resource type="Script" uid="uid://otvcj2876n6a" path="res://scripts/seed_bloom.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://otvcj2876n6a" path="res://scripts/character/plants/seed_bloom.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://13wh0mqk6gf" path="res://assets/Plants/SeedBloomNBG.PNG" id="2_texture"]
 
 [node name="SeedBloom" type="Node2D" unique_id=1650805094]

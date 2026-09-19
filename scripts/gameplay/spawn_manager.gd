@@ -24,10 +24,10 @@ const SEED_BLOOM_LURE_WEIGHT := 2.0
 const NORMAL_LANE_WEIGHT := 1.0
 
 const DINOSAUR_SCENES := {
-	"dryosaurus": "res://scenes/enemies/dryosaurus.tscn",
-	"velociraptor": "res://scenes/enemies/velociraptor.tscn",
-	"triceratops": "res://scenes/enemies/triceratops.tscn",
-	"trex": "res://scenes/enemies/trex.tscn",
+	"dryosaurus": "res://scenes/dinosaurs/dryosaurus.tscn",
+	"velociraptor": "res://scenes/dinosaurs/velociraptor.tscn",
+	"triceratops": "res://scenes/dinosaurs/triceratops.tscn",
+	"trex": "res://scenes/dinosaurs/trex.tscn",
 }
 
 var world: Node2D

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbnv6j6msse05"]
 
-[ext_resource type="Script" uid="uid://ctha2oprjixsv" path="res://scripts/horsetail.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://ctha2oprjixsv" path="res://scripts/character/plants/horsetail.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://ctku1551v1g8e" path="res://assets/Plants/SPHorsetail.png" id="2_sbvg1"]
 [ext_resource type="AudioStream" uid="uid://l7lo6541lo7r" path="res://audio/Electric SHOCK-[AudioTrimmer.com].mp3" id="3_j3lam"]
 

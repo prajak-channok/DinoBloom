@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nbh13v7l1nk5"]
 
-[ext_resource type="Script" uid="uid://ccpt3fcuhubqq" path="res://scripts/dryosaurus.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://ccpt3fcuhubqq" path="res://scripts/character/dinosaurs/dryosaurus.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://e7bc3j3ns7is" path="res://assets/Dinosaurs/SPDryosaurusWalk.png" id="2_walk"]
 [ext_resource type="Texture2D" uid="uid://grq4flawi0ky" path="res://assets/Dinosaurs/SPDryosaurusEat.png" id="3_eat"]
 

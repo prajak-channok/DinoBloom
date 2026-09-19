@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dj4vqhqxk1s8w"]
 
-[ext_resource type="Script" uid="uid://credvk6b1wfhh" path="res://scripts/settings_popup.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://credvk6b1wfhh" path="res://scripts/UI/settings_popup.gd" id="1_script"]
 
 [sub_resource type="StyleBoxFlat" id="PopupPanelStyle"]
 bg_color = Color(0.47208336, 0.55, 0.41250002, 1)

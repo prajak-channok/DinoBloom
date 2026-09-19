@@ -26,7 +26,6 @@ var grid_row: int = 0
 var hp: float = 0.0
 var max_hp: float = 0.0
 var attack: float = 0.0
-var atk_multiplier: float = 0.0
 var _attack_timer: float = 0.0
 var _board_rect := Rect2()
 var _state := "walking"

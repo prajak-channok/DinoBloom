@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://hhrh0cree2eu" path="res://assets/BackGround/StartBG.png" id="1_bg"]
 [ext_resource type="Texture2D" uid="uid://jghm4e1yjn4c" path="res://assets/Component/LogoGameNBG.png" id="2_logo"]
-[ext_resource type="Script" uid="uid://dlu86w5lflk2l" path="res://scripts/start_scene.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://dlu86w5lflk2l" path="res://scripts/UI/start_scene.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://bqjc33ht2s8cv" path="res://audio/#14 Wander (Official).mp3" id="4_i331m"]
 
 [sub_resource type="StyleBoxFlat" id="ButtonNormal"]

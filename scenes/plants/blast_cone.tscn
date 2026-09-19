@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bujb5lb3raoqp"]
 
-[ext_resource type="Script" uid="uid://frnkgw3d8ty5" path="res://scripts/blast_cone.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://frnkgw3d8ty5" path="res://scripts/character/plants/blast_cone.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://cn357xktn0c0n" path="res://assets/Plants/SPBlastCone.png" id="2_xwjn1"]
 [ext_resource type="AudioStream" uid="uid://cwrv7u3wuo60t" path="res://audio/Falling Bomb Sound Effect  Atomic Bomb Sound Effect  Big Explosion!-[AudioTrimmer.com].mp3" id="3_poyjp"]
 

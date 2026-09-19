@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b30c6kc4vta1t"]
 
-[ext_resource type="Script" uid="uid://bu70rf1sdljjg" path="res://scripts/sticky_trap_visual.gd" id="1_whg7j"]
+[ext_resource type="Script" uid="uid://bu70rf1sdljjg" path="res://scripts/character/plants/sticky_trap_visual.gd" id="1_whg7j"]
 [ext_resource type="Texture2D" uid="uid://bupsjt87bb3uc" path="res://assets/Plants/SPStickyMoss.png" id="2_hteup"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y15yb"]

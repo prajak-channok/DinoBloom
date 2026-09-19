@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bk1en6o8x2kj6"]
 
-[ext_resource type="Script" uid="uid://c418vu2q46mje" path="res://scripts/horsetail_lightning.gd" id="1_vcrk6"]
+[ext_resource type="Script" uid="uid://c418vu2q46mje" path="res://scripts/character/plants/horsetail_lightning.gd" id="1_vcrk6"]
 [ext_resource type="Texture2D" uid="uid://uqt1r3vraimf" path="res://assets/Plants/PTHorsetail.png" id="2_ye28m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcrk6"]

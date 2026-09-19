@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cetxy2vj5mtpe"]
 
-[ext_resource type="Script" uid="uid://l4vh8spjc78u" path="res://scripts/triceratops.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://l4vh8spjc78u" path="res://scripts/character/dinosaurs/triceratops.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bylm44t0h1qoi" path="res://assets/Dinosaurs/SPTriceratopsWalk.png" id="2_walk"]
 [ext_resource type="Texture2D" uid="uid://d1tijv0xon3ln" path="res://assets/Dinosaurs/SPTriceratopsEat.png" id="3_eat"]
 

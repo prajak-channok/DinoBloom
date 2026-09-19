@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dnihi1764mbga"]
 
 [ext_resource type="Texture2D" uid="uid://c3ucvxp3assgn" path="res://assets/Component/DNANBG.png" id="1_3q44q"]
-[ext_resource type="Script" uid="uid://cybwdfutuh2w5" path="res://scripts/upgrade_scene.gd" id="1_upgscr"]
+[ext_resource type="Script" uid="uid://cybwdfutuh2w5" path="res://scripts/UI/upgrade_scene.gd" id="1_upgscr"]
 [ext_resource type="AudioStream" uid="uid://dv6aspl7py2jv" path="res://audio/DOORS Roblox OST_ Elevator Jam.mp3" id="3_8euho"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bml3v"]

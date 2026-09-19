@@ -16,11 +16,15 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/image="uid://jghm4e1yjn4c"
 config/icon="uid://jghm4e1yjn4c"
 
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+
 [autoload]
 
-SaveManager="*res://scripts/save_manager.gd"
-GameManager="*res://scripts/game_manager.gd"
-SettingsManager="*res://scripts/settings_manager.gd"
+SaveManager="*res://scripts/core/save_manager.gd"
+GameManager="*res://scripts/core/game_manager.gd"
+SettingsManager="*res://scripts/core/settings_manager.gd"
 HoverSound="*uid://bgvu3mrdqeir5"
 
 [display]

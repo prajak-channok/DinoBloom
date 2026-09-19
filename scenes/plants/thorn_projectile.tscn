@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgyah7i5sqqte"]
 
-[ext_resource type="Script" uid="uid://d0p1kqeno00pw" path="res://scripts/thorn_projectile.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://d0p1kqeno00pw" path="res://scripts/character/plants/thorn_projectile.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://ptbg1d3bdnhb" path="res://assets/Plants/PThornFern.png" id="2_texture"]
 
 [node name="ThornProjectile" type="Node2D" unique_id=1415187856]

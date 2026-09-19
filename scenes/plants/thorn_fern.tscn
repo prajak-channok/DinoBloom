@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://box6vl8as1c8w"]
 
-[ext_resource type="Script" uid="uid://dsjva1jhgot5v" path="res://scripts/thorn_fern.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dsjva1jhgot5v" path="res://scripts/character/plants/thorn_fern.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c7nsdsqdvaoot" path="res://assets/Plants/SPThornFern.png" id="2_attack_texture"]
 [ext_resource type="AudioStream" uid="uid://bujkkp6jgr6pc" path="res://audio/Sound arrow effect-[AudioTrimmer.com].mp3" id="3_wi7p4"]
 

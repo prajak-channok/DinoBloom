@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dntsnnnphrp78"]
 
-[ext_resource type="Script" uid="uid://6hbkfq4o01od" path="res://scripts/gameplay_scene.gd" id="1_gameplay"]
-[ext_resource type="Script" uid="uid://ba22i5i1rori" path="res://scripts/stage_board.gd" id="2_board"]
+[ext_resource type="Script" uid="uid://6hbkfq4o01od" path="res://scripts/gameplay/gameplay_scene.gd" id="1_gameplay"]
+[ext_resource type="Script" uid="uid://ba22i5i1rori" path="res://scripts/gameplay/stage_board.gd" id="2_board"]
 [ext_resource type="AudioStream" uid="uid://cak0a6wmhnh5g" path="res://audio/Plant Growing - Sound Effect (HD)-[AudioTrimmer.com].mp3" id="2_gtnmq"]
-[ext_resource type="Script" uid="uid://dnoqi86vnmc66" path="res://scripts/stage_board_visual.gd" id="3_board_visual"]
-[ext_resource type="Script" uid="uid://bbmb5y70218l" path="res://scripts/wave_manager.gd" id="4_wave_manager"]
-[ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/spawn_manager.gd" id="5_spawn_manager"]
-[ext_resource type="Script" uid="uid://b2wrs8jll6jr2" path="res://scripts/match_manager.gd" id="6_match_manager"]
+[ext_resource type="Script" uid="uid://dnoqi86vnmc66" path="res://scripts/gameplay/stage_board_visual.gd" id="3_board_visual"]
+[ext_resource type="Script" uid="uid://bbmb5y70218l" path="res://scripts/gameplay/wave_manager.gd" id="4_wave_manager"]
+[ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/gameplay/spawn_manager.gd" id="5_spawn_manager"]
+[ext_resource type="Script" uid="uid://b2wrs8jll6jr2" path="res://scripts/gameplay/match_manager.gd" id="6_match_manager"]
 [ext_resource type="AudioStream" uid="uid://0srw641n2cjb" path="res://audio/Buckshot Roulette OST - General Release (extended).mp3" id="7_cd025"]
 
 [sub_resource type="StyleBoxFlat" id="PlayAreaFrame"]
