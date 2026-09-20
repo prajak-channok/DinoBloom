@@ -66,19 +66,18 @@ const PLANT_TEXTURES := {
 @onready var board: StageBoard = $PlayArea/World/Board
 @onready var placement_preview: ColorRect = $PlayArea/World/PlacementPreview
 @onready var plant_cards: VBoxContainer = $UI/PlantPanel/Margin/VBox/Cards
-@onready var seed_label: Label = $UI/TopBar/Content/HBox/SeedLabel
-@onready var additional_dino_label: Label = $UI/TopBar/Content/HBox/AdditionalDinoLabel
-@onready var status_label: Label = $UI/TopBar/Content/HBox/StatusLabel
+@onready var seed_label: Label = $UI/TopBar/Content/Bar/LeftGroup/SeedLabel
+@onready var additional_dino_label: Label = $UI/TopBar/Content/Bar/AdditionalDinoLabel
 
 # --- M4: Match/Wave/Spawn systems ---
 @onready var wave_manager: WaveManager = $Systems/WaveManager
 @onready var spawn_manager: SpawnManager = $Systems/SpawnManager
 @onready var match_manager: MatchManager = $Systems/MatchManager
 
-@onready var wave_label: Label = $UI/TopBar/Content/HBox/WaveLabel
-@onready var pause_button: Button = $UI/TopBar/Content/HBox/PauseButton
-@onready var speed_button: Button = $UI/TopBar/Content/HBox/SpeedButton
-@onready var remove_plant_button: Button = $UI/TopBar/Content/HBox/RemovePlantButton
+@onready var wave_label: Label = $UI/TopBar/Content/Bar/WaveLabel
+@onready var pause_button: Button = $UI/TopBar/Content/Bar/RightGroup/PauseButton
+@onready var speed_button: Button = $UI/TopBar/Content/Bar/RightGroup/SpeedButton
+@onready var remove_plant_button: Button = $UI/TopBar/Content/Bar/LeftGroup/RemovePlantButton
 @onready var boss_hp_bar_container: PanelContainer = $UI/BossHPBar
 @onready var boss_hp_bar: ProgressBar = $UI/BossHPBar/Margin/HBox/BossBar
 
@@ -167,7 +166,6 @@ func _ready() -> void:
 	# --- โค้ดเดิมของคุณ ---
 	_build_plant_cards()
 	_update_seed_label()
-	_update_status("Select plant to place on field")
 	placement_preview.visible = false
 	_layout_gameplay()
 	remove_plant_button.pressed.connect(_on_toggle_remove_mode)
@@ -322,13 +320,13 @@ func _build_plant_cards() -> void:
 		cost_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		
 		# 3. หดขอบขวาและขอบล่างเข้ามานิดนึง เพื่อไม่ให้ตัวเลขเบียดเส้นขอบเกินไป
-		cost_label.offset_right = -12.0
-		cost_label.offset_bottom = -2.0
+		cost_label.offset_right = -8.0
+		cost_label.offset_bottom = -4.0
 		
 		# ตกแต่งตัวอักษรให้อ่านง่าย
 		cost_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
 		cost_label.add_theme_constant_override("outline_size", 4)
-		cost_label.add_theme_font_size_override("font_size", 14) 
+		cost_label.add_theme_font_size_override("font_size", 16) 
 		
 		button.add_child(cost_label)
 
@@ -385,21 +383,18 @@ func _on_plant_card_pressed(plant_name: String) -> void:
 	if selected_plant == plant_name:
 		selected_plant = ""
 		placement_preview.visible = false
-		_update_status("Select plant to place on field")
 		_update_card_states()
 		return
-	
+
 	var stats: Dictionary = _get_placement_stats(plant_name)
 	if float(_plant_cooldowns.get(plant_name, 0.0)) > 0.0:
 		return
 	if ancient_seed < stats.cost:
-		_update_status("Ancient Seed isn't enough")
 		return
 
 	if remove_mode:
 		_set_remove_mode(false)
 	selected_plant = plant_name
-	_update_status("Placing %s — select grid" % plant_name)
 	_update_card_states()
 
 func _on_toggle_remove_mode() -> void:
@@ -411,16 +406,13 @@ func _set_remove_mode(enabled: bool) -> void:
 		selected_plant = ""
 		placement_preview.visible = false
 		_update_card_states()
-		_update_status("Remove Mode: Click a plant to remove")
-	else:
-		_update_status("Select plant to place")
 	_update_remove_button_visual()
 
 func _update_remove_button_visual() -> void:
 	if remove_plant_button == null:
 		return
-	remove_plant_button.text = "Remove: ON" if remove_mode else "Remove"
-	remove_plant_button.add_theme_color_override("font_color", Color(0.95, 0.35, 0.3, 1.0) if remove_mode else Color(1, 1, 1, 1))
+	remove_plant_button.text = "Select Grid" if remove_mode else "Reclaim"
+	remove_plant_button.add_theme_color_override("font_color", Color(1, 0.7, 0.35, 1) if remove_mode else Color(1, 1, 1, 1))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -467,12 +459,10 @@ func _try_place(play_position: Vector2) -> void:
 	if grid.x < 0:
 		return
 	if not _is_cell_available(grid):
-		_update_status("This grid was placed!")
 		return
 
 	var stats: Dictionary = _get_placement_stats(selected_plant)
 	if ancient_seed < stats.cost:
-		_update_status("Ancient Seed isn't enough")
 		return
 	if float(_plant_cooldowns.get(selected_plant, 0.0)) > 0.0:
 		return
@@ -498,14 +488,10 @@ func _try_place(play_position: Vector2) -> void:
 	elif plant.has_method("setup"):
 		plant.setup(self, grid.x)
 
-	if plant.has_signal("seed_generated"):
-		plant.seed_generated.connect(_on_seed_generated)
-
 	ancient_seed -= stats.cost
 	_occupied[grid] = {"node": plant, "cost": stats.cost}
 	_plant_cooldowns[selected_plant] = stats.cooldown
 	_update_seed_label()
-	_update_status("%s was placed!" % selected_plant)
 	selected_plant = ""
 	placement_preview.visible = false
 	_update_card_states()
@@ -527,11 +513,15 @@ func _try_remove_plant(play_position: Vector2) -> void:
 		return
 
 	var cost := int(entry.get("cost", 0))
-	var refund := floori(cost * 0.5)
+	var half_cost := cost / 2.0
+	var refund := floori(half_cost / 25.0) * 25
+	
+	if half_cost - refund >= 20:
+		refund += 25
+	
 	plant_node.queue_free()
 	add_seed(refund)
-	_update_status("Remove plant and gain %d Ancient Seed" % refund)
-	
+
 	if place_sound:
 		place_sound.play()
 
@@ -578,12 +568,6 @@ func _update_additional_dino_label() -> void:
 	else:
 		additional_dino_label.visible = false
 
-func _on_seed_generated(amount: int) -> void:
-	_update_status("Seed Bloom produce +%d Ancient Seed" % amount)
-
 func _update_seed_label() -> void:
 	seed_label.text = "Ancient Seed  %d / %d" % [ancient_seed, max_seed]
 	_update_card_states()
-
-func _update_status(message: String) -> void:
-	status_label.text = message

@@ -24,7 +24,7 @@ var plant_levels: Dictionary = {
 }
 
 const MAX_SEED_LEVELS: Array[int] = [400, 500, 600, 700]
-const MAX_SEED_UPGRADE_COSTS: Array[int] = [25, 50, 100]
+const MAX_SEED_UPGRADE_COSTS: Array[int] = [15, 40, 80]
 var max_seed_level: int = 0
 
 func _ready() -> void:

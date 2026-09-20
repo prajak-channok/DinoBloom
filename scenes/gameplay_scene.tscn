@@ -25,6 +25,54 @@ bg_color = Color(0.035, 0.055, 0.03, 0.97)
 border_width_bottom = 2
 border_color = Color(0.35, 0.38, 0.2, 0.9)
 
+[sub_resource type="StyleBoxFlat" id="ButtonNormalRemove"]
+bg_color = Color(0.16, 0.07, 0.05, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.35, 0.18, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="ButtonHoverRemove"]
+bg_color = Color(0.26, 0.1, 0.06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.45, 0.2, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="ButtonNormalPause"]
+bg_color = Color(0.14, 0.11, 0.04, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.65, 0.25, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="ButtonHoverPause"]
+bg_color = Color(0.22, 0.17, 0.06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.98, 0.8, 0.35, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
 [sub_resource type="StyleBoxFlat" id="ButtonNormal"]
 bg_color = Color(0.11, 0.15, 0.08, 1)
 border_width_left = 1
@@ -283,7 +331,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.75, 0.68, 1)
 theme_override_font_sizes/font_size = 13
-text = "Select plant card. "
+text = "Select Plant"
 horizontal_alignment = 1
 
 [node name="Cards" type="VBoxContainer" parent="UI/PlantPanel/Margin/VBox" unique_id=1467634648]
@@ -298,70 +346,103 @@ theme_override_styles/panel = SubResource("TopStyle")
 
 [node name="Content" type="MarginContainer" parent="UI/TopBar" unique_id=1777770773]
 layout_mode = 2
-theme_override_constants/margin_left = 12
+theme_override_constants/margin_left = 18
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 12
+theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 16
 
-[node name="HBox" type="HBoxContainer" parent="UI/TopBar/Content" unique_id=1500066703]
+[node name="Bar" type="Control" parent="UI/TopBar/Content" unique_id=1500066703]
 layout_mode = 2
+
+[node name="LeftGroup" type="HBoxContainer" parent="UI/TopBar/Content/Bar" unique_id=1500066704]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -35.0
+offset_right = 523.0
+offset_bottom = 35.0
+grow_vertical = 2
 theme_override_constants/separation = 14
 
-[node name="RemovePlantButton" type="Button" parent="UI/TopBar/Content/HBox" unique_id=2038598305]
-custom_minimum_size = Vector2(150, 48)
+[node name="RemovePlantButton" type="Button" parent="UI/TopBar/Content/Bar/LeftGroup" unique_id=2038598305]
+custom_minimum_size = Vector2(140, 70)
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("ButtonNormal")
-theme_override_styles/hover = SubResource("ButtonHover")
-text = "Remove"
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("ButtonNormalRemove")
+theme_override_styles/hover = SubResource("ButtonHoverRemove")
+text = "Reabsorb"
 
-[node name="StatusLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1478087897]
+[node name="MarginContainer" type="MarginContainer" parent="UI/TopBar/Content/Bar/LeftGroup" unique_id=1620160047]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 17
-text = "Select a plant and click on field to place."
-vertical_alignment = 1
+theme_override_constants/margin_left = 39
 
-[node name="SeedLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=86908434]
+[node name="SeedLabel" type="Label" parent="UI/TopBar/Content/Bar/LeftGroup" unique_id=86908434]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94, 0.84, 0.45, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Ancient Seed  100 / 1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdditionalDinoLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1892037442]
-visible = false
-custom_minimum_size = Vector2(70, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
-theme_override_font_sizes/font_size = 18
-text = "+0 Dino"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WaveLabel" type="Label" parent="UI/TopBar/Content/HBox" unique_id=1892037441]
+[node name="WaveLabel" type="Label" parent="UI/TopBar/Content/Bar" unique_id=1892037441]
 custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
+layout_mode = 0
+offset_left = 1115.0
+offset_top = 31.0
+offset_right = 1235.0
+offset_bottom = 59.0
 theme_override_colors/font_color = Color(0.85, 0.92, 0.65, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Wave 1 / 3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseButton" type="Button" parent="UI/TopBar/Content/HBox" unique_id=218783900]
-custom_minimum_size = Vector2(84, 48)
+[node name="AdditionalDinoLabel" type="Label" parent="UI/TopBar/Content/Bar" unique_id=1892037442]
+visible = false
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1023.0
+offset_top = -16.0
+offset_right = 1109.0
+offset_bottom = 15.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.1, 1)
+theme_override_font_sizes/font_size = 22
+text = "+ 0 Dino"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightGroup" type="HBoxContainer" parent="UI/TopBar/Content/Bar" unique_id=1500066705]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -30.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PauseButton" type="Button" parent="UI/TopBar/Content/Bar/RightGroup" unique_id=218783900]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("ButtonNormal")
-theme_override_styles/hover = SubResource("ButtonHover")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("ButtonNormalPause")
+theme_override_styles/hover = SubResource("ButtonHoverPause")
 text = "PAUSE"
 
-[node name="SpeedButton" type="Button" parent="UI/TopBar/Content/HBox" unique_id=1165211316]
+[node name="SpeedButton" type="Button" parent="UI/TopBar/Content/Bar/RightGroup" unique_id=1165211316]
 custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "1×"
