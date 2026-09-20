@@ -6,10 +6,11 @@ enum State {
 	WAVE_START,
 	PLAYING,
 	WAVE_CLEAR,
+	REWARD_REVEAL,
 	PAUSED,
 	WIN,
 	LOSE,
-	SURRENDER_CONFIRM,
+	SURRENDER_CONFIRM
 }
 
 const WAVE_START_POPUP_SECONDS := 2.0
@@ -35,6 +36,7 @@ var _pre_pause_state: int = State.PLAYING
 var _pre_surrender_state: int = State.PLAYING
 var _popup_timer: float = 0.0
 var _match_ended: bool = false
+var _reward_reveal_dna_reward: int = 0
 
 # --- UI references (all provided via setup()) ---
 var ui_wave_label: Label
@@ -69,6 +71,8 @@ var ui_paused_overlay: Control
 var _boss_node: Node2D = null
 
 var speed_normal_style: StyleBox
+
+@onready var reward_reveal_popup: RewardRevealPopup = $"../../Popups/RewardRevealPopup"
 
 func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: SpawnManager, p_stage: StageData, p_stage_id: String, ui: Dictionary) -> void:
 	gameplay = p_gameplay
@@ -125,6 +129,8 @@ func setup(p_gameplay: Node, p_wave_manager: WaveManager, p_spawn_manager: Spawn
 		ui_win_next_button.pressed.connect(_go_to_next_stage)
 	if ui_lose_button:
 		ui_lose_button.pressed.connect(_return_to_stage_select)
+	
+	reward_reveal_popup.finished.connect(_on_reward_reveal_finished)
 
 	spawn_manager.enemy_died.connect(_on_enemy_died)
 	spawn_manager.enemy_reached_boundary.connect(_on_enemy_reached_boundary)
@@ -163,13 +169,14 @@ func _begin_playing() -> void:
 	spawn_manager.start_wave(wave_data, hp_multiplier, atk_multiplier, current_wave == 1)
 
 func _process(delta: float) -> void:
+	var real_delta := delta / maxf(Engine.time_scale, 0.001)
 	match state:
 		State.WAVE_START:
-			_popup_timer -= delta
+			_popup_timer -= real_delta
 			if _popup_timer <= 0.0:
 				_begin_playing()
 		State.WAVE_CLEAR:
-			_popup_timer -= delta
+			_popup_timer -= real_delta
 			if ui_wave_clear_countdown:
 				ui_wave_clear_countdown.text = "Next wave in %ds..." % maxi(0, ceili(_popup_timer))
 			if _popup_timer <= 0.0:
@@ -187,11 +194,49 @@ func _on_wave_finished() -> void:
 	var dna_reward := wave_manager.compute_dna_reward(wave_data)
 	SaveManager.add_dna(dna_reward)
 
-	if stage_id == "stage_01" and current_wave == 1:
-		SaveManager.unlock_plant_free("sticky_moss")
-	elif stage_id == "stage_01" and current_wave == 3:
-		SaveManager.unlock_plant_free("blast_cone")
+	var unlock_plant_id := ""
 
+	if stage_id == "stage_01" and current_wave == 1:
+		unlock_plant_id = "sticky_moss"
+		SaveManager.unlock_plant_free(unlock_plant_id)
+	elif stage_id == "stage_01" and current_wave == 3:
+		unlock_plant_id = "blast_cone"
+		SaveManager.unlock_plant_free(unlock_plant_id)
+	elif stage_id == "stage_02" and current_wave == 3:
+		unlock_plant_id = "ginkgo_cannon"
+		SaveManager.unlock_plant_free(unlock_plant_id)
+
+	if unlock_plant_id != "":
+		_show_reward_reveal(unlock_plant_id, dna_reward)
+		return
+		
+	_continue_after_wave_finished(dna_reward)
+
+func _show_reward_reveal(plant_id: String, dna_reward: int) -> void:
+	var texture_path := ""
+
+	match plant_id:
+		"sticky_moss":
+			texture_path = "res://assets/Plants/StickyMossNBG.png"
+		"blast_cone":
+			texture_path = "res://assets/Plants/BlastConeNBG.png"
+		"gingko_cannon":
+			texture_path = "res://assets/Plants/GingkoCannonNBG.png"
+
+	if texture_path == "":
+		_continue_after_wave_finished(dna_reward)
+		return
+
+	var plant_texture := load(texture_path) as Texture2D
+	if plant_texture == null:
+		_continue_after_wave_finished(dna_reward)
+		return
+
+	_reward_reveal_dna_reward = dna_reward
+	reward_reveal_popup.show_reward(plant_texture)
+	set_state(State.REWARD_REVEAL)
+	
+func _continue_after_wave_finished(dna_reward: int) -> void:
 	if current_wave >= wave_manager.TOTAL_WAVES:
 		_trigger_win(dna_reward)
 	else:
@@ -201,6 +246,9 @@ func _on_wave_finished() -> void:
 			ui_wave_clear_dna.text = "+%d DNA" % dna_reward
 		_popup_timer = WAVE_CLEAR_BREAK_SECONDS
 		set_state(State.WAVE_CLEAR)
+
+func _on_reward_reveal_finished() -> void:
+	_continue_after_wave_finished(_reward_reveal_dna_reward)
 
 func _on_enemy_died(_dino_id: String) -> void:
 	if randf() < SEED_DROP_CHANCE:
@@ -348,6 +396,8 @@ func _update_popup_visibility() -> void:
 		ui_surrender_popup.visible = state == State.SURRENDER_CONFIRM
 	if ui_paused_overlay:
 		ui_paused_overlay.visible = state == State.PAUSED
+	if reward_reveal_popup:
+		reward_reveal_popup.visible = state == State.REWARD_REVEAL
 
 func _update_button_states() -> void:
 	if ui_pause_button:

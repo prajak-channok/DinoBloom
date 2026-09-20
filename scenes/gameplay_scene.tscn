@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/gameplay/spawn_manager.gd" id="5_spawn_manager"]
 [ext_resource type="Script" uid="uid://b2wrs8jll6jr2" path="res://scripts/gameplay/match_manager.gd" id="6_match_manager"]
 [ext_resource type="AudioStream" uid="uid://0srw641n2cjb" path="res://audio/Buckshot Roulette OST - General Release (extended).mp3" id="7_cd025"]
+[ext_resource type="Script" uid="uid://duq04jwga3shv" path="res://scripts/UI/reward_reveal_popup.gd" id="8_hvrxh"]
+[ext_resource type="Texture2D" uid="uid://7hhia2sq0br0" path="res://assets/Component/RewardEffect.png" id="8_uyhvn"]
+[ext_resource type="Texture2D" uid="uid://c6oy3a22ddsgn" path="res://assets/Plants/StickyMossNBG.png" id="9_n2udg"]
 
 [sub_resource type="StyleBoxFlat" id="PlayAreaFrame"]
 bg_color = Color(0.05, 0.06, 0.04, 1)
@@ -64,13 +67,6 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="DebugStyle"]
-bg_color = Color(0.02, 0.02, 0.02, 0.75)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="PopupPanelStyle"]
 content_margin_left = 40.0
@@ -171,6 +167,29 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
+
+[sub_resource type="Gradient" id="Gradient_s7rlf"]
+offsets = PackedFloat32Array(0.0038022813, 0.54372627, 1)
+colors = PackedColorArray(0.7839999, 0.84, 0, 0, 0.9506666, 1, 0.26, 0.76862746, 0.7839999, 0.84, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s7wsd"]
+gradient = SubResource("Gradient_s7rlf")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s7wsd"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 100.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 7.0
+scale_max = 7.0
+color = Color(0.81960785, 0.7058824, 0.41960785, 1)
 
 [node name="GameplayScene" type="Node2D" unique_id=1113645756]
 script = ExtResource("1_gameplay")
@@ -384,26 +403,6 @@ max_value = 1000.0
 value = 1000.0
 show_percentage = false
 
-[node name="DebugOverlay" type="CanvasLayer" parent="." unique_id=1372388587]
-layer = 10
-
-[node name="Panel" type="PanelContainer" parent="DebugOverlay" unique_id=1275123371]
-visible = false
-offset_left = 235.0
-offset_top = 94.0
-offset_right = 520.0
-offset_bottom = 132.0
-theme_override_styles/panel = SubResource("DebugStyle")
-
-[node name="DebugLabel" type="Label" parent="DebugOverlay" unique_id=2097115895]
-visible = false
-offset_left = 248.0
-offset_top = 101.0
-offset_right = 505.0
-offset_bottom = 126.0
-theme_override_font_sizes/font_size = 14
-text = "F3 Debug Grid"
-
 [node name="Popups" type="CanvasLayer" parent="." unique_id=1836632703]
 process_mode = 3
 layer = 8
@@ -411,9 +410,11 @@ layer = 8
 [node name="WaveStartPopup" type="Control" parent="Popups" unique_id=643843586]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1500.0
-offset_bottom = 844.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 
 [node name="Dim" type="ColorRect" parent="Popups/WaveStartPopup" unique_id=1697139587]
@@ -722,6 +723,106 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("ButtonNormal")
 theme_override_styles/hover = SubResource("ButtonHover")
 text = "SETTING"
+
+[node name="RewardRevealPopup" type="Control" parent="Popups" unique_id=1931794711]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_hvrxh")
+
+[node name="Dim" type="ColorRect" parent="Popups/RewardRevealPopup" unique_id=243915310]
+layout_mode = 0
+offset_right = 1500.0
+offset_bottom = 844.0
+color = Color(0.01, 0.01, 0.01, 0.72)
+
+[node name="GoldGlow" type="TextureRect" parent="Popups/RewardRevealPopup" unique_id=1302702986]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_s7wsd")
+
+[node name="GoldEffect" type="GPUParticles2D" parent="Popups/RewardRevealPopup" unique_id=1299929437]
+position = Vector2(750, 422)
+scale = Vector2(1.5, 1.5)
+amount = 25
+texture = ExtResource("8_uyhvn")
+lifetime = 1.5
+explosiveness = 0.2
+process_material = SubResource("ParticleProcessMaterial_s7wsd")
+
+[node name="PlantImage" type="TextureRect" parent="Popups/RewardRevealPopup" unique_id=1656918499]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -145.0
+offset_right = 125.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_n2udg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RewardText" type="Label" parent="Popups/RewardRevealPopup" unique_id=289477307]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -182.0
+offset_top = -239.0
+offset_right = 182.0
+offset_bottom = -190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.5146667, 0.089999974, 1)
+theme_override_font_sizes/font_size = 35
+text = "UNLOCK NEW PLANT!"
+
+[node name="ContinueButton" type="Button" parent="Popups/RewardRevealPopup" unique_id=847174278]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 187.0
+offset_right = 150.0
+offset_bottom = 287.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.55, 0.55, 0.55, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.29, 0.29, 0.29, 1)
+theme_override_font_sizes/font_size = 27
+text = "continue"
+flat = true
+
+[node name="AutoCloseTimer" type="Timer" parent="Popups/RewardRevealPopup" unique_id=2147178731]
+wait_time = 10.0
+
+[node name="UnlockTimer" type="Timer" parent="Popups/RewardRevealPopup" unique_id=75961756]
+wait_time = 3.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=263023206]
 stream = ExtResource("7_cd025")

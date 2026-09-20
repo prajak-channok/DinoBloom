@@ -65,7 +65,7 @@ func start_wave(wave_data: Dictionary, hp_multiplier: float, atk_multiplier: flo
 	_atk_multiplier = atk_multiplier
 	_finished_emitted = false
 	_is_first_wave = is_first_wave
-	_next_spawn_time = randf_range(8.0, 10.0) if _is_first_wave else randf_range(5.0, 7.0)
+	_next_spawn_time = randf_range(9.0, 11.0) if _is_first_wave else randf_range(5.0, 7.0)
 	_active = true
 
 ## Immediately halts further spawning (used on Lose / Surrender).
@@ -119,7 +119,7 @@ func _schedule_next_spawn() -> void:
 		return
 
 	if _elapsed <= 60.0:
-		_next_spawn_time = _elapsed + randf_range(13, 15)
+		_next_spawn_time = _elapsed + randf_range(15, 17)
 	elif _elapsed <= 90.0:
 		_next_spawn_time = _elapsed + randf_range(6, 8)
 	elif _elapsed <= 110.0:

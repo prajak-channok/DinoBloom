@@ -43,7 +43,7 @@ var faction: String = "Enemy"
 var _stunned: bool = false
 var _stun_timer: float = 0.0
 
-func setup(row: int, board_rect: Rect2 = Rect2(), cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0) -> void:
+func setup(row: int, board_rect: Rect2 = Rect2(), cell_size: Vector2 = Vector2(120.0, 100.0), hp_multiplier: float = 1.0, _hp_multiplier: float = 1.0) -> void:
 	grid_row = row
 	hp = DATA.base_hp * hp_multiplier
 	max_hp = hp

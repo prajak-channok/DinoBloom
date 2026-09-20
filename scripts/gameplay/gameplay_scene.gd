@@ -69,8 +69,6 @@ const PLANT_TEXTURES := {
 @onready var seed_label: Label = $UI/TopBar/Content/HBox/SeedLabel
 @onready var additional_dino_label: Label = $UI/TopBar/Content/HBox/AdditionalDinoLabel
 @onready var status_label: Label = $UI/TopBar/Content/HBox/StatusLabel
-@onready var debug_label: Label = $DebugOverlay/DebugLabel
-@onready var debug_panel: PanelContainer = $DebugOverlay/Panel
 
 # --- M4: Match/Wave/Spawn systems ---
 @onready var wave_manager: WaveManager = $Systems/WaveManager
@@ -434,12 +432,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			_try_place(play_area.get_local_mouse_position())
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		_try_remove_plant(play_area.get_local_mouse_position())
-	elif event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_F3:
-			debug_grid_enabled = not debug_grid_enabled
-			board.configure(board.board_rect, debug_grid_enabled)
-			debug_label.visible = debug_grid_enabled
-			debug_panel.visible = debug_grid_enabled
 
 func _update_preview(play_position: Vector2) -> void:
 	if remove_mode:
