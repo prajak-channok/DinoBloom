@@ -222,8 +222,8 @@ script = ExtResource("1_script")
 
 [node name="AttackSprite" type="AnimatedSprite2D" parent="Visual" unique_id=222828870]
 texture_filter = 1
-position = Vector2(2, -10)
-scale = Vector2(0.37341267, 0.37341267)
+position = Vector2(2, -5)
+scale = Vector2(0.3258822, 0.3258822)
 sprite_frames = SubResource("SpriteFrames_thorn_attack")
 animation = &"attack"
 

@@ -385,16 +385,26 @@ layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Panel" type="PanelContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=938600247]
+[node name="Panel" type="Panel" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo" unique_id=319881921]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_s7wsd")
 
 [node name="PlantName" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/TopInfo/Panel" unique_id=1568072328]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(225, 100)
 custom_maximum_size = Vector2(225, 100)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = -25.0
+offset_right = 112.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -407,7 +417,11 @@ autowrap_mode = 3
 visible = false
 custom_minimum_size = Vector2(170, 150)
 custom_maximum_size = Vector2(170, 150)
-layout_mode = 2
+layout_mode = 0
+offset_left = 27.0
+offset_top = 125.0
+offset_right = 197.0
+offset_bottom = 275.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -429,29 +443,38 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 21
 text = "ATK: -"
 
 [node name="HP" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=1356559432]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 21
 text = "HP: -"
 
-[node name="DPS" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=2085239342]
+[node name="Cooldown" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=2085239342]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
-text = "DPS: -"
+theme_override_font_sizes/font_size = 21
+text = "Cooldown: 0"
 
-[node name="Skill" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=745113618]
-visible = false
+[node name="Cost" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info/Stats" unique_id=745113618]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
-text = "Skill: -"
+theme_override_font_sizes/font_size = 21
+text = "Cost: 0"
+
+[node name="Level" type="Label" parent="UpgradeBoard/LeftPanel/MarginContainer/Info" unique_id=1775622116]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.1443, 0.39, 0.16067997, 1)
+theme_override_font_sizes/font_size = 24
+text = "Level: 0"
 
 [node name="UpgradePanel" type="PanelContainer" parent="UpgradeBoard/LeftPanel/MarginContainer/Info" unique_id=77095607]
 custom_minimum_size = Vector2(0, 100)

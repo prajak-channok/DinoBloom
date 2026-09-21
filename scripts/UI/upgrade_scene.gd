@@ -40,7 +40,9 @@ const STAT_DISPLAY_NAMES := {
 @onready var plant_name_label: Label = %PlantName
 @onready var atk_label: Label = %ATK
 @onready var hp_label: Label = %HP
-@onready var dps_label: Label = %DPS
+@onready var cd_label: Label = %Cooldown
+@onready var plant_cost_label: Label = %Cost
+@onready var level_label: Label = %Level
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var next_upgrade_label: Label = %NextUpgradeLabel
 @onready var dna_cost_label: Label = %DNACostValue
@@ -154,14 +156,15 @@ func _select_plant(plant_id: String) -> void:
 func _refresh_left_panel(plant_id: String) -> void:
 	var base: PlantData = PlantProgression.get_plant_data(plant_id)
 	if base == null:
-		plant_name_label.text = "No Data"
+		plant_name_label.text = "No Plant"
 		plant_preview.texture = null
-		atk_label.text = "ATK: -"
-		hp_label.text = "HP: -"
-		dps_label.text = "DPS: -"
+		atk_label.text = "ATK: 0"
+		hp_label.text = "HP: 0"
+		cd_label.text = "Cooldown: 0"
+		plant_cost_label.text = "Cost: 0"
 		progress_bar.value = 0.0
-		next_upgrade_label.text = "Next Upgrade: No data"
-		dna_cost_label.text = "-"
+		next_upgrade_label.text = ""
+		dna_cost_label.text = "0"
 		upgrade_button.text = "Upgrade"
 		upgrade_button.disabled = true
 		return
@@ -169,16 +172,17 @@ func _refresh_left_panel(plant_id: String) -> void:
 	var stats: Dictionary = PlantProgression.get_final_stats(plant_id)
 	plant_name_label.text = base.display_name
 	plant_preview.texture = base.visual_reference
-	atk_label.text = "ATK: %s" % (str(stats.attack) if stats.attack > 0 else "-")
+	atk_label.text = "ATK: %s" % (str(stats.attack) if stats.attack > 0 else "0")
 	hp_label.text = "HP: %s" % str(stats.hp)
 
-	var dps: float = 0.0
-	if base.attack_interval > 0:
-		dps = stats.attack / base.attack_interval
-	dps_label.text = "DPS: %s" % ("%.1f" % dps if dps > 0 else "-")
+	var cd: int = int(stats.placement_cooldown)
+	cd_label.text = "Cooldown: %s" % str(cd)
+	var plant_cost: int = stats.placement_cost
+	plant_cost_label.text = "Cost: %s" % str(plant_cost)
 
 	var level: int = SaveManager.get_plant_level(plant_id)
 	progress_bar.value = (float(level) / float(PlantProgression.MAX_LEVEL)) * 100.0
+	level_label.text = "Level: %s" % str(level)
 
 	next_upgrade_label.text = _format_next_upgrade(plant_id, level)
 
