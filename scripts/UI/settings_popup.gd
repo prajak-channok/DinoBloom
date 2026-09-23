@@ -13,7 +13,6 @@ extends Control
 @onready var effect_percent_label: Label = %EffectPercentLabel
 @onready var full_screen_button: Button = %FullScreenBtn
 
-@onready var reset_button: Button = %ResetButton
 @onready var save_close_button: Button = %SaveCloseButton
 
 var _icon_open := {
@@ -42,7 +41,6 @@ func _ready() -> void:
 	effect_icon.pressed.connect(_on_icon_pressed.bind("Effect"))
 	full_screen_button.pressed.connect(_on_full_screen_pressed)
 
-	reset_button.pressed.connect(_on_reset_pressed)
 	save_close_button.pressed.connect(_on_save_close_pressed)
 
 func _get_slider(bus_name: String) -> HSlider:
@@ -106,9 +104,6 @@ func _toggle_web_fullscreen() -> void:
 	})();
 	"""
 	JavaScriptBridge.eval(js, true)
-
-func _on_reset_pressed() -> void:
-	SaveManager.reset_save()
 
 func _on_save_close_pressed() -> void:
 	SettingsManager.save_settings()

@@ -8,44 +8,24 @@ extends Control
 @onready var setting_button: Button = %SettingButton
 
 func _ready() -> void:
-	#SaveManager.reset_save()
-	#SaveManager.add_dna(800)
-	exit_popup.hide()
 	play_button.pressed.connect(_on_play_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
 	confirm_exit_button.pressed.connect(_on_exit_confirmed)
 	cancel_exit_button.pressed.connect(_on_exit_cancelled)
 	setting_button.pressed.connect(_on_setting_pressed)
-	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
-	var custom_pressed = StyleBoxFlat.new()
-	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
 	
-	# ตั้งค่าความมน (สมมติว่าใช้ความมนระดับ 15 ถ้าของเดิมมนกว่านี้ก็แก้เลขได้เลย)
-	var corner = 15 
-	custom_pressed.corner_radius_top_left = corner
-	custom_pressed.corner_radius_top_right = corner
-	custom_pressed.corner_radius_bottom_left = corner
-	custom_pressed.corner_radius_bottom_right = corner
-	
-	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
 	var all_buttons: Array[Button] = [
 		play_button,
 		exit_button,
 		confirm_exit_button,
 		cancel_exit_button,
-		setting_button
-	]
-	
-	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
-	for btn in all_buttons:
-		if btn: # เช็คกันเหนียวเผื่อหาปุ่มไม่เจอ
-			btn.add_theme_stylebox_override("pressed", custom_pressed)
+		setting_button]
+	PressedBtnStyle.apply_pressed_style(all_buttons)
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/select_stage_scene.tscn")
+	GameManager.go_to_stage_select()
 
 func _on_exit_pressed() -> void:
-	# เปลี่ยนคำสั่งให้โชว์ Popup ตัวใหม่
 	exit_popup.show()
 
 func _on_exit_confirmed() -> void:
@@ -59,7 +39,3 @@ func _on_exit_cancelled() -> void:
 func _on_setting_pressed() -> void:
 	var popup := preload("res://scenes/settings_popup.tscn").instantiate()
 	add_child(popup)
-
-
-func _on_dev_button_pressed() -> void:
-	SaveManager.add_dna(800)

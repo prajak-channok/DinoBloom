@@ -124,19 +124,6 @@ func _ready() -> void:
 
 	max_seed = SaveManager.get_max_seed()
 
-	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
-	var custom_pressed = StyleBoxFlat.new()
-	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
-	
-	# ตั้งค่าความมน (ปรับเลข 15 ให้เข้ากับปุ่มในหน้านี้)
-	var corner = 15 
-	custom_pressed.corner_radius_top_left = corner
-	custom_pressed.corner_radius_top_right = corner
-	custom_pressed.corner_radius_bottom_left = corner
-	custom_pressed.corner_radius_bottom_right = corner
-	
-	# --- 2. นำปุ่มทั้งหมดในหน้านี้มาใส่ใน Array ---
-	# ข้อควรระวัง: ถ้าคุณมีปุ่ม Pause หรือ 1x ให้เพิ่มตัวแปรปุ่มเหล่านั้นเข้ามาในนี้ด้วย (คั่นด้วยลูกน้ำ)
 	var all_buttons: Array[Button] = [
 		remove_plant_button,
 		pause_button, 
@@ -147,13 +134,8 @@ func _ready() -> void:
 		surrender_cancel_button,
 		resume_button,
 		abandon_button,
-		setting_button
-	]
-	
-	# --- 3. วนลูปยัดสไตล์ตอนกดลงไปให้ทุกปุ่ม ---
-	for btn in all_buttons:
-		if btn:
-			btn.add_theme_stylebox_override("pressed", custom_pressed)
+		setting_button]
+	PressedBtnStyle.apply_pressed_style(all_buttons)
 	
 	# เช็คว่าเป็นด่านสุดท้ายหรือไม่
 	var stage_keys = STAGE_DATA.keys()

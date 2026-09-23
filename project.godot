@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="DinoBloom_version_Conferm"
+config/name="DinoBloom"
 run/main_scene="res://scenes/start_scene.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/image="uid://jghm4e1yjn4c"

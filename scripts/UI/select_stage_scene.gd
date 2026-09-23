@@ -19,35 +19,16 @@ var selected_stage_id := ""
 
 func _ready() -> void:
 	selected_stage_id = ""
-	
-	# 3. สั่งซ่อน Popup ไว้ก่อนตอนเริ่ม Scene
-	locked_popup.hide() 
-	
-	# --- 1. สร้างดีไซน์ปุ่มตอนกด (สีดำ + มุมมน) ---
-	var custom_pressed = StyleBoxFlat.new()
-	custom_pressed.bg_color = Color(0, 0, 0, 1) # สีดำทึบ
-	
-	# ตั้งค่าความมน (สมมติว่าใช้ความมนระดับ 15 ถ้าของเดิมมนกว่านี้ก็แก้เลขได้เลย)
-	var corner = 15 
-	custom_pressed.corner_radius_top_left = corner
-	custom_pressed.corner_radius_top_right = corner
-	custom_pressed.corner_radius_bottom_left = corner
-	custom_pressed.corner_radius_bottom_right = corner
-	
-	# --- 2. จับมัดรวมทุกปุ่มในหน้าต่างนี้ ---
+
 	var all_buttons: Array[Button] = [
 		start_button, 
 		upgrade_button,
 		back_button,
-		popup_ok_button, # ถ้าสร้างตัวแปรปุ่ม OK ไว้แล้วก็ใส่มาด้วย
+		popup_ok_button,
 		setting_button
 	]
-	all_buttons.append_array(stage_buttons) # เอาปุ่มด่าน 1, 2, 3 มารวมด้วย
-	
-	# --- 3. สั่งวนลูปใส่สไตล์ให้ทุกปุ่ม ---
-	for btn in all_buttons:
-		if btn: # เช็คกันเหนียวเผื่อหาปุ่มไม่เจอ
-			btn.add_theme_stylebox_override("pressed", custom_pressed)
+	all_buttons.append_array(stage_buttons)
+	PressedBtnStyle.apply_pressed_style(all_buttons)
 	
 	back_button.pressed.connect(_on_back_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
@@ -68,7 +49,6 @@ func _on_stage_pressed(stage_id: String) -> void:
 		locked_popup.show() 
 	_refresh()
 
-# 6. เพิ่มฟังก์ชันสำหรับปุ่ม OK เมื่อกดแล้วให้ปิดหน้าต่าง
 func _on_popup_ok_pressed() -> void:
 	locked_popup.hide()
 
@@ -82,13 +62,13 @@ func _on_start_pressed() -> void:
 	if not SaveManager.is_stage_unlocked(selected_stage_id):
 		return
 	GameManager.selected_stage_id = selected_stage_id
-	GameManager.start_selected_stage()
+	GameManager.go_to_gameplay()
 
 func _on_upgrade_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/upgrade_scene.tscn")
+	GameManager.go_to_upgrade()
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/start_scene.tscn")
+	GameManager.go_to_start()
 
 func _refresh() -> void:
 	dna_label.text = str(SaveManager.dna)

@@ -317,7 +317,7 @@ func cancel_surrender() -> void:
 func _return_to_stage_select() -> void:
 	Engine.time_scale = 1.0
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/select_stage_scene.tscn")
+	GameManager.go_to_stage_select()
 	
 func _get_next_stage_id() -> String:
 	var idx := STAGE_ORDER.find(stage_id)
@@ -333,7 +333,7 @@ func _go_to_next_stage() -> void:
 	Engine.time_scale = 1.0
 	get_tree().paused = false
 	GameManager.selected_stage_id = next_id
-	GameManager.start_selected_stage()
+	GameManager.go_to_gameplay()
 
 # ---------------------------------------------------------------------------
 # Pause / Speed

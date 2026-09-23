@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://doh254l86lk2i" path="res://scripts/gameplay/spawn_manager.gd" id="5_spawn_manager"]
 [ext_resource type="Script" uid="uid://b2wrs8jll6jr2" path="res://scripts/gameplay/match_manager.gd" id="6_match_manager"]
 [ext_resource type="AudioStream" uid="uid://0srw641n2cjb" path="res://audio/Buckshot Roulette OST - General Release (extended).mp3" id="7_cd025"]
-[ext_resource type="Script" uid="uid://duq04jwga3shv" path="res://scripts/UI/reward_reveal_popup.gd" id="8_hvrxh"]
+[ext_resource type="Script" uid="uid://duq04jwga3shv" path="res://scripts/UI/reward_popup.gd" id="8_hvrxh"]
 [ext_resource type="Texture2D" uid="uid://7hhia2sq0br0" path="res://assets/Component/RewardEffect.png" id="8_uyhvn"]
 [ext_resource type="Texture2D" uid="uid://c6oy3a22ddsgn" path="res://assets/Plants/StickyMossNBG.png" id="9_n2udg"]
 
