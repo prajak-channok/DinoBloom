@@ -6,6 +6,9 @@ signal seed_generated(amount: int)
 const DATA: PlantData = preload("res://data/plants/seed_bloom.tres")
 const DESIGN_CELL_HEIGHT: float = 104.0
 
+var _production_amount: int = int(DATA.ability_data.get("production_amount", 0))
+var _production_interval: float = float(DATA.ability_data.get("production_interval", 0.0))
+
 @export var idle_bob_height: float = 3.0
 @export var idle_bob_speed: float = 0.8
 
@@ -32,6 +35,9 @@ func setup(gameplay: Node, row: int) -> void:
 	grid_row = row
 	var final_stats: Variant = PlantProgression.get_final_stats(DATA.id)
 	_hp = final_stats.hp if final_stats != null else DATA.base_hp
+	var ability_data: Dictionary = final_stats.ability_data if final_stats != null else DATA.ability_data
+	_production_amount = int(ability_data.get("production_amount", 0))
+	_production_interval = float(ability_data.get("production_interval", 0.0))
 	add_to_group("plants")
 
 func set_grid_cell(row: int, column: int, cell_size: Vector2) -> void:
@@ -60,8 +66,8 @@ func _process(delta: float) -> void:
 		return
 
 	_production_timer += delta
-	if _production_timer >= DATA.production_interval:
-		_production_timer -= DATA.production_interval
+	if _production_timer >= _production_interval:
+		_production_timer -= _production_interval
 		if group.is_empty():
 			_produce()
 		else:
@@ -120,9 +126,9 @@ func _contiguous_run(candidates: Array, seed_bloom: SeedBloom, position_of: Call
 	return run if run.size() >= 3 else []
 
 func _produce() -> void:
-	seed_generated.emit(DATA.production_amount)
+	seed_generated.emit(_production_amount)
 	if _gameplay != null and _gameplay.has_method("add_seed"):
-		_gameplay.add_seed(DATA.production_amount)
+		_gameplay.add_seed(_production_amount)
 
 func get_interaction_rect() -> Rect2:
 	return Rect2(position - interaction_shape.shape.size * 0.5, interaction_shape.shape.size)

@@ -1,7 +1,7 @@
 class_name PressedBtnStyle
 extends RefCounted
 
-# Only set botton style script
+# Only set botton style script (becuase all buttons don't have pressed style, so need quick solving)
 # Setting pressed-state style for selected-botton (ตั้งสีตอน pressed ให้กับปุ่มที่ต้องการ)
 static func apply_pressed_style(buttons: Array[Button]) -> void:
 	var style := StyleBoxFlat.new()
