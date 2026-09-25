@@ -9,7 +9,6 @@ class_name PlantProgression
 # Define here because this data no structure
 const UPGRADE_COST := [5, 12, 16, 25, 40]
 const MAX_LEVEL := 5
-const UPGRADE_COST_PATH := "res://data/upgrade/upgrade_cost.tres"
 
 ## stat key -> PlantData field name. Add a row here + a matching "<key>_modifier"
 ## export on UpgradeLevelData to support a new stat without touching the math below.
