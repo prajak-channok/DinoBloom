@@ -2,6 +2,7 @@ extends Node
 class_name WaveManager
 
 const TOTAL_WAVES := 3
+# Define wave data here because need quick solving for deadline
 const WAVE_CONFIG := {
 	"stage_01": {
 		1: {

@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="UpgradeCostData" format=3 uid="uid://bsmcoepolfhxc"]
-
-[ext_resource type="Script" uid="uid://sugq3k5kdee8" path="res://scripts/data/upgrade_cost_data.gd" id="1"]
-
-[resource]
-script = ExtResource("1")
-costs = Array[int]([5, 12, 16, 25, 40])

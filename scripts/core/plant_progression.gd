@@ -6,6 +6,8 @@ class_name PlantProgression
 ## and try_upgrade mutates it (via SaveManager.apply_plant_upgrade). Final Stat itself
 ## is always computed here, never saved.
 
+# Define here because this data no structure
+const UPGRADE_COST := [5, 12, 16, 25, 40]
 const MAX_LEVEL := 5
 const UPGRADE_COST_PATH := "res://data/upgrade/upgrade_cost.tres"
 
@@ -70,10 +72,10 @@ static func get_final_stats(plant_id: String) -> Variant:
 static func get_upgrade_cost(level: int) -> int:
 	if level < 0 or level >= MAX_LEVEL:
 		return -1
-	var cost_data: UpgradeCostData = load(UPGRADE_COST_PATH)
-	if level >= cost_data.costs.size():
+	var cost_data: Array = UPGRADE_COST
+	if level >= cost_data.size():
 		return -1
-	return cost_data.costs[level]
+	return cost_data[level]
 
 ## The non-zero stat deltas the plant would gain by going from its current level to
 ## current + 1, as [{"stat": stat_key, "value": delta}, ...]. Empty if maxed or if the
